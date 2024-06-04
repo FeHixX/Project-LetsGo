@@ -1,0 +1,86 @@
+@import 'mixins';
+
+:root {
+  // colors
+  --color-white-default: #fff;
+  --color-black-default: #000;
+  --color-transparent: rgba(255 255 255 / 0%);
+
+  // project colors
+  --color-blue: #2c39f2;
+  --color-blue-border: #dadcfa;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+}
+
+html,
+body {
+  max-width: 100vw;
+  scroll-behavior: smooth;
+}
+
+body {
+  @include text;
+  color: var(--color-black-default);
+  overflow-x: hidden;
+}
+
+a {
+  color: currentcolor;
+  text-decoration: none;
+  transition: opacity $transition;
+
+  @include desktop-only {
+    &:hover,
+    &:focus-visible {
+      opacity: 0.7;
+    }
+  }
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+  margin: 0;
+}
+
+button {
+  @include reset-btn;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+
+  main {
+    flex-grow: 1;
+  }
+}
