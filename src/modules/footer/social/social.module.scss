@@ -1,26 +1,58 @@
-@use '@styles/func';
-@use '@styles/mixins';
+@use "@styles/func";
+@use "@styles/mixins";
+@use "@styles/variables";
 
 .root {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-}
+  justify-self: center;
+  max-width: 50%;
+  grid-area: 1/1/2/3;
 
-.item {
-  margin-right: func.rem(12);
+  @include mixins.tablet {
+    max-width: 37%;
+  }
 
-  &:last-child {
-    margin-right: 0;
+  @include mixins.tablet-small {
+    max-width: 100%;
   }
 }
 
 .link {
-  display: block;
-  width: func.rem(24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   line-height: 0;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background-color: var(--color-pale-cornflower-blue);
+  transition: background-color variables.$transition;
 
   svg {
-    width: 100%;
-    height: auto;
+    width: 32px;
+    height: 32px;
+    transition: opacity variables.$transition;
+  }
+
+  &:hover {
+    background-color: var(--color-picton-blue);
+  }
+
+  &:active {
+    svg {
+      opacity: 0.3;
+    }
+  }
+
+  @include mixins.tablet-small {
+    width: 45px;
+    height: 45px;
+
+    svg {
+      width: 23px;
+      height: 23px;
+    }
   }
 }
