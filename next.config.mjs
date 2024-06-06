@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
 	output: 'export',
 	distDir: 'dist',
+  basePath: isProd ? '/sectesnx' : '',
   reactStrictMode: true,
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>

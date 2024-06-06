@@ -16,7 +16,7 @@ const Home: FC<HomeProps> = ({ className }) => {
           Next.js template
         </Heading>
         <Image
-          src="/images/sticker-dino.png"
+          src={`${process.env.NODE_ENV === 'production' ? '/sectesnx' : ''}/images/sticker-dino.png`}
           width={512}
           height={492}
           quality={85}
