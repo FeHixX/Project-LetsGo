@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'standalone',
+	output: 'export',
+	distDir: 'dist',
   reactStrictMode: true,
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
