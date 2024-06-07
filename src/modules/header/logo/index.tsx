@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import LigaLogoIcon from '@icons/header/logo-full.svg'
+import LigaLogoIcon from '@icons/logo-full.svg'
 
 import styles from './logo.module.scss'
 
