@@ -24,6 +24,7 @@
 
 .wrapper {
   display: grid;
+  grid-template-columns: min-content auto;
   align-items: center;
 
   @include mixins.tablet-small {
@@ -45,21 +46,13 @@
   }
 }
 
-.logo_wrapper {
+.logo {
   grid-area: 1/1/2/2;
+  z-index: 1;
 }
 
-.logo_desktop {
-  @include mixins.tablet-small {
-    display: none;
-  }
-}
-
-.logo_mobile {
-  display: none;
-
-  @include mixins.tablet-small {
-    display: block;
-    margin-bottom: 40px;
-  }
+.social {
+  display: flex;
+  justify-content: center;
+  grid-area: 1/1/2/3;
 }
