@@ -5,10 +5,7 @@
 .root {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-self: center;
   max-width: 50%;
-  grid-area: 1/1/2/3;
 
   @include mixins.tablet {
     max-width: 37%;
@@ -37,6 +34,7 @@
   }
 
   &:hover {
+    opacity: 1;
     background-color: var(--color-picton-blue);
   }
 
