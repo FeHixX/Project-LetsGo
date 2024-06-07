@@ -1,19 +1,52 @@
 import { FC } from 'react'
 import { Wrapper } from '@/ui'
-import classNames from 'classnames'
+import MailIcon from '@icons/header/mail.svg'
+import PhoneIcon from '@icons/header/phone.svg'
 
-import config from '../../../package.json'
 import styles from './header.module.scss'
-import { HeaderProps } from './header.types'
+import { HeaderSiteItemI, HeaderSocialItemI } from './header.types'
 import Logo from './logo'
+import Nav from './nav'
 
-const Header: FC<HeaderProps> = ({ className }) => {
-  const headerClassName = classNames(styles.root, className)
+const socialList: HeaderSocialItemI[] = [
+  {
+    label: 'phone',
+    href: 'tel:+79837454545',
+    description: 'Позвонить',
+    icon: <PhoneIcon />
+  },
+  {
+    label: 'mail',
+    href: 'mailto:info@lifetour.com',
+    description: 'Письмо на почту',
+    icon: <MailIcon />
+  }
+]
+
+const siteList: HeaderSiteItemI[] = [
+  {
+    label: 'service',
+    href: '#',
+    description: 'О сервисе'
+  },
+  {
+    label: 'directions',
+    href: '#',
+    description: 'Направления'
+  },
+  {
+    label: 'companion',
+    href: '#',
+    description: 'Попутчики'
+  }
+]
+
+const Header: FC = () => {
   return (
-    <header className={headerClassName}>
+    <header className={styles.root}>
       <Wrapper className={styles.wrapper}>
         <Logo />
-        <strong>v {config.version}</strong>
+        <Nav siteList={siteList} socialList={socialList} />
       </Wrapper>
     </header>
   )

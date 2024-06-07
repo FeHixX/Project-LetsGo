@@ -8,6 +8,8 @@
 
   // project colors
   --color-blue: #2c39f2;
+  --color-jordy-blue: #7ebaeb;
+  --color-midnight-express: #192144;
   --color-blue-border: #dadcfa;
 }
 
@@ -42,6 +44,7 @@ a {
   transition: opacity $transition;
 
   @include desktop-only {
+
     &:hover,
     &:focus-visible {
       opacity: 0.7;

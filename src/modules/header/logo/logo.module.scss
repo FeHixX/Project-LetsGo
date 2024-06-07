@@ -3,10 +3,11 @@
 
 .root {
   display: block;
+  margin: 0 145px 0 0;
   line-height: 0;
 
   svg {
-    width: func.rem(110);
-    height: func.rem(24);
+    width: 200px;
+    height: 46px;
   }
 }
