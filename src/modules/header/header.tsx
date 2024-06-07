@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Wrapper } from '@/ui'
-import MailIcon from '@icons/header/mail.svg'
-import PhoneIcon from '@icons/header/phone.svg'
+import MailIcon from '@icons/mail.svg'
+import PhoneIcon from '@icons/phone.svg'
 
 import styles from './header.module.scss'
 import { HeaderSiteItemI, HeaderSocialItemI } from './header.types'
