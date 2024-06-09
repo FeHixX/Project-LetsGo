@@ -10,23 +10,18 @@ import { Provider } from '@service/provider'
 const font = localFont({
   src: [
     {
-      path: './fonts/neuemachina-light.woff2',
-      weight: '500',
-      style: 'normal'
-    },
-    {
-      path: './fonts/neuemachina-regular.woff2',
+      path: './fonts/roboto-regular.woff2',
       weight: '400',
       style: 'normal'
     },
     {
-      path: './fonts/neuemachina-medium.woff2',
+      path: './fonts/roboto-medium.woff2',
       weight: '500',
       style: 'normal'
     },
     {
-      path: './fonts/neuemachina-ultrabold.woff2',
-      weight: '800',
+      path: './fonts/roboto-bold.woff2',
+      weight: '700',
       style: 'normal'
     }
   ]
