@@ -31,12 +31,8 @@ const Footer: FC = () => {
   return (
     <footer className={styles.root}>
       <Wrapper className={styles.wrapper}>
-        <div className={styles.logo}>
-          <Logo />
-        </div>
-        <div className={styles.social}>
-          <Social items={socialList} />
-        </div>
+        <Logo className={styles.logo} />
+        <Social items={socialList} className={styles.social} />
       </Wrapper>
     </footer>
   )

@@ -1,5 +1,5 @@
-@use "@styles/func";
-@use "@styles/mixins";
+@use '@styles/func';
+@use '@styles/mixins';
 
 .root {
   position: relative;
@@ -25,7 +25,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: min-content auto;
-  align-items: center;
+  place-items: center center;
 
   @include mixins.tablet-small {
     position: relative;
@@ -35,7 +35,7 @@
 
     &::after {
       position: absolute;
-      content: "";
+      content: '';
       bottom: 0;
       left: 25px;
       right: 50px;
@@ -48,11 +48,9 @@
 
 .logo {
   grid-area: 1/1/2/2;
-  z-index: 1;
 }
 
 .social {
   display: flex;
-  justify-content: center;
   grid-area: 1/1/2/3;
 }
