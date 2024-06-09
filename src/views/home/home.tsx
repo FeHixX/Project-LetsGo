@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import Image from 'next/image'
+import { Pagination } from '@/modules/pagination'
 import { Heading, Wrapper } from '@/ui'
 import classNames from 'classnames'
 
@@ -13,7 +14,7 @@ const Home: FC<HomeProps> = ({ className }) => {
     <main className={rootClassName}>
       <Wrapper>
         <Heading tagName="h1" className={styles.title}>
-          Next.js template
+          Направления
         </Heading>
         <Image
           src={`${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/images/sticker-dino.png`}
@@ -23,6 +24,7 @@ const Home: FC<HomeProps> = ({ className }) => {
           alt="Ligazavr"
           className={styles.image}
         />
+        <Pagination />
       </Wrapper>
     </main>
   )

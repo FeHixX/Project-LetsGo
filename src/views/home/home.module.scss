@@ -5,12 +5,12 @@
 .root {
   width: 100%;
   padding: func.rem(40) 0;
+  background-color: var(--color-whisper);
 }
 
 .title {
-  color: var(--color-blue);
-  text-align: center;
-  margin: 0 auto func.rem(32);
+  color: var(--color-white-default);
+  text-align: left;
 }
 
 .image {

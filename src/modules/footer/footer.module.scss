@@ -1,5 +1,5 @@
-@use "@styles/func";
-@use "@styles/mixins";
+@use '@styles/func';
+@use '@styles/mixins';
 
 .root {
   position: relative;
@@ -35,7 +35,7 @@
 
     &::after {
       position: absolute;
-      content: "";
+      content: '';
       bottom: 0;
       left: 25px;
       right: 50px;
