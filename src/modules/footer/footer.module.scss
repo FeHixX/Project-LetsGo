@@ -25,7 +25,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: min-content auto;
-  align-items: center;
+  place-items: center center;
 
   @include mixins.tablet-small {
     position: relative;
@@ -48,11 +48,9 @@
 
 .logo {
   grid-area: 1/1/2/2;
-  z-index: 1;
 }
 
 .social {
   display: flex;
-  justify-content: center;
   grid-area: 1/1/2/3;
 }
