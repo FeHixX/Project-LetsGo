@@ -1,0 +1,31 @@
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
+.root {
+  width: 100%;
+  padding: func.rem(40) 0;
+  background-color: var(--color-whisper);
+}
+
+.title {
+  color: var(--color-white-default);
+  text-align: left;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  max-width: func.rem(512);
+  height: auto;
+  margin: 0 auto;
+
+  @include mixins.tablet-small {
+    max-width: func.rem(400);
+  }
+}
+
+.companions {
+  padding: 20px;
+  background-color: #f4f4f4;
+}
