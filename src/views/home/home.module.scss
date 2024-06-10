@@ -4,13 +4,8 @@
 
 .root {
   width: 100%;
-  padding: func.rem(40) 0;
+  padding: 0 0 72px;
   background-color: var(--color-whisper);
-}
-
-.title {
-  color: var(--color-white-default);
-  text-align: left;
 }
 
 .image {

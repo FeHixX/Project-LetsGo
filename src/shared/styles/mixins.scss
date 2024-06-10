@@ -50,12 +50,12 @@
 }
 
 @mixin h1 {
-  font-weight: 400;
-  font-size: rem(96);
-  line-height: 1.04;
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 100%;
 
   @include tablet-small {
-    font-size: rem(38);
+    font-size: 36px;
   }
 }
 
@@ -91,8 +91,8 @@
 
 @mixin text {
   font-weight: 400;
-  font-size: rem(16);
-  line-height: rem(20);
+  font-size: 20px;
+  line-height: 100%;
 }
 
 @mixin reset-btn {
