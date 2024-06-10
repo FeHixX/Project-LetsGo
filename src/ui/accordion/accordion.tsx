@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FC } from 'react';
-import styles from './Accordion.module.scss';
+import styles from './accordion.module.scss';
 import { AccordionItemProps, AccordionProps } from './accordion.types';
 
 const AccordionItem: FC<AccordionItemProps> = ({ title, content }) => {
