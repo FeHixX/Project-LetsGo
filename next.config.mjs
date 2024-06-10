@@ -5,6 +5,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
 	distDir: 'dist',
   basePath: isProd ? '/intern-pognali-1-6' : '',
+  assetPrefix: isProd ? '/intern-pognali-1-6/' : '',
   reactStrictMode: true,
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
