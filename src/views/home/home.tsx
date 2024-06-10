@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import Image from 'next/image'
 import { Pagination } from '@/modules/pagination'
-import { Heading, Wrapper } from '@/ui'
+import { SectionHeader } from '@/modules/sectionHeader'
+import { Wrapper } from '@/ui'
 import classNames from 'classnames'
 
 import styles from './home.module.scss'
@@ -12,10 +13,8 @@ const Home: FC<HomeProps> = ({ className }) => {
 
   return (
     <main className={rootClassName}>
+      <SectionHeader>Направления</SectionHeader>
       <Wrapper>
-        <Heading tagName="h1" className={styles.title}>
-          Направления
-        </Heading>
         <Image
           src={`${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/images/sticker-dino.png`}
           width={512}
