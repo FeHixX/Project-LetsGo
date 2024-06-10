@@ -1,0 +1,47 @@
+// src/components/Accordion.module.scss
+
+.accordion {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.accordionItem {
+  border-bottom: 1px solid #ddd;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.accordionButton {
+  width: 100%;
+  padding: 15px;
+  text-align: left;
+  background: #f7f7f7;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #e2e2e2;
+  }
+}
+
+.accordionContent {
+  padding: 15px;
+  background: #fff;
+  animation: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
