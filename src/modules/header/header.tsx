@@ -31,12 +31,12 @@ const siteList: HeaderSiteItemI[] = [
   },
   {
     label: 'directions',
-    href: '#',
+    href: '/directions',
     description: 'Направления'
   },
   {
-    label: 'companion',
-    href: '#',
+    label: 'companions',
+    href: '/companions',
     description: 'Попутчики'
   }
 ]
