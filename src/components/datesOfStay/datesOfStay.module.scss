@@ -1,0 +1,46 @@
+@use "@styles/func";
+@use "@styles/mixins";
+@use "@styles/variables";
+  
+.root {
+
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.navButton:disabled {
+  cursor: not-allowed;
+  color: #ccc;
+}
+
+.dateDisplay {
+  font-size: 1.2rem;
+}
+
+.start {
+  border: 2px solid orange;
+  background-color: navy;
+  color: white;
+}
+
+.end {
+  background-color: navy;
+  color: white;
+}
+
+.highlight {
+  background-color: navy;
+  color: white;
+}
