@@ -11,7 +11,7 @@ const SectionHeader: FC<SectionHeaderProps> = ({ children, className }) => {
   return (
     <header className={rootClassName}>
       <Wrapper className={styles.wrapper}>
-        <Heading tagName="h1" size='lg' className={styles.title}>
+        <Heading tagName="h1" size="lg" className={styles.title}>
           {children}
         </Heading>
       </Wrapper>

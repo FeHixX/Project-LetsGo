@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import LogoDesktop from '@icons/logo-full-footer.svg'
-import LogoMobile from '@icons/logo-mobile-footer.svg'
+import LogoDesktop from '@icons/logo-full-black.svg'
+import LogoMobile from '@icons/logo-mobile-black.svg'
 import classNames from 'classnames'
 
 import styles from './logo.module.scss'
