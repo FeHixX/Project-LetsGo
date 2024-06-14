@@ -1,6 +1,8 @@
-import { HeaderSiteItemI, HeaderSocialItemI } from '../header.types'
+import { HeaderSiteItemI, HeaderSocialItemI, HeaderContactItemI } from '../header.types'
 
 export interface HeaderNavProps {
   socialList: HeaderSocialItemI[]
   siteList: HeaderSiteItemI[]
+  contactList: HeaderContactItemI[]
+  active: boolean
 }

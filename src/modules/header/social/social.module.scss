@@ -2,28 +2,47 @@
 @use '@styles/mixins';
 
 .root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  margin: 0 0 0 auto;
-}
+  display: none;
 
-.link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  background-color: #7ebaeb;
-  border-radius: 50%;
+  @include mixins.tablet {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 30px;
+    background-color: var(--color-white-default);
 
-  svg {
-    width: 16px;
-    height: 16px;
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background-color: var(--color-midnight);
+      border-radius: 0 0 22px 22px;
+    }
   }
 
-  span {
-    display: none;
+  @include mixins.tablet-small {
+    padding-right: 25px;
+    padding-left: 25px;
+  }
+}
+
+.icon {
+  @include mixins.tablet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+
+    svg {
+      fill: var(--color-black-default);
+    }
   }
 }
