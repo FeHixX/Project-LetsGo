@@ -1,0 +1,9 @@
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
+.root {
+  position: absolute;
+  color: var(--color-picton-blue);
+  inset: 0;
+}
