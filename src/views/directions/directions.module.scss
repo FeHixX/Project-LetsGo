@@ -4,28 +4,14 @@
 
 .root {
   width: 100%;
-  padding: func.rem(40) 0;
-  background-color: var(--color-whisper);
-}
+  padding: 0 0 72px;
+  background-color: var(--color-solitude);
 
-.title {
-  color: var(--color-white-default);
-  text-align: left;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  max-width: func.rem(512);
-  height: auto;
-  margin: 0 auto;
+  @include mixins.tablet {
+    padding: 0 0 63px;
+  }
 
   @include mixins.tablet-small {
-    max-width: func.rem(400);
+    padding: 0 0 43px;
   }
-}
-
-.directions {
-  padding: 20px;
-  background-color: #f4f4f4;
 }

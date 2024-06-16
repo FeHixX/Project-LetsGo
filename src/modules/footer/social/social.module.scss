@@ -33,9 +33,11 @@
     transition: opacity variables.$transition;
   }
 
-  &:hover {
-    opacity: 1;
+  &:hover,
+  &:focus-visible {
     background-color: var(--color-picton-blue);
+    outline: none;
+    opacity: 1;
   }
 
   &:active {
