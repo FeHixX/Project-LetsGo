@@ -1,33 +1,27 @@
-.root {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+@use "@styles/func";
+@use "@styles/mixins";
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: -100px;
-        width: 60px;
-        height: 2px;
-        background-color: #fff;
+.root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 0 145px;
+    flex-grow: 1;
+
+    @include mixins.tablet {
+        display: none;
     }
 }
 
-.toggle {
-    position: relative;
-    display: none;
-
-    &::after {
-        content: "";
+.activeroot {
+    @include mixins.tablet {
         position: absolute;
-        top: 23px;
-        right: 18px;
-        width: 25px;
-        height: 3px;
-        background-color: #fff;
-        box-shadow: 0 5px 0 0 #fff, 0 8px 0 0 #fff;
+        display: block;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 105px 0;
+        z-index: 1;
     }
 }

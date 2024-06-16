@@ -1,13 +1,63 @@
-@use '@styles/func';
-@use '@styles/mixins';
+@use "@styles/func";
+@use "@styles/mixins";
 
 .root {
-  display: block;
-  margin: 0 145px 0 0;
+  display: inline-block;
   line-height: 0;
+
+  &:active {
+    opacity: 0.5;
+  }
+}
+
+.desktop {
+  display: inline-block;
 
   svg {
     width: 200px;
-    height: 46px;
+    height: 50px;
+  }
+
+  .black {
+    display: none;
+  }
+
+  @include mixins.tablet {
+    svg {
+      width: 166px;
+      height: 42px;
+    }
+  }
+
+  @include mixins.tablet-small {
+    display: none;
+  }
+}
+
+.mobile {
+  display: none;
+
+  svg {
+    width: 96px;
+    height: 15px;
+  }
+
+  .black {
+    display: none;
+  }
+
+  @include mixins.tablet-small {
+    display: inline-block;
+  }
+}
+
+.activedesktop,
+.activemobile {
+  .white {
+    display: none;
+  }
+
+  .black {
+    display: block;
   }
 }

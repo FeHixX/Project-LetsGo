@@ -1,11 +1,11 @@
 import { FC } from 'react'
 
-import styles from './social.module.scss'
-import { HeaderSocialProps } from './social.types'
+import styles from './contact.module.scss'
+import { HeaderContactProps } from './contact.types'
 
-const Social: FC<HeaderSocialProps> = ({ socialItems }) => (
+const Contact: FC<HeaderContactProps> = ({ contactItems }) => (
   <ul className={styles.root}>
-    {socialItems.map(({ icon, label, href }) => (
+    {contactItems.map(({ href, icon, label, description }) => (
       <li className={styles.item} key={label}>
         <a
           href={href}
@@ -15,10 +15,11 @@ const Social: FC<HeaderSocialProps> = ({ socialItems }) => (
           className={styles.link}
         >
           <div className={styles.icon}>{icon}</div>
+          <span>{description}</span>
         </a>
       </li>
     ))}
   </ul>
 )
 
-export default Social
+export default Contact
