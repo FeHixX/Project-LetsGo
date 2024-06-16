@@ -2,10 +2,10 @@ import { FC } from 'react'
 import { Heading, Wrapper } from '@/ui'
 import classNames from 'classnames'
 
-import styles from './sectionHeader.module.scss'
-import { SectionHeaderProps } from './sectionHeader.types'
+import styles from './pageHeader.module.scss'
+import { PageHeaderProps } from './pageHeader.types'
 
-const SectionHeader: FC<SectionHeaderProps> = ({ children, className }) => {
+const PageHeader: FC<PageHeaderProps> = ({ children, className }) => {
   const rootClassName = classNames(styles.root, className)
 
   return (
@@ -19,4 +19,4 @@ const SectionHeader: FC<SectionHeaderProps> = ({ children, className }) => {
   )
 }
 
-export default SectionHeader
+export default PageHeader

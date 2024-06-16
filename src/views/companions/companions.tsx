@@ -1,6 +1,7 @@
 import { FC } from 'react'
+import { PageHeader } from '@/modules/pageHeader'
 import { Pagination } from '@/modules/pagination'
-import { Heading, Wrapper } from '@/ui'
+import { Wrapper } from '@/ui'
 import classNames from 'classnames'
 
 import styles from './companions.module.scss'
@@ -11,10 +12,8 @@ const Companions: FC<CompanionsProps> = ({ className }) => {
 
   return (
     <main className={rootClassName}>
+      <PageHeader className={styles.header}>Попутчики</PageHeader>
       <Wrapper>
-        <Heading tagName="h1" className={styles.title}>
-          Здесь страница Попутчики CATALOG
-        </Heading>
         <Pagination />
       </Wrapper>
     </main>

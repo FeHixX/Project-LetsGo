@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-export interface SectionHeaderProps {
+export interface PageHeaderProps {
   children: ReactNode
   className?: string
 }
