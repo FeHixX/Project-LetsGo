@@ -8,27 +8,26 @@
 
   // project colors
   --color-blue: #2c39f2;
-  --color-jordy-blue: #7ebaeb;
-  --color-midnight-express: #192144;
   --color-blue-border: #dadcfa;
-  --color-light-grey: #cccccc;
-  --color-midnight: #121936;
-  --color-midnight-secondary: #161C35;
-  --color-pale-cornflower-blue: #a8d2f4;
-  --color-picton-blue: #4d99d6;
-  --color-white-smoke: #f2f2f2;
-  --color-solitude: #edeff6;
-  --color-whisper: #e5e5e5;
-  --color-link-water: #cbced9;
-  --color-midnight-express-2: #161c35;
+  --color-catalina-blue: #1d2e5b;
   --color-charcoal: #444;
   --color-echo-blue: #aeb4cb;
   --color-gainsboro: #d9d9d9;
-  --color-catalina-blue: #1d2e5b;
-  --color-pink-swan: #b2b2b2;
-  --color-solitude-2: #e2e5f1;
   --color-hawkes-blue: #dfe3f0;
   --color-hawkes-blue-2: #d1d7e9;
+  --color-jordy-blue: #7ebaeb;
+  --color-light-grey: #ccc;
+  --color-link-water: #cbced9;
+  --color-midnight: #121936;
+  --color-midnight-express: #192144;
+  --color-midnight-express-2: #161c35;
+  --color-pale-cornflower-blue: #a8d2f4;
+  --color-picton-blue: #4d99d6;
+  --color-pink-swan: #b2b2b2;
+  --color-solitude: #edeff6;
+  --color-solitude-2: #e2e5f1;
+  --color-whisper: #e5e5e5;
+  --color-white-smoke: #f2f2f2;
 }
 
 * {
@@ -62,7 +61,6 @@ a {
   transition: opacity $transition;
 
   @include desktop-only {
-
     &:hover,
     &:focus-visible {
       opacity: 0.7;
