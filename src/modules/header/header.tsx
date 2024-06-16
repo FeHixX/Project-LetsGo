@@ -25,12 +25,12 @@ const siteList: HeaderSiteItemI[] = [
   },
   {
     label: 'directions',
-    href: '#',
+    href: `${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/directions`,
     description: 'Направления'
   },
   {
     label: 'companion',
-    href: '#',
+    href: `${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/companions`,
     description: 'Попутчики'
   }
 ]
