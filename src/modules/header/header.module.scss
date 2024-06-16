@@ -3,12 +3,93 @@
 
 .root {
   position: relative;
-  width: 100%;
-  background-color: var(--color-midnight-express);
 }
 
 .wrapper {
   display: flex;
-  align-items: center;
-  padding: 46px 0 64px;
+  padding-top: 50px;
+  padding-bottom: 60px;
+  background-color: var(--color-midnight-express);
+
+  @include mixins.tablet {
+    padding-top: 45px;
+  }
+
+  @include mixins.tablet-small {
+    padding-top: 25px;
+  }
+}
+
+.activewrapper {
+  @include mixins.tablet {
+    background-color: var(--color-white-default);
+  }
+}
+
+.toggle {
+  display: none;
+
+  @include mixins.tablet {
+    position: absolute;
+    display: block;
+    top: 60px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 25px;
+    height: 11px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      box-shadow: 0 8px 0 0 #fff;
+    }
+  }
+
+  @include mixins.tablet-small {
+    top: 24px;
+    right: 38px;
+  }
+}
+
+.activetoggle {
+  @include mixins.tablet {
+    z-index: 2;
+
+    position: absolute;
+    top: 55px;
+    right: 50%;
+    transform: translateX(50%);
+    display: block;
+    width: 20px;
+    height: 20px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: -4px;
+      transform: translateX(50%);
+      width: 28px;
+      height: 2px;
+      background-color: var(--color-light-grey);
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  @include mixins.tablet-small {
+    top: 23px;
+    right: 37px;
+  }
 }

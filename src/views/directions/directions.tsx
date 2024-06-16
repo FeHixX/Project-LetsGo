@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { Pagination } from '@/modules/pagination'
-import { Heading, Wrapper } from '@/ui'
+import { PageHeader } from '@/modules/pageHeader'
+import { User } from '@/modules/user'
 import classNames from 'classnames'
 
 import styles from './directions.module.scss'
@@ -12,13 +12,8 @@ const Directions: FC<DirectionsProps> = ({ className }) => {
 
   return (
     <main className={rootClassName}>
-      <Wrapper>
-        <Heading tagName="h1" className={styles.title}>
-          Здесь страница Направления FORM
-        </Heading>
-        <DatesOfStay></DatesOfStay>
-        <Pagination />
-      </Wrapper>
+      <PageHeader className={styles.header}>Направления</PageHeader>
+      <User />
     </main>
   )
 }

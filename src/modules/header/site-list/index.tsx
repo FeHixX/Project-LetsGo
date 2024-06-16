@@ -9,7 +9,6 @@ const SiteList: FC<HeaderSiteListProps> = ({ siteItems }) => (
       <li className={styles.item} key={label}>
         <a
           href={href}
-          target="_blank"
           rel="noopener noreferrer"
           aria-label={label}
           className={styles.link}

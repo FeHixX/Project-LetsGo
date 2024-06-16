@@ -5,7 +5,7 @@ import { HeaderSocialProps } from './social.types'
 
 const Social: FC<HeaderSocialProps> = ({ socialItems }) => (
   <ul className={styles.root}>
-    {socialItems.map(({ href, icon, label, description }) => (
+    {socialItems.map(({ icon, label, href }) => (
       <li className={styles.item} key={label}>
         <a
           href={href}
@@ -14,8 +14,7 @@ const Social: FC<HeaderSocialProps> = ({ socialItems }) => (
           aria-label={label}
           className={styles.link}
         >
-          {icon}
-          <span>{description}</span>
+          <div className={styles.icon}>{icon}</div>
         </a>
       </li>
     ))}

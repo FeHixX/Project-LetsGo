@@ -1,0 +1,74 @@
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 43px;
+    height: 44px;
+    background-color: var(--color-white-default);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color variables.$transition;
+
+    &:has(input:active) {
+      background-color: var(--color-solitude-2);
+    }
+  }
+
+  svg {
+    width: 23px;
+    height: 23px;
+    color: var(--color-gainsboro);
+    transition:
+      color variables.$transition,
+      opacity variables.$transition;
+  }
+
+  input {
+    position: fixed;
+    transform: scale(0);
+
+    &:checked + svg {
+      color: var(--color-catalina-blue);
+    }
+
+    &:hover + svg,
+    &:focus-visible + svg {
+      color: var(--color-pink-swan);
+    }
+
+    &:active + svg {
+      color: var(--color-catalina-blue);
+      opacity: 0.1;
+    }
+
+    &:checked:hover + svg,
+    &:checked:focus-visible + svg {
+      opacity: 0.7;
+    }
+
+    &:checked:active + svg {
+      opacity: 0.3;
+    }
+  }
+
+  @include mixins.tablet-small {
+    label {
+      width: 32px;
+      height: 32px;
+    }
+
+    svg {
+      width: 17px;
+      height: 16px;
+    }
+  }
+}

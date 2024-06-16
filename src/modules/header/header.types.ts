@@ -5,9 +5,14 @@ export interface HeaderSiteItemI {
   label: string
   description: string
 }
-export interface HeaderSocialItemI {
+export interface HeaderContactItemI {
   icon: ReactNode
   href: string
   label: string
   description: string
+}
+export interface HeaderSocialItemI {
+  icon: ReactNode
+  label: string
+  href: string
 }
