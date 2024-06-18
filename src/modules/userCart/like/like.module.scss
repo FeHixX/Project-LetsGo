@@ -1,0 +1,77 @@
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: 0 3px;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    transition: background-color variables.$transition;
+
+    svg {
+      width: 23px;
+      height: 20px;
+      color: var(--color-transparent);
+      opacity: 0.3;
+      transition: variables.$transition;
+      transition-property: opacity, stroke;
+      stroke: var(--color-midnight-express);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-lavender);
+
+      svg {
+        opacity: 0.5;
+      }
+    }
+
+    &:active {
+      background-color: var(--color-lavender);
+
+      svg {
+        opacity: 0.1;
+      }
+    }
+
+    &[data-counter='true'] {
+      background-color: var(--color-tutu);
+
+      svg {
+        color: var(--color-red-orange);
+        opacity: 1;
+        stroke: var(--color-red-orange);
+      }
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--color-remy);
+      }
+
+      &:active {
+        background-color: var(--color-remy);
+
+        svg {
+          opacity: 0.3;
+        }
+      }
+    }
+  }
+
+  span {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    color: var(--color-midnight-express-2);
+    text-transform: uppercase;
+  }
+}
