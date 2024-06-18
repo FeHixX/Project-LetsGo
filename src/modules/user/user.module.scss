@@ -121,7 +121,6 @@
 .tags {
   position: relative;
   width: calc(58% + 4px);
-  padding: 35px 39px 33px;
   border: 1px solid var(--color-link-water);
   border-radius: 10px;
   transition: border-color variables.$transition;
@@ -139,6 +138,11 @@
     left: 21px;
     color: var(--color-midnight-express-2);
     letter-spacing: 0.07em;
+  }
+
+  label{
+    display: flex;
+    padding: 35px 39px 33px;
   }
 
   textarea {
@@ -159,13 +163,16 @@
 
   @include mixins.tablet {
     width: 100%;
-    padding: 35px 39px 32px;
     grid-area: 3/1/4/4;
 
     legend {
       left: 50%;
       letter-spacing: 0.1em;
       transform: translateX(-50%);
+    }
+
+    label{
+      padding: 35px 39px 32px;
     }
 
     textarea {
@@ -176,12 +183,15 @@
 
   @include mixins.tablet-small {
     margin: 0 0 7px;
-    padding: 26px 24px 22px;
     grid-area: 3/1/4/3;
 
     legend {
       color: var(--color-catalina-blue);
       letter-spacing: 0;
+    }
+
+    label{
+      padding: 26px 24px 22px;
     }
 
     textarea {

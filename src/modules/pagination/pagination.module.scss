@@ -33,12 +33,12 @@
     border-radius: 50%;
     user-select: none;
 
-    &:hover,
-    &:focus-visible {
+    &:hover:not(.current),
+    &:focus-visible:not(.current) {
       opacity: 0.6;
     }
 
-    &:active {
+    &:active:not(.current) {
       opacity: 0.3;
     }
   }
@@ -65,12 +65,12 @@
   button {
     transition: opacity variables.$transition;
 
-    &:hover,
-    &:focus-visible {
+    &:hover:hover,
+    &:focus-visible:focus-visible {
       opacity: 0.6;
     }
 
-    &:active {
+    &:active:active {
       opacity: 0.3;
     }
   }

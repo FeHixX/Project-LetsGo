@@ -23,14 +23,16 @@ const Textarea: FC<TextareaProps> = ({
   }, [])
 
   return (
-    <textarea
-      ref={textareaRef}
-      name={name}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      rows={rows}
-      onInput={adjustHeight}
-    />
+    <label>
+      <textarea
+        ref={textareaRef}
+        name={name}
+        maxLength={maxLength}
+        placeholder={placeholder}
+        rows={rows}
+        onInput={adjustHeight}
+      />
+    </label>
   )
 }
 

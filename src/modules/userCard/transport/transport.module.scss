@@ -1,0 +1,23 @@
+@use '@styles/func';
+@use '@styles/mixins';
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+
+  .checked {
+    svg {
+      color: var(--color-catalina-blue);
+      opacity: 1;
+    }
+  }
+
+  li:not(.checked) {
+    svg {
+      width: 22px;
+      height: 22px;
+      opacity: 0.15;
+    }
+  }
+}

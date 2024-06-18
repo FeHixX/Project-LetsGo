@@ -1,0 +1,131 @@
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
+.image {
+  margin: -46px 0 -42px;
+  grid-area: 1/1/4/2;
+  overflow: hidden;
+
+  img {
+    display: block;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+    object-fit: cover;
+    transition: transform variables.$transition;
+  }
+}
+
+.root {
+  display: grid;
+  padding: 46px 42px 42px 0;
+  overflow: hidden;
+  background-color: var(--color-white-default);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: box-shadow variables.$transition;
+  gap: 29px calc(7% - 1px);
+  grid-template: repeat(2, auto) 1fr/ 285px repeat(2, 1fr);
+  justify-items: start;
+
+  &:hover,
+  &:focus-within {
+    box-shadow: 0 4px 9px 0 rgba(0 0 0 / 16%);
+
+    .image {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.title {
+  position: relative;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%;
+  color: var(--color-catalina-blue);
+  grid-area: 1/2/2/3;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: -26px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-salmon);
+    border-radius: 50%;
+  }
+
+  &[data-online='true'] {
+    &::before {
+      background-color: var(--color-lawn-green);
+    }
+  }
+}
+
+.tags {
+  margin: -9px 0 0;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 115%;
+  grid-area: 2/2/3/3;
+}
+
+.countries {
+  grid-area: 1/3/3/4;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 0 -8px;
+  gap: 4px;
+  grid-area: 3/2/4/3;
+}
+
+.right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 12px 0 -2px;
+  padding: 0 0 0 18px;
+  gap: 0 10px;
+  grid-area: 3/3/4/4;
+}
+
+.level {
+  flex-shrink: 0;
+  width: 62px;
+  height: 62px;
+  padding: 13px 0 0;
+
+  circle {
+    stroke-width: 4px;
+  }
+
+  p {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: var(--color-catalina-blue);
+
+    &::after {
+      bottom: 18px;
+      height: 1px;
+      background-color: var(--color-black-default);
+      opacity: 0.1;
+    }
+  }
+
+  span {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    color: var(--color-black-default);
+    opacity: 0.4;
+  }
+}

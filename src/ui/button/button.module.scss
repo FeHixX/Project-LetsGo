@@ -6,37 +6,53 @@
   @include mixins.reset-btn;
   position: relative;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-weight: 500;
-  font-size: func.rem(18);
-  line-height: func.rem(20);
-  color: var(--color-white-default);
-  background-color: var(--color-blue);
+  align-items: center;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  color: var(--color-midnight-express-2);
+  text-transform: uppercase;
+  background-color: var(--color-pale-cornflower-blue);
+  border-radius: 25px;
+  outline: none;
   cursor: pointer;
   transition: variables.$transition;
-  transition-property: color, background-color;
-  outline: none;
+  transition-property: color, background-color, box-shadow;
   user-select: none;
 
+  &:hover,
+  &:focus-visible {
+    background-color: var(--color-picton-blue);
+  }
+
+  &:active {
+    background-color: var(--color-picton-blue);
+    color: rgba(22 28 53 / 30%);
+  }
+
   &_sm {
-    height: func.rem(48);
-    padding: func.rem(12) func.rem(20);
+    padding: 15px 27px;
   }
 
   &_md {
-    height: func.rem(60);
-    padding: func.rem(20) func.rem(50);
-
-    @include mixins.tablet {
-      height: func.rem(50);
-      padding: func.rem(15) func.rem(50);
-    }
+    padding: 29px 34px 27px;
   }
 
   &_white {
-    color: var(--color-black-default);
     background-color: var(--color-white-default);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-white-default);
+      box-shadow: 0 3px 6px 0 rgba(0 0 0 / 14%);
+    }
+
+    &:active {
+      color: rgba(22 28 53 / 30%);
+      background-color: var(--color-picton-blue);
+      box-shadow: none;
+    }
   }
 
   &:disabled {
