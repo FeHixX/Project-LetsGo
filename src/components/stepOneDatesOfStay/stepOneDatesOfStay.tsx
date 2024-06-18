@@ -6,8 +6,8 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import { addMonths } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
-import styles from './datesOfStay.module.scss';
-import { DatesOfStayProps } from './datesOfStay.types';
+import styles from './stepOneDatesOfStay.module.scss';
+import { stepOneDatesOfStayProps } from './stepOnedatesOfStay.types';
 
 const customRu = {
   ...ru,
@@ -23,11 +23,16 @@ const customRu = {
 
 registerLocale('ru', customRu);
 
-const DatesOfStay: FC<DatesOfStayProps> = ({ className }) => {
+const StepOneDatesOfStay: FC<stepOneDatesOfStayProps> = ({ data, updateData, nextStep, className }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const today = new Date();
   const maxDate = addMonths(today, 1);
+
+  const handleNext = () => {
+    // Implement form validation if needed
+    nextStep();
+  };
 
   const rootClassName = classNames(styles.root, className);
 
@@ -35,7 +40,8 @@ const DatesOfStay: FC<DatesOfStayProps> = ({ className }) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-  }, []);
+    updateData({ dates });
+  }, [updateData]);
 
   const renderDayContents = useCallback((day: number, date: Date | null) => {
     let label = null;
@@ -54,7 +60,7 @@ const DatesOfStay: FC<DatesOfStayProps> = ({ className }) => {
   }, [startDate, endDate]);
 
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName}>    
       <div className={styles.dateWrapper}>
         <DatePicker
           selected={startDate || undefined}
@@ -70,8 +76,10 @@ const DatesOfStay: FC<DatesOfStayProps> = ({ className }) => {
           renderDayContents={renderDayContents}
         />
       </div>
+      <button onClick={handleNext}>Следующий шаг</button>
+      <h2>Шаг 1. Даты пребывания</h2>
     </div>
   );
 };
 
-export default DatesOfStay;
+export default StepOneDatesOfStay;

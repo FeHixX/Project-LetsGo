@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import Image from 'next/image'
 import { Accordion, Wrapper } from '@/ui'
 import classNames from 'classnames'
 
@@ -27,14 +26,6 @@ const Home: FC<HomeProps> = ({ className }) => {
   return (
     <main className={rootClassName}>
       <Wrapper>
-        <Image
-          src={`${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/images/sticker-dino.png`}
-          width={512}
-          height={492}
-          quality={85}
-          alt="Ligazavr"
-          className={styles.image}
-        />
         <Accordion items={accordionItems} />
       </Wrapper>
     </main>

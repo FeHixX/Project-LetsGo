@@ -1,2 +1,5 @@
-export { DatesOfStay } from './datesOfStay'
+export { stepOneDatesOfStay } from './stepOneDatesOfStay'
 export { Dialog } from './dialog'
+export { MultiStepForm } from './multiStepForm'
+export { stepTwoItinerary } from './stepTwoItinerary'
+export { stepThreePastime } from './stepThreePastime'
