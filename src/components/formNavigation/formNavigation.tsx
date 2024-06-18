@@ -1,3 +1,5 @@
+//Заготовка списка навигации для многошаговой формы направления, на случай если понадобится навигация.)
+
 import React, { FC } from 'react';
 import styles from './formNavigation.module.scss';
 import classNames from 'classnames'
