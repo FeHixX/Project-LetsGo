@@ -1,4 +1,4 @@
-import { UserCountriesItemI } from '../userCart.types'
+import { UserCountriesItemI } from '../userCard.types'
 
 export interface CountriesProps {
   className?: string

@@ -1,4 +1,4 @@
-import { UserTransportItemI } from '../userCart.types'
+import { UserTransportItemI } from '../userCard.types'
 
 export interface TransportProps {
   className?: string
