@@ -7,7 +7,7 @@ import { addMonths } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './stepOneDatesOfStay.module.scss';
-import { stepOneDatesOfStayProps } from './stepOnedatesOfStay.types';
+import { stepOneDatesOfStayProps } from './stepOneDatesOfStay.types';
 
 const customRu = {
   ...ru,
@@ -60,7 +60,13 @@ const StepOneDatesOfStay: FC<stepOneDatesOfStayProps> = ({ data, updateData, nex
   }, [startDate, endDate]);
 
   return (
-    <div className={rootClassName}>    
+    <div className={rootClassName}>
+      <div>
+      <h2>Шаг 1. Даты пребывания</h2>
+      <p></p>
+      </div>
+      <div>
+      </div>
       <div className={styles.dateWrapper}>
         <DatePicker
           selected={startDate || undefined}
@@ -77,7 +83,6 @@ const StepOneDatesOfStay: FC<stepOneDatesOfStayProps> = ({ data, updateData, nex
         />
       </div>
       <button onClick={handleNext}>Следующий шаг</button>
-      <h2>Шаг 1. Даты пребывания</h2>
     </div>
   );
 };
