@@ -6,8 +6,9 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import { addMonths } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
-import styles from './datesOfStay.module.scss';
-import { DatesOfStayProps } from './datesOfStay.types';
+import styles from './stepOneDatesOfStay.module.scss';
+import { StepOneDatesOfStayProps } from './stepOneDatesOfStay.types';
+import StepList from '../formNavigation/formNavigation';
 
 const customRu = {
   ...ru,
@@ -23,11 +24,16 @@ const customRu = {
 
 registerLocale('ru', customRu);
 
-const DatesOfStay: FC<DatesOfStayProps> = ({ className }) => {
+const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({ updateData, nextStep, className }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const today = new Date();
   const maxDate = addMonths(today, 1);
+
+  const handleNext = () => {
+    // Implement form validation if needed
+    nextStep();
+  };
 
   const rootClassName = classNames(styles.root, className);
 
@@ -35,7 +41,8 @@ const DatesOfStay: FC<DatesOfStayProps> = ({ className }) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-  }, []);
+    updateData({ dates: dates.map(date => date?.toISOString() || '') });
+  }, [updateData]);
 
   const renderDayContents = useCallback((day: number, date: Date | null) => {
     let label = null;
@@ -55,6 +62,13 @@ const DatesOfStay: FC<DatesOfStayProps> = ({ className }) => {
 
   return (
     <div className={rootClassName}>
+      <div>
+        <h2>Шаг 1. Даты пребывания</h2>
+        <p></p>
+      </div>
+      <div>
+        <StepList currentStep={0} activeStep={0} setStep={nextStep} />
+      </div>
       <div className={styles.dateWrapper}>
         <DatePicker
           selected={startDate || undefined}
@@ -70,8 +84,9 @@ const DatesOfStay: FC<DatesOfStayProps> = ({ className }) => {
           renderDayContents={renderDayContents}
         />
       </div>
+      <button onClick={handleNext}>Следующий шаг</button>
     </div>
   );
 };
 
-export default DatesOfStay;
+export default StepOneDatesOfStay;

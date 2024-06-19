@@ -1,0 +1,54 @@
+@use "@styles/func";
+@use "@styles/mixins";
+@use "@styles/variables";
+  
+.root {
+	display: flex;
+	flex-direction: column;
+	background-color: #AED0EB;
+	align-items: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-top-left-radius: 50px;
+	border-top-right-radius: 50px;
+
+	.multiStepFormTitle {
+		margin-bottom: 40px;
+		padding-left: 20px;
+	}
+
+	.multiStepForm {
+		display: flex;
+		flex-direction: column;
+
+		.step-list {
+			list-style-type: none;
+			padding: 0;
+		
+			li {
+				font-size: 1.2rem;
+				margin: 10px 0;
+				position: relative;
+				padding-left: 20px;
+		
+				&::before {
+					content: '•';
+					position: absolute;
+					left: 0;
+					color: lightgray;
+				}
+			}
+		
+			.active-step {
+				font-weight: bold;
+		
+				&::before {
+					color: #1a1a1a; /* Dark blue color */
+				}
+			}
+		}
+		
+	}
+}
+
+
