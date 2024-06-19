@@ -50,9 +50,11 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
     <section className={rootClassName}>
       <div className={styles.multiStepForm}>
         <h2 className={styles.multiStepFormTitle}>Добавить план:</h2>
+        <div className={styles.multiStepFormWrapper}>
         {step === 1 && <StepOneDatesOfStay data={formData.stayDates} updateData={updateStayDates} nextStep={nextStep} />}
         {step === 2 && <StepTwoItinerary data={formData.route} updateData={updateRoute} nextStep={nextStep} prevStep={prevStep} />}
         {step === 3 && <StepThreePastime data={formData.activities} updateData={updateActivities} prevStep={prevStep} />}
+        </div>
       </div>
     </section>
   );

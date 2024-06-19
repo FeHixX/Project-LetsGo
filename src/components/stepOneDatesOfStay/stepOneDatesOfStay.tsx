@@ -9,6 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styles from './stepOneDatesOfStay.module.scss';
 import { StepOneDatesOfStayProps } from './stepOneDatesOfStay.types';
 import StepList from '../formNavigation/formNavigation';
+import Polygon from '@icons/polygon.svg'
 
 const customRu = {
   ...ru,
@@ -27,6 +28,9 @@ registerLocale('ru', customRu);
 const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({ updateData, nextStep, className }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+  const [companions, setCompanions] = useState<number>(2);
+  const [duration, setDuration] = useState<number>(3);
+  const [withChildren, setWithChildren] = useState<boolean>(true);
   const today = new Date();
   const maxDate = addMonths(today, 1);
 
@@ -62,12 +66,42 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({ updateData, nextStep,
 
   return (
     <div className={rootClassName}>
-      <div>
+      <div className={styles.formHead}>
+      <div className={styles.formDescription}>
         <h2>Шаг 1. Даты пребывания</h2>
-        <p></p>
+        <p>Укажите предпочтительное количество попутчиков, которых <br/>
+        вы хотели бы позвать в поездку, и ее предполагаемую длительность.</p>
       </div>
-      <div>
         <StepList currentStep={0} activeStep={0} setStep={nextStep} />
+      </div>
+      <div className={styles.inputGroup}>
+        <div className={styles.inputCompanions}>
+        <label>Ищу попутчиков:
+          <div className={styles.counter}>
+            <button onClick={() => setCompanions(Math.max(1, companions - 1))}>-</button>
+            <span>{companions}</span>
+            <button onClick={() => setCompanions(companions + 1)}>+</button>
+            <span>чел.</span>
+          </div>
+        </label>
+        <label>Длительность:
+          <div className={styles.counter}>
+            <button onClick={() => setDuration(Math.max(1, duration - 1))}>-</button>
+            <span>{duration}</span>
+            <button onClick={() => setDuration(duration + 1)}>+</button>
+            <span>дн.</span>
+          </div>
+        </label>
+        </div>
+        <label>
+          <input
+            type="checkbox"
+            checked={withChildren}
+            onChange={() => setWithChildren(!withChildren)}
+          />
+          Можно с детьми
+        </label>
+
       </div>
       <div className={styles.dateWrapper}>
         <DatePicker
@@ -84,7 +118,9 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({ updateData, nextStep,
           renderDayContents={renderDayContents}
         />
       </div>
-      <button onClick={handleNext}>Следующий шаг</button>
+      <button className={styles.formButton} onClick={handleNext}>Следующий шаг
+        <Polygon></Polygon>
+      </button>
     </div>
   );
 };
