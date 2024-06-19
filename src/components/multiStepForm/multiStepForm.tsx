@@ -1,11 +1,11 @@
 'use client';
 
 import React, { FC, useState } from 'react';
-import { StepTwoItinerary } from '../stepTwoItinerary/stepTwoItinerary';
-import { StepThreePastime } from '../stepThreePastime/stepThreePastime';
+import classNames from 'classnames';
+import StepTwoItinerary from '../stepTwoItinerary/stepTwoItinerary';
+import StepThreePastime from '../stepThreePastime/stepThreePastime';
 import StepOneDatesOfStay from '../stepOneDatesOfStay/stepOneDatesOfStay';
 import styles from './multiStepForm.module.scss';
-import classNames from 'classnames';
 
 interface FormData {
   stayDates: {
@@ -22,7 +22,7 @@ interface FormData {
   };
 }
 
-const MultiStepForm: FC = (className) => {
+const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
   const rootClassName = classNames(styles.root, className);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
@@ -41,10 +41,10 @@ const MultiStepForm: FC = (className) => {
   return (
     <section className={rootClassName}>
       <div className={styles.multiStepForm}>
-      <h2 className={styles.multiStepFormTitle}>Добавить план:</h2>
-      {step === 1 && <StepOneDatesOfStay data={formData.stayDates} updateData={updateFormData} nextStep={nextStep} />}
-      {step === 2 && <StepTwoItinerary data={formData.route} updateData={updateFormData} nextStep={nextStep} prevStep={prevStep} />}
-      {step === 3 && <StepThreePastime data={formData.activities} updateData={updateFormData} prevStep={prevStep} />}
+        <h2 className={styles.multiStepFormTitle}>Добавить план:</h2>
+        {step === 1 && <StepOneDatesOfStay data={formData.stayDates} updateData={updateFormData} nextStep={nextStep} />}
+        {step === 2 && <StepTwoItinerary data={formData.route} updateData={updateFormData} nextStep={nextStep} prevStep={prevStep} />}
+        {step === 3 && <StepThreePastime data={formData.activities} updateData={updateFormData} prevStep={prevStep} />}
       </div>
     </section>
   );

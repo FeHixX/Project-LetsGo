@@ -1,6 +1,12 @@
 import { FC } from 'react';
+import classNames from 'classnames';
 
-export const StepTwoItinerary: FC<{ data: any; updateData: (data: any) => void; nextStep: () => void; prevStep: () => void }> = ({ data, updateData, nextStep, prevStep }) => {
+import styles from './StepTwoItinerary.module.scss';
+import { StepTwoItineraryProps } from './stepTwoItinerary.types';
+
+const StepTwoItinerary: FC<StepTwoItineraryProps> = ({ className, nextStep, prevStep }) => {
+  const rootClassName = classNames(styles.root, className);
+
   const handleNext = () => {
     nextStep();
   };
@@ -10,10 +16,12 @@ export const StepTwoItinerary: FC<{ data: any; updateData: (data: any) => void; 
   };
 
   return (
-    <div>
-      <h2>Шаг 2. Маршрут</h2>
-      <button onClick={handlePrev}>На шаг назад</button>
-      <button onClick={handleNext}>Следующий шаг</button>
+    <div className={rootClassName}>
+      <div>
+        <h2>Шаг 2. Маршрут</h2>
+        <button onClick={handlePrev}>На шаг назад</button>
+        <button onClick={handleNext}>Следующий шаг</button>
+      </div>
     </div>
   );
 };

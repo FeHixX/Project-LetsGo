@@ -8,6 +8,7 @@ import { ru } from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './stepOneDatesOfStay.module.scss';
 import { stepOneDatesOfStayProps } from './stepOneDatesOfStay.types';
+import StepList from '../formNavigation/formNavigation';
 
 const customRu = {
   ...ru,
@@ -23,7 +24,7 @@ const customRu = {
 
 registerLocale('ru', customRu);
 
-const StepOneDatesOfStay: FC<stepOneDatesOfStayProps> = ({ data, updateData, nextStep, className }) => {
+const StepOneDatesOfStay: FC<stepOneDatesOfStayProps> = ({ updateData, nextStep, className }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const today = new Date();
@@ -62,10 +63,11 @@ const StepOneDatesOfStay: FC<stepOneDatesOfStayProps> = ({ data, updateData, nex
   return (
     <div className={rootClassName}>
       <div>
-      <h2>Шаг 1. Даты пребывания</h2>
-      <p></p>
+        <h2>Шаг 1. Даты пребывания</h2>
+        <p></p>
       </div>
       <div>
+        <StepList currentStep={0} activeStep={0} setStep={nextStep} />
       </div>
       <div className={styles.dateWrapper}>
         <DatePicker

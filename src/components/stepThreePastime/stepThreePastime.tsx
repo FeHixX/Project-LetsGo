@@ -1,6 +1,12 @@
 import { FC } from 'react';
+import classNames from 'classnames';
 
-export const StepThreePastime: FC<{ data: any; updateData: (data: any) => void; prevStep: () => void }> = ({ data, updateData, prevStep }) => {
+import styles from './StepThreePastime.module.scss';
+import { StepThreePastimeProps } from './stepThreePastime.types';
+
+export const StepThreePastime: FC<StepThreePastimeProps> = ({ className, data, prevStep }) => {
+  const rootClassName = classNames(styles.root, className);
+  
   const handlePrev = () => {
     prevStep();
   };
@@ -10,10 +16,12 @@ export const StepThreePastime: FC<{ data: any; updateData: (data: any) => void; 
   };
 
   return (
-    <div>
-      <h2>Шаг 3. Развлечения</h2>
-      <button onClick={handlePrev}>На шаг назад</button>
-      <button onClick={handleSubmit}>Отправить</button>
+    <div className={rootClassName}>
+      <div>
+        <h2>Шаг 3. Развлечения</h2>
+        <button onClick={handlePrev}>На шаг назад</button>
+        <button onClick={handleSubmit}>Отправить</button>
+      </div>
     </div>
   );
 };
