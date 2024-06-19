@@ -20,35 +20,22 @@
 	.multiStepForm {
 		display: flex;
 		flex-direction: column;
+	}
 
-		.step-list {
-			list-style-type: none;
-			padding: 0;
-		
-			li {
-				font-size: 1.2rem;
-				margin: 10px 0;
-				position: relative;
-				padding-left: 20px;
-		
-				&::before {
-					content: '•';
-					position: absolute;
-					left: 0;
-					color: lightgray;
-				}
-			}
-		
-			.active-step {
-				font-weight: bold;
-		
-				&::before {
-					color: #1a1a1a; /* Dark blue color */
-				}
-			}
-		}
-		
+	.multiStepFormWrapper {
+		display: flex;
+    background: white;
+    border-radius: 50px;
+    padding: 30px;
 	}
 }
 
+.formHead {
+	display: flex;
+	justify-content: space-between
+}
 
+.formDescription {
+	display: flex;
+	flex-direction: column;
+}
