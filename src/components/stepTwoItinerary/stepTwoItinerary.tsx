@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 
-import styles from './StepTwoItinerary.module.scss';
+import styles from './stepTwoItinerary.module.scss';
 import { StepTwoItineraryProps } from './stepTwoItinerary.types';
 
 const StepTwoItinerary: FC<StepTwoItineraryProps> = ({ className, nextStep, prevStep }) => {
