@@ -1,10 +1,12 @@
-export interface stepOneDatesOfStayProps {
+export interface StayDates {
+  numPeople: number;
+  duration: number;
+  dates: string[];
+}
+
+export interface StepOneDatesOfStayProps {
   className?: string;
-  data: {
-    numPeople: number;
-    duration: number;
-    dates: string[];
-  };
-  updateData: (newData: any) => void;
+  data: StayDates;
+  updateData: (newData: Partial<StayDates>) => void;
   nextStep: () => void;
 }

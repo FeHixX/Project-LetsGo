@@ -7,7 +7,7 @@ import { addMonths } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './stepOneDatesOfStay.module.scss';
-import { stepOneDatesOfStayProps } from './stepOneDatesOfStay.types';
+import { StepOneDatesOfStayProps } from './stepOneDatesOfStay.types';
 import StepList from '../formNavigation/formNavigation';
 
 const customRu = {
@@ -24,7 +24,7 @@ const customRu = {
 
 registerLocale('ru', customRu);
 
-const StepOneDatesOfStay: FC<stepOneDatesOfStayProps> = ({ updateData, nextStep, className }) => {
+const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({ updateData, nextStep, className }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const today = new Date();
@@ -41,7 +41,7 @@ const StepOneDatesOfStay: FC<stepOneDatesOfStayProps> = ({ updateData, nextStep,
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-    updateData({ dates });
+    updateData({ dates: dates.map(date => date?.toISOString() || '') });
   }, [updateData]);
 
   const renderDayContents = useCallback((day: number, date: Date | null) => {

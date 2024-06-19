@@ -34,17 +34,25 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
   const nextStep = () => setStep((prevStep) => prevStep + 1);
   const prevStep = () => setStep((prevStep) => prevStep - 1);
 
-  const updateFormData = (newData: Partial<FormData>) => {
-    setFormData((prevData) => ({ ...prevData, ...newData }));
+  const updateStayDates = (newData: Partial<FormData['stayDates']>) => {
+    setFormData((prevData) => ({ ...prevData, stayDates: { ...prevData.stayDates, ...newData } }));
+  };
+
+  const updateRoute = (newData: FormData['route']) => {
+    setFormData((prevData) => ({ ...prevData, route: newData }));
+  };
+
+  const updateActivities = (newData: Partial<FormData['activities']>) => {
+    setFormData((prevData) => ({ ...prevData, activities: { ...prevData.activities, ...newData } }));
   };
 
   return (
     <section className={rootClassName}>
       <div className={styles.multiStepForm}>
         <h2 className={styles.multiStepFormTitle}>Добавить план:</h2>
-        {step === 1 && <StepOneDatesOfStay data={formData.stayDates} updateData={updateFormData} nextStep={nextStep} />}
-        {step === 2 && <StepTwoItinerary data={formData.route} updateData={updateFormData} nextStep={nextStep} prevStep={prevStep} />}
-        {step === 3 && <StepThreePastime data={formData.activities} updateData={updateFormData} prevStep={prevStep} />}
+        {step === 1 && <StepOneDatesOfStay data={formData.stayDates} updateData={updateStayDates} nextStep={nextStep} />}
+        {step === 2 && <StepTwoItinerary data={formData.route} updateData={updateRoute} nextStep={nextStep} prevStep={prevStep} />}
+        {step === 3 && <StepThreePastime data={formData.activities} updateData={updateActivities} prevStep={prevStep} />}
       </div>
     </section>
   );
