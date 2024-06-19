@@ -2,4 +2,6 @@
 @use "@styles/mixins";
 @use "@styles/variables";
   
-.root {}
+.root {
+	display: flex;
+}
