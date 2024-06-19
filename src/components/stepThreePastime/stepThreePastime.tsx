@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react';
 import classNames from 'classnames';
-import styles from './StepThreePastime.module.scss';
+import styles from './stepThreePastime.module.scss';
 
 export interface StepThreePastimeProps {
   className?: string;
