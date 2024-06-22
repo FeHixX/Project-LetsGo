@@ -1,15 +1,16 @@
-import { FC } from 'react';
-import classNames from 'classnames';
-import styles from './formNavigation.module.scss';
-import { FormNavigationProps } from './formNavigation.types';
+import { FC } from 'react'
+import classNames from 'classnames'
+
+import styles from './formNavigation.module.scss'
+import { FormNavigationProps } from './formNavigation.types'
 
 const StepList: FC<FormNavigationProps & { activeStep: number }> = ({
   className,
   activeStep
 }) => {
-  const rootClassName = classNames(styles.root, className);
+  const rootClassName = classNames(styles.root, className)
 
-  const steps = ['ДАТЫ', 'МАРШРУТ', 'РАЗВЛЕЧЕНИЯ'];
+  const steps = ['ДАТЫ', 'МАРШРУТ', 'РАЗВЛЕЧЕНИЯ']
 
   return (
     <div className={rootClassName}>
@@ -21,10 +22,10 @@ const StepList: FC<FormNavigationProps & { activeStep: number }> = ({
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default StepList;
+export default StepList
 
 //Заготовка списка навигации для многошаговой формы направления, на случай если понадобится навигация.)
 
@@ -64,4 +65,3 @@ export default StepList;
 // };
 
 // export default FormNavigation;
-

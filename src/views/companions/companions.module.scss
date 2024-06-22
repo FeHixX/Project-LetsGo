@@ -6,3 +6,20 @@
   width: 100%;
   background-color: var(--color-solitude);
 }
+
+.header {
+
+  @include mixins.tablet {
+    padding: 77px 0 66px;
+  }
+
+  @include mixins.tablet-small {
+    padding: 0 0 12px;
+  }
+}
+
+.header h1 {
+  @include mixins.tablet {
+    font-variant: normal;
+  }
+}

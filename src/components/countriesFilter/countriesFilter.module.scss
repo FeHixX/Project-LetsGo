@@ -1,0 +1,296 @@
+@use '@styles/func';
+@use '@styles/mixins';
+
+.root {
+    @include mixins.tablet {
+        z-index: 2;
+
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    padding: 60px 60px 55px;
+    margin: 0 auto;
+    text-transform: uppercase;
+
+    @include mixins.tablet {
+        padding: 64px 40px 55px;
+        background-color: var(--color-azureish-white-2);
+        border-radius: 0 0 60px 60px;
+    }
+
+
+    @include mixins.tablet-small {
+        align-items: flex-start;
+        padding: 22px 25px 15px;
+        border-radius: 0 0 20px 20px;
+    }
+}
+
+.activefilter {
+    @include mixins.tablet {
+        border-radius: 0;
+    }
+}
+
+.filterList {
+    display: flex;
+    align-items: center;
+    margin-left: 64px;
+
+    @include mixins.tablet {
+        margin-left: 31px;
+    }
+
+    @include mixins.tablet-small {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-left: 27px;
+    }
+}
+
+.filterListTitle {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+
+    @include mixins.tablet {
+        display: none;
+    }
+
+    @include mixins.tablet-small {
+        display: block;
+        font-size: 16px;
+        line-height: 18px;
+    }
+}
+
+.activeFilterListTitle {
+    @include mixins.tablet-small {
+        margin: 0 15px 0 0;
+    }
+}
+
+.continents {
+    display: flex;
+    margin: 0 0 0 5px;
+    gap: 25px;
+
+    @include mixins.tablet {
+        margin: 0;
+        gap: 22px;
+    }
+
+    @include mixins.tablet-small {
+        display: none;
+    }
+}
+
+.activecontinents {
+    @include mixins.tablet-small {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+    }
+}
+
+.continent {
+    cursor: pointer;
+
+    @include mixins.tablet-small {
+        font-size: 16px;
+        line-height: 18px;
+    }
+}
+
+.filterButton {
+    margin: 0 55px 0 0;
+    padding: 0 45px 0 0;
+    text-transform: uppercase;
+
+    @include mixins.tablet {
+        margin: 0;
+        padding: 0 72px 0 0;
+    }
+
+
+    @include mixins.tablet-small {
+        padding: 0;
+        width: 12px;
+        height: 12px;
+        background-color: tomato;
+    }
+}
+
+.filterCloseButton {
+    @include mixins.tablet {
+        padding: 0 105px 0 0;
+    }
+
+    @include mixins.tablet-small {
+        padding: 0;
+    }
+}
+
+.filterButtonText {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.filterOpenButton {
+    & .filterOpenButtonText {
+        display: block;
+
+        @include mixins.tablet-small {
+            display: none;
+        }
+    }
+
+    & .filterCloseButtonText {
+        display: none;
+    }
+}
+
+.filterCloseButton {
+    & .filterOpenButtonText {
+        display: none;
+    }
+
+    & .filterCloseButtonText {
+        display: block;
+
+        @include mixins.tablet-small {
+            display: none;
+        }
+    }
+}
+
+.container {
+    display: none;
+}
+
+.activecontainer {
+    padding: 20px 60px 74px;
+    max-width: 1440px;
+    margin: 0 auto;
+
+    @include mixins.tablet {
+        padding: 8px 40px 80px;
+        background-color: var(--color-azureish-white-2);
+        border-radius: 0 0 60px 60px;
+
+        @include mixins.tablet-small {
+            padding: 8px 25px 27px;
+            border-radius: 0 0 20px 20px;
+        }
+    }
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px 5px;
+    margin: 0 0 62px;
+    padding: 0 37px;
+
+    @include mixins.tablet {
+        display: flex;
+        gap: 20px 85px;
+        padding: 0 25px;
+    }
+
+    @include mixins.tablet-small {
+        flex-direction: column;
+        gap: 12px;
+        margin: 0 0 6px;
+    }
+}
+
+.letters {
+    @include mixins.tablet {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 23px 20px;
+    }
+
+    @include mixins.tablet-small {
+        gap: 0;
+    }
+}
+
+.letter {
+    margin: 0 0 35px;
+    font-size: 60px;
+    font-weight: bold;
+    line-height: 60px;
+
+    @include mixins.tablet {
+        margin: 0;
+    }
+
+    @include mixins.tablet-small {
+        padding: 13.5px 16px;
+        font-size: 14px;
+        font-weight: medium;
+        line-height: 14px;
+    }
+}
+
+.country {
+    margin: 0 0 5px;
+
+    @include mixins.tablet-small {
+        margin: 0;
+    }
+}
+
+.countryText {
+    line-height: 25px;
+
+    @include mixins.tablet-small {
+        font-size: 16px;
+        line-height: 21px;
+    }
+}
+
+.bigCloseButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    width: 100%;
+    color: var(--color-midnight-express);
+    background-color: var(--color-azureish-white);
+    border-radius: 20px;
+    text-transform: uppercase;
+
+    @include mixins.tablet {
+        margin: 0 35px;
+        width: 90%;
+    }
+
+    @include mixins.tablet-small {
+        margin: 0;
+        padding: 10px 0;
+        width: 100%;
+    }
+}
+
+.bigCloseButtonText {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+
+    @include mixins.tablet-small {
+        font-size: 16px;
+    }
+}

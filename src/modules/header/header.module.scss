@@ -3,20 +3,20 @@
 
 .root {
   position: relative;
+  background-color: var(--color-midnight-express);
 }
 
 .wrapper {
   display: flex;
   padding-top: 50px;
   padding-bottom: 60px;
-  background-color: var(--color-midnight-express);
 
   @include mixins.tablet {
     padding-top: 45px;
   }
 
   @include mixins.tablet-small {
-    padding-top: 25px;
+    padding-top: 20px;
   }
 }
 
@@ -58,7 +58,7 @@
 
 .activetoggle {
   @include mixins.tablet {
-    z-index: 2;
+    z-index: 4;
 
     position: absolute;
     top: 55px;
