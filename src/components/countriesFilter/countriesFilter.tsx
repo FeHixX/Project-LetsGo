@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import useResponsive from '@/shared/hooks/useResponsive'
 
 import styles from './countriesFilter.module.scss'
-import { CountriesFilterProps } from './countriesFilter.types'
 
 const continents = ['Европа', 'Азия', 'Америка', 'Острова']
 
@@ -249,7 +248,7 @@ const countries = [
   }
 ]
 
-let countriesAll = []
+let countriesAll: string[] = []
 countries.map((item) => {
   for (let i = 0; i < item.countries.length; i++) {
     const element = item.countries[i]
@@ -257,13 +256,13 @@ countries.map((item) => {
   }
 })
 
-const CountriesFilter: FC<CountriesFilterProps> = () => {
+const CountriesFilter: FC = () => {
   const [selectedContinent, setSelectedContinent] = useState('ЕВРОПА')
   const [selectedLetter, setSelectedLetter] = useState('А')
   const { isMobile, isTablet, isDesktop } = useResponsive()
   const [active, setActive] = useState<boolean>(false)
 
-  const filteredCountries = countriesAll.filter((country) =>
+  const filteredCountries: string[] = countriesAll.filter((country) =>
     country.startsWith(selectedLetter)
   )
 
@@ -326,7 +325,7 @@ const CountriesFilter: FC<CountriesFilterProps> = () => {
         {isDesktop && (
           <div className={styles.wrapper}>
             {countries.map((item) => (
-              <div className={styles.countries} key={item.countries}>
+              <div className={styles.countries} key={item.letter}>
                 <h4 className={styles.letter}>{item.letter}</h4>
                 <ul className={styles.list}>
                   {item.countries.map((country) => (
