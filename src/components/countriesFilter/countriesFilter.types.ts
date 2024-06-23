@@ -1,3 +1,3 @@
 export interface CountriesFilterProps {
-    className?: string
+    countriesAll?: string[]
 }
