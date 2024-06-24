@@ -10,6 +10,10 @@
   border-radius: 20px;
   padding: 26px 41px 24px 29px;
 
+  @include mixins.tablet {
+    padding: 26px 34px 24px 29px;
+  }
+
   @include mixins.tablet-small {
     padding: 0;
   }
@@ -58,8 +62,8 @@
   justify-content: space-between;
 
   svg {
-    width: 13px;
-    height: 20px;
+    width: 12px;
+    height: 18px;
   }
 
   button {
