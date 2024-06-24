@@ -2,9 +2,6 @@
 @use '@styles/mixins';
 
 .root {
-  margin: 4px 0 0;
-  padding: 0 0 0 16px;
-
   span {
     position: fixed;
     transform: scale(0);
@@ -12,7 +9,7 @@
 
   ul {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     font-weight: 500;
     font-size: 20px;
     line-height: 100%;
@@ -23,12 +20,91 @@
 
   li {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0 18px;
+    width: 100%;
+    gap: 5px calc(8% - 1px);
+  }
 
-    svg {
-      width: 35px;
+  img {
+    width: 35px;
+    height: 24px;
+  }
+
+  @include mixins.tablet {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+
+    span {
+      position: relative;
+      margin: 0 0 0 49px;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 107%;
+      color: var(--color-charcoal);
+      text-transform: lowercase;
+      transform: scale(1);
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: -12px;
+        z-index: -1;
+        width: calc(100% + 24px);
+        height: 100%;
+        background-color: var(--color-white-default);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -100vw;
+        left: -100vw;
+        z-index: -2;
+        height: 1px;
+        background-color: var(--color-solitude);
+      }
+    }
+
+    ul {
+      flex-direction: row;
+      gap: 13px;
+    }
+
+    li {
+      align-items: end;
+      width: auto;
+      gap: 15px;
+    }
+
+    img {
+      width: 40px;
       height: 24px;
+    }
+  }
+
+  @include mixins.tablet-small {
+    gap: 17px;
+
+    span {
+      margin: 0;
+      font-size: 14px;
+      line-height: 114%;
+    }
+
+    ul {
+      flex-direction: column;
+      font-size: 15px;
+      line-height: 107%;
+      gap: 10px;
+    }
+
+    img {
+      width: 26px;
+      height: 18px;
     }
   }
 }

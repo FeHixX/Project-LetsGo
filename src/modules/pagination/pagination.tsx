@@ -26,10 +26,10 @@ const Pagination: FC<PaginationProps> = ({ className }) => {
         </li>
       </ul>
       <div className={styles.arrows}>
-        <button type="button">
+        <button type="button" data-pagination="prev">
           <IconPrev />
         </button>
-        <button type="button">
+        <button type="button" data-pagination="next">
           <IconNext />
         </button>
       </div>

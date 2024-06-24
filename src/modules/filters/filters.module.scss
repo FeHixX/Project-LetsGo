@@ -1,0 +1,14 @@
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
+.root {
+  width: 100%;
+  background-color: var(--color-pale-cornflower-blue);
+  border-radius: 20px;
+  grid-area: 1/2/2/3;
+
+  @include mixins.desktop-small {
+    height: 50px;
+  }
+}
