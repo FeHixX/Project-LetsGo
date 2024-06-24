@@ -2,46 +2,45 @@
 @use '@styles/mixins';
 @use '@styles/variables';
 
-.image {
-  margin: -46px 0 -42px;
-  grid-area: 1/1/4/2;
-  overflow: hidden;
-
-  img {
-    display: block;
-    height: 100%;
-    border-radius: 20px 0 0 20px;
-    object-fit: cover;
-    transition: transform variables.$transition;
-  }
-}
-
 .root {
   display: grid;
-  padding: 46px 42px 42px 0;
+  padding: 46px 35px 38px 0;
   overflow: hidden;
   background-color: var(--color-white-default);
   border-radius: 20px;
-  cursor: pointer;
-  transition: box-shadow variables.$transition;
-  gap: 29px calc(7% - 1px);
-  grid-template: repeat(2, auto) 1fr/ 285px repeat(2, 1fr);
-  justify-items: start;
+  gap: 20px calc(7% - 2px);
+  grid-template: auto 1fr auto / 285px repeat(2, 1fr);
+  place-items: start;
 
-  &:hover,
-  &:focus-within {
-    box-shadow: 0 4px 9px 0 rgba(0 0 0 / 16%);
+  &_new {
+    box-shadow: 0 4px 20px 0 rgba(0 0 0 / 25%);
 
-    .image {
-      img {
-        transform: scale(1.1);
-      }
+    [data-hidden] {
+      display: none;
+      user-select: none;
     }
+  }
+
+  @include mixins.desktop-small {
+    gap: 20px 4%;
+  }
+
+  @include mixins.tablet {
+    padding: 35px 25px 25px 35px;
+    gap: 17px calc(5% + 1px);
+    grid-template: repeat(2, auto) 1fr auto / 190px 1fr auto;
+  }
+
+  @include mixins.tablet-small {
+    padding: 15px 25px 23px;
+    gap: 14px 7%;
+    grid-template: repeat(4, auto) minmax(40px, 1fr) / auto 1fr;
   }
 }
 
 .title {
   position: relative;
+  margin: 0;
   font-weight: 700;
   font-size: 30px;
   line-height: 100%;
@@ -64,68 +63,121 @@
       background-color: var(--color-lawn-green);
     }
   }
+
+  @include mixins.desktop-small {
+    &::before {
+      left: -19px;
+    }
+  }
+
+  @include mixins.tablet {
+    &::before {
+      right: -31px;
+      left: auto;
+    }
+  }
+
+  @include mixins.tablet-small {
+    max-width: 80%;
+    margin: 0 0 30px;
+    font-size: 20px;
+    grid-area: 1/2/2/3;
+
+    &::before {
+      top: 7px;
+      width: 6px;
+      height: 6px;
+    }
+
+    &[data-online='true'] {
+      &::before {
+        background-color: var(--color-sulu);
+      }
+    }
+  }
+}
+
+.image {
+  align-self: stretch;
+  margin: -46px 0 -38px;
+  grid-area: 1/1/4/2;
+
+  @include mixins.tablet {
+    margin: 0;
+  }
+
+  @include mixins.tablet-small {
+    align-self: end;
+    margin: 0 0 0 -7px;
+    grid-area: 1/1/2/2;
+  }
 }
 
 .tags {
-  margin: -9px 0 0;
+  max-width: 226px;
   font-weight: 400;
   font-size: 20px;
   line-height: 115%;
   grid-area: 2/2/3/3;
+
+  @include mixins.tablet {
+    margin: 0 0 0 4px;
+  }
+
+  @include mixins.tablet-small {
+    max-width: 100%;
+    margin: 0 0 1px 1px;
+    font-size: 15px;
+    line-height: 120%;
+    grid-area: 2/1/3/3;
+  }
 }
 
 .countries {
+  margin: 4px 0 0 12px;
   grid-area: 1/3/3/4;
+  justify-self: stretch;
+
+  @include mixins.tablet {
+    margin: 5px 0 0;
+    grid-area: 4/1/5/4;
+  }
+
+  @include mixins.tablet-small {
+    margin: 0;
+    grid-area: 3/1/4/3;
+  }
 }
 
-.center {
-  display: flex;
-  align-items: center;
-  margin: 10px 0 0 -8px;
-  gap: 4px;
+.button {
+  align-self: end;
+  margin: 0 0 10px -7px;
   grid-area: 3/2/4/3;
+
+  @include mixins.tablet {
+    margin: 0 0 1px -3px;
+  }
+
+  @include mixins.tablet-small {
+    margin: 0 -5px;
+    grid-area: 5/1/6/3;
+    justify-self: stretch;
+  }
 }
 
-.right {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: 12px 0 -2px;
-  padding: 0 0 0 18px;
-  gap: 0 10px;
+.transport {
+  margin: -3px 8px 3px 12px;
   grid-area: 3/3/4/4;
-}
+  place-self: end stretch;
 
-.level {
-  flex-shrink: 0;
-  width: 62px;
-  height: 62px;
-  padding: 13px 0 0;
-
-  circle {
-    stroke-width: 4px;
+  @include mixins.tablet {
+    align-self: stretch;
+    margin: 4px 0 -4px;
+    grid-area: 1/3/4/4;
   }
 
-  p {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 100%;
-    color: var(--color-catalina-blue);
-
-    &::after {
-      bottom: 18px;
-      height: 1px;
-      background-color: var(--color-black-default);
-      opacity: 0.1;
-    }
-  }
-
-  span {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 100%;
-    color: var(--color-black-default);
-    opacity: 0.4;
+  @include mixins.tablet-small {
+    margin: 5px -4px 0 2px;
+    grid-area: 4/1/5/3;
   }
 }

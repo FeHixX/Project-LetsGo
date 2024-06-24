@@ -2,7 +2,7 @@
 @use '@styles/mixins';
 
 .root {
-  span {
+  > span {
     position: fixed;
     transform: scale(0);
   }
@@ -11,9 +11,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 8px;
 
-    span {
+    > span {
       position: relative;
       font-weight: 400;
       font-size: 14px;
@@ -37,7 +37,7 @@
         position: absolute;
         top: 50%;
         right: -100vw;
-        left: -100vw;
+        left: -29vw;
         z-index: -2;
         height: 1px;
         background-color: var(--color-solitude);
@@ -46,47 +46,58 @@
   }
 }
 
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 11px;
+.level {
+  flex-shrink: 0;
+  width: 62px;
+  height: 62px;
+  padding: 13px 0 0;
 
-  li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    svg {
-      width: 22px;
-      height: 22px;
-      color: var(--color-catalina-blue);
-    }
+  circle {
+    stroke-width: 4px;
   }
 
-  li:not([data-checked='true']) {
-    svg {
-      opacity: 0.15;
+  p {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    color: var(--color-catalina-blue);
+
+    span {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 100%;
+      color: var(--color-black-default);
+      opacity: 0.4;
+    }
+
+    &::after {
+      bottom: 18px;
+      height: 1px;
+      background-color: var(--color-black-default);
+      opacity: 0.1;
     }
   }
 
   @include mixins.tablet {
-    flex-direction: column;
+    svg {
+      color: var(--color-neon-carro);
+    }
   }
 
   @include mixins.tablet-small {
-    flex-direction: row;
-    margin: 0 0 0 -6px;
-    gap: 1px;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    padding: 0;
 
-    li {
-      width: 32px;
-      height: 32px;
-      background-color: var(--color-solitude);
-      border-radius: 50%;
+    p {
+      span {
+        display: none;
+      }
 
-      svg {
-        width: 14px;
-        height: 16px;
+      &::after {
+        content: none;
       }
     }
   }

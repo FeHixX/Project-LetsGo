@@ -1,0 +1,30 @@
+@use '@styles/func';
+@use '@styles/mixins';
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  @include mixins.tablet {
+    gap: 7px;
+  }
+
+  @include mixins.tablet-small {
+    .like {
+      display: none;
+    }
+  }
+}
+
+.button {
+  @include mixins.tablet {
+    padding: 15px 37px;
+  }
+
+  @include mixins.tablet-small {
+    width: 100%;
+    padding: 14px 37px 9px;
+    font-size: 17px;
+  }
+}

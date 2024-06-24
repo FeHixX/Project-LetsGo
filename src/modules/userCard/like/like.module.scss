@@ -9,10 +9,12 @@
 
   button {
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
     width: 50px;
     height: 50px;
+    background-color: var(--color-solitude);
     border-radius: 50%;
     transition: background-color variables.$transition;
 
@@ -73,5 +75,29 @@
     line-height: 100%;
     color: var(--color-midnight-express-2);
     text-transform: uppercase;
+  }
+
+  @include mixins.tablet {
+    gap: 7px;
+  }
+
+  @include mixins.tablet-small {
+    gap: 7px;
+
+    button {
+      width: 30px;
+      height: 30px;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    span {
+      margin: 5px 0 0;
+      font-size: 14px;
+      line-height: 114%;
+    }
   }
 }

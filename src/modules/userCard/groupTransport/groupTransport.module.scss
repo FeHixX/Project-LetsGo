@@ -1,0 +1,32 @@
+@use '@styles/func';
+@use '@styles/mixins';
+
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+
+  @include mixins.tablet {
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  @include mixins.tablet-small {
+    flex-flow: row nowrap;
+    align-items: start;
+    gap: 15px;
+  }
+}
+
+.level {
+  margin-left: auto;
+
+  @include mixins.tablet {
+    margin-top: auto;
+  }
+
+  @include mixins.tablet-small {
+    margin-top: 0;
+  }
+}

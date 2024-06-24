@@ -1,0 +1,41 @@
+@use '@styles/func';
+@use '@styles/mixins';
+
+.root {
+  width: 100%;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+    object-fit: cover;
+  }
+
+  .like {
+    display: none;
+  }
+
+  @include mixins.tablet {
+    img {
+      border-radius: 20px;
+    }
+  }
+
+  @include mixins.tablet-small {
+    position: relative;
+
+    img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+
+    .like {
+      position: absolute;
+      bottom: 0;
+      left: 77%;
+      display: flex;
+    }
+  }
+}

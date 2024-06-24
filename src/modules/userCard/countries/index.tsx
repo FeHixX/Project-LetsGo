@@ -21,7 +21,7 @@ const Countries: FC<CountriesProps> = ({ item, className }) => {
               quality={85}
               alt="Флаг страны: ${name}"
             />
-            {name}
+            <p>{name}</p>
           </li>
         ))}
       </ul>

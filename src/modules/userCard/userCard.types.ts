@@ -1,9 +1,5 @@
 import { ReactNode } from 'react'
 
-export interface userCardProps {
-  className?: string
-}
-
 export interface UserCountriesItemI {
   name: string
   img: string
@@ -12,4 +8,21 @@ export interface UserCountriesItemI {
 export interface UserTransportItemI {
   icon: ReactNode
   checked: boolean
+}
+
+export interface UserCardItemI {
+  isNew?: boolean
+  name: string
+  photo: string
+  online: boolean
+  tags: string
+  likes: number
+  countries: UserCountriesItemI[]
+  transport: UserTransportItemI[]
+  level: number
+}
+
+export interface UserCardProps {
+  className?: string
+  item: UserCardItemI
 }
