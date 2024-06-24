@@ -3,6 +3,8 @@ import { PageHeader } from '@/modules/pageHeader'
 import { UserList } from '@/modules/userList'
 import classNames from 'classnames'
 
+import { CountriesFilter } from '@/components/countriesFilter'
+
 import styles from './companions.module.scss'
 import { CompanionsProps } from './companions.types'
 
@@ -12,6 +14,7 @@ const Companions: FC<CompanionsProps> = ({ className }) => {
   return (
     <main className={rootClassName}>
       <PageHeader className={styles.header}>Попутчики</PageHeader>
+      <CountriesFilter />
       <UserList className={styles.list} />
     </main>
   )
