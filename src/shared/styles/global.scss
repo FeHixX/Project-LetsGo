@@ -40,6 +40,13 @@
   --color-tutu: #f9eaea;
   --color-whisper: #e5e5e5;
   --color-white-smoke: #f2f2f2;
+<<<<<<< ligaa-herashchanka
+=======
+  --color-azureish-white: #d6daed;
+  --color-azureish-white-2: #e2e5f2;
+  --color-light-grayish-blue: #d6d9e6;
+  --color-light-grayish-blue-2: #e1e3e9;
+>>>>>>> master
 }
 
 * {
@@ -73,6 +80,7 @@ a {
   transition: opacity $transition;
 
   @include desktop-only {
+
     &:hover,
     &:focus-visible {
       opacity: 0.7;
