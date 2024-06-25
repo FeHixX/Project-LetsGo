@@ -1,6 +1,6 @@
 // StepThreePastime.tsx
 
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState } from 'react';
 import { ChangeEvent, FormEvent } from 'react';
 import classNames from 'classnames';
 import styles from './stepThreePastime.module.scss';
@@ -44,23 +44,24 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({ className, prevStep }) =>
   const [formData, setFormData] = useState<FormData>(initialFormData);
 
   const handleArrayChange = (
-      e: ChangeEvent<HTMLInputElement>,
-      field: 'countryList' | 'hashTags' | 'transport',
-      index: number,
-      subfield: 'name' | 'description' | null = null
-  ) => {
-      const value = e.target.value;
-      const updatedArray = [...formData[field]];
-      if (field === 'countryList' && subfield) {
-          updatedArray[index] = {
-              ...updatedArray[index],
-              [subfield]: value
-          };
-      } else {
-          updatedArray[index] = value;
-      }
-      setFormData({ ...formData, [field]: updatedArray });
-  };
+    e: ChangeEvent<HTMLInputElement>,
+    field: 'countryList' | 'hashTags' | 'transport',
+    index: number,
+    subfield: 'name' | 'description' | null = null
+) => {
+    const value = e.target.value;
+    const updatedArray = [...formData[field]];
+    if (field === 'countryList' && subfield) {
+        const updatedCountry = {
+            ...(updatedArray[index] as Country), // Type assertion to make sure TypeScript knows it's a Country
+            [subfield]: value
+        };
+        updatedArray[index] = updatedCountry;
+    } else {
+        updatedArray[index] = value;
+    }
+    setFormData({ ...formData, [field]: updatedArray });
+};
 
   const handleChange = (
       e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
