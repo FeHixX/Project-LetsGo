@@ -31,6 +31,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: false,
+    domains: ['flagcdn.com', 'upload.wikimedia.org'],
   }
 };
 
