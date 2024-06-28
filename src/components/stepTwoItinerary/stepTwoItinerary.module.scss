@@ -1,23 +1,9 @@
 @use "@styles/func";
 @use "@styles/mixins";
 @use "@styles/variables";
-  
-.root {
-	display: flex;
-}
 
-.formButton {
-  border-radius: 20px;
-  background-color: #a8d2f4;
+.root {
   display: flex;
-  max-width: 286px;
-  gap: 20px;
-  font-size: 24px;
-  color: var(--basic_blue_light, #1d2e5b);
-  font-weight: 700;
-  white-space: nowrap;
-  line-height: 100%;
-  padding: 29px 36px;
 }
 
 .formHead {
@@ -31,4 +17,142 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between
+}
+
+.country {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 85px;
+  margin: 0 0 15px;
+}
+
+.countryName {
+  min-width: 730px;
+  width: 100%;
+  max-width: 730px;
+  padding: 26px 23px 22px 25px;
+  border: 1px solid #CBCED9;
+}
+
+.countryIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 88px;
+}
+
+.countryDelete {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: -4px;
+    transform: translateX(50%);
+    width: 28px;
+    height: 2px;
+    background-color: var(--color-light-grey);
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+.formSelectContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 88px;
+}
+
+.formSelect {
+  position: relative;
+}
+
+.formSelectButton {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 730px;
+  padding: 26px 23px 22px 25px;
+  border: 1px solid #CBCED9;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.lettersAndCountries {
+  display: none;
+}
+
+.activeLettersAndCountries {
+  z-index: 3;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70px;
+  display: flex;
+  justify-content: space-between;
+  padding: 32px 26px 36px;
+  background-color: #ffffff;
+}
+
+.letters {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0 16px;
+  flex-grow: 1;
+}
+
+.letter {
+  margin: 0 0 16px;
+  padding: 27px 24px;
+  max-width: 60px;
+  max-height: 70px;
+  border: 1px solid #CBCED9;
+  font-size: 20px;
+  font-weight: medium;
+  line-height: 20px;
+
+  @include mixins.tablet {
+    margin: 0;
+  }
+
+  @include mixins.tablet-small {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.formButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formButton {
+  border-radius: 20px;
+  display: flex;
+  max-width: 286px;
+  gap: 20px;
+  font-size: 24px;
+  color: var(--basic_blue_light, #1d2e5b);
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 100%;
+  padding: 29px 36px;
+}
+
+.formButtonNext {
+  background-color: #a8d2f4;
 }
