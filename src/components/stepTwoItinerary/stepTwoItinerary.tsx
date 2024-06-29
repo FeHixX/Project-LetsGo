@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
-import Select from '@/ui/select/select'
 import PolygonNext from '@icons/polygon-next.svg'
 import PolygonPrev from '@icons/polygon-prev.svg'
 import axios from 'axios'
@@ -18,16 +17,19 @@ interface Country {
   }
   continent: string[]
   island: boolean
+  description?: string
 }
 
 const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
   className,
   nextStep,
-  prevStep
+  prevStep,
+  updateCountries
 }) => {
   const rootClassName = classNames(styles.root, className)
 
   const handleNext = () => {
+    updateCountries({ countries: selectedCountries.map(country => country.name.common) })
     nextStep()
   }
 

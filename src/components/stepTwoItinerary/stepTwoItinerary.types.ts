@@ -3,7 +3,7 @@ export interface StepTwoItineraryProps {
   data: {
     countries: string[];
   };
-  updateData: (data: { countries: string[] }) => void;
+  updateCountries: (data: { countries: string[] }) => void;
   nextStep: () => void;
   prevStep: () => void;
 }

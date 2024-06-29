@@ -1,32 +1,36 @@
-// StepThreePastime.tsx
+import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import PolygonPrev from '@icons/polygon-prev.svg';
+import classNames from 'classnames';
+import Image from 'next/image';
 
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
-import PolygonPrev from '@icons/polygon-prev.svg'
-import classNames from 'classnames'
-
-import StepList from '../formNavigation/formNavigation'
-import styles from './stepThreePastime.module.scss'
+import StepList from '../formNavigation/formNavigation';
+import styles from './stepThreePastime.module.scss';
 
 export interface StepThreePastimeProps {
-  className?: string
-  data: { Bosnia: string; Czechia: string }
-  updateData: (data: Partial<{ Bosnia: string; Czechia: string }>) => void
-  prevStep: () => void
+  className?: string;
+  data: { [key: string]: string };
+  updateData: (data: Partial<{ Bosnia: string; Czechia: string }>) => void;
+  prevStep: () => void;
+  selectedCountries: Country[];
 }
 
 interface Country {
-  name: string
-  description: string
+  name: { common: string; rus: string };
+  flags: {
+    png: string;
+    svg: string;
+  };
+  description?: string;
 }
 
 interface FormData {
-  companionCount: number
-  children: boolean
-  startDate: string
-  endDate: string
-  countryList: Country[]
-  hashTags: string[]
-  transport: string[]
+  companionCount: number;
+  children: boolean;
+  startDate: string;
+  endDate: string;
+  countryList: { name: string; description: string }[];
+  hashTags: string[];
+  transport: string[];
 }
 
 const initialFormData: FormData = {
@@ -34,17 +38,24 @@ const initialFormData: FormData = {
   children: false,
   startDate: '',
   endDate: '',
-  countryList: [{ name: '', description: '' }],
+  countryList: [],
   hashTags: [''],
   transport: ['']
-}
+};
 
 const StepThreePastime: FC<StepThreePastimeProps> = ({
   className,
-  prevStep
+  prevStep,
+  selectedCountries
 }) => {
-  const rootClassName = classNames(styles.root, className)
-  const [formData, setFormData] = useState<FormData>(initialFormData)
+  const rootClassName = classNames(styles.root, className);
+  const [formData, setFormData] = useState<FormData>({
+    ...initialFormData,
+    countryList: selectedCountries.map((country) => ({
+      name: country.name.rus,
+      description: country.description || ''
+    }))
+  });
 
   const handleArrayChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -52,47 +63,71 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
     index: number,
     subfield: 'name' | 'description' | null = null
   ) => {
-    const value = e.target.value
-    const updatedArray = [...formData[field]]
+    const value = e.target.value;
+    const updatedArray = [...formData[field]];
     if (field === 'countryList' && subfield) {
       const updatedCountry = {
-        ...(updatedArray[index] as Country), // Type assertion to make sure TypeScript knows it's a Country
+        ...(updatedArray[index] as { name: string; description: string }),
         [subfield]: value
-      }
-      updatedArray[index] = updatedCountry
+      };
+      updatedArray[index] = updatedCountry;
     } else {
-      updatedArray[index] = value
+      updatedArray[index] = value;
     }
-    setFormData({ ...formData, [field]: updatedArray })
-  }
+    setFormData({ ...formData, [field]: updatedArray });
+  };
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
     field: keyof FormData
   ) => {
-    const value =
-      e.target.type === 'checkbox'
-        ? (e.target as HTMLInputElement).checked
-        : e.target.value
-    setFormData({ ...formData, [field]: value })
-  }
+    const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value;
+    setFormData({ ...formData, [field]: value });
+  };
+
+  const handleAddField = (field: 'hashTags' | 'transport') => {
+    setFormData({ ...formData, [field]: [...formData[field], ''] });
+  };
+
+  const handleRemoveField = (field: 'hashTags' | 'transport', index: number) => {
+    const updatedArray = formData[field].filter((_, i) => i !== index);
+    setFormData({ ...formData, [field]: updatedArray });
+  };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    // Validate that country names are in Russian and match the predefined list
+    const invalidCountries = formData.countryList.filter((country) => {
+      return !selectedCountries.some((sc) => sc.name.rus === country.name);
+    });
+
+    if (invalidCountries.length > 0) {
+      alert('Наименование страны должно быть на русском языке из списка предложенных.');
+      return;
+    }
+
     const response = await fetch('https://lets-go-8s43.onrender.com/cards/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(formData)
-    })
-    const data = await response.json()
-    console.log(data)
-  }
+    });
+
+    if (!response.ok) {
+      const data = await response.json();
+      console.error(data);
+      alert('Ошибка при отправке данных');
+    } else {
+      const data = await response.json();
+      console.log(data);
+    }
+  };
 
   const handlePrev = () => {
-    prevStep()
-  }
+    prevStep();
+  };
 
   return (
     <div className={rootClassName}>
@@ -156,15 +191,18 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
         <label>
           Country List:
           {formData.countryList.map((country, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                placeholder="Name"
-                value={country.name}
-                onChange={(e) =>
-                  handleArrayChange(e, 'countryList', index, 'name')
-                }
-              />
+            <div key={country.name}>
+              <div className={styles.countryInfo}>
+                <Image
+                  src={selectedCountries[index].flags.png}
+                  alt={`${country.name} flag`}
+                  width={70}
+                  height={47}
+                />
+                <div className={styles.countryName}>
+                  {country.name}
+                </div>
+              </div>
               <input
                 type="text"
                 placeholder="Description"
@@ -180,31 +218,37 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
         <label>
           Hash Tags:
           {formData.hashTags.map((tag, index) => (
-            <input
-              key={index}
-              type="text"
-              value={tag}
-              onChange={(e) => handleArrayChange(e, 'hashTags', index)}
-            />
+            <div key={index}>
+              <input
+                type="text"
+                value={tag}
+                onChange={(e) => handleArrayChange(e, 'hashTags', index)}
+              />
+              <button type="button" onClick={() => handleRemoveField('hashTags', index)}>Remove</button>
+            </div>
           ))}
+          <button type="button" onClick={() => handleAddField('hashTags')}>Add Tag</button>
         </label>
         <br />
         <label>
           Transport:
           {formData.transport.map((mode, index) => (
-            <input
-              key={index}
-              type="text"
-              value={mode}
-              onChange={(e) => handleArrayChange(e, 'transport', index)}
-            />
+            <div key={index}>
+              <input
+                type="text"
+                value={mode}
+                onChange={(e) => handleArrayChange(e, 'transport', index)}
+              />
+              <button type="button" onClick={() => handleRemoveField('transport', index)}>Remove</button>
+            </div>
           ))}
+          <button type="button" onClick={() => handleAddField('transport')}>Add Transport</button>
         </label>
         <br />
         <button type="submit">Submit</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default StepThreePastime
+export default StepThreePastime;
