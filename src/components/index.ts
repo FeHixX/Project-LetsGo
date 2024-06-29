@@ -1,3 +1,4 @@
+export { CountriesFilter } from './countriesFilter'
 export { Dialog } from './dialog'
 export { FormNavigation } from './formNavigation'
 export { MultiStepForm } from './multiStepForm'

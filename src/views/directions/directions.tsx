@@ -1,3 +1,4 @@
+'use client';
 import { FC } from 'react'
 import { PageHeader } from '@/modules/pageHeader'
 import { User } from '@/modules/user'

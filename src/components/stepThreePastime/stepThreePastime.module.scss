@@ -1,23 +1,9 @@
 @use "@styles/func";
 @use "@styles/mixins";
 @use "@styles/variables";
-  
-.root {
-	display: flex;
-}
 
-.formButton {
-  border-radius: 20px;
-  background-color: #a8d2f4;
+.root {
   display: flex;
-  max-width: 286px;
-  gap: 20px;
-  font-size: 24px;
-  color: var(--basic_blue_light, #1d2e5b);
-  font-weight: 700;
-  white-space: nowrap;
-  line-height: 100%;
-  padding: 29px 36px;
 }
 
 .formHead {
@@ -31,4 +17,17 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between
+}
+
+.formButton {
+  border-radius: 20px;
+  display: flex;
+  max-width: 286px;
+  gap: 20px;
+  font-size: 24px;
+  color: var(--basic_blue_light, #1d2e5b);
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 100%;
+  padding: 29px 36px;
 }
