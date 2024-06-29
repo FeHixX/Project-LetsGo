@@ -44,9 +44,15 @@
     position: fixed;
     transform: scale(0);
   }
+
+  @include mixins.tablet-small {
+    label {
+      gap: 9px;
+    }
+  }
 }
 
-    /* stylelint-disable-next-line no-descending-specificity */
+/* stylelint-disable-next-line no-descending-specificity */
 .mark {
   display: flex;
   flex-shrink: 0;
