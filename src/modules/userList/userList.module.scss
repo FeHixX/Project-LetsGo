@@ -28,6 +28,7 @@
 }
 
 .filters {
+  align-self: start;
   grid-area: 1/2/2/3;
 
   @include mixins.desktop-small {
