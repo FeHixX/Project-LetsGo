@@ -11,7 +11,7 @@
   form {
     display: flex;
     flex-direction: column;
-    margin: 0 0 20px;
+    margin: 0 0 29px;
     gap: 19px;
   }
 
@@ -33,7 +33,7 @@
     background-color: var(--color-pale-cornflower-blue);
 
     form {
-      margin: 0;
+      margin: 0 0 6px;
       padding: 0;
       border-bottom: none;
       gap: 0;
@@ -77,6 +77,12 @@
 
   @include mixins.tablet {
     flex-direction: row;
+  }
+
+  @media (768px <= width <= 1023.9px) {
+    &:last-child {
+      margin: -8px 16px 0 0;
+    }
   }
 
   @include mixins.tablet-small {
@@ -126,12 +132,31 @@
   }
 }
 
+.slider {
+  display: flex;
+  flex-direction: column;
+  margin: -6px 0 0;
+  gap: 36px 0;
+
+  @media (768px <= width <= 1023.9px) {
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 0 67px;
+  }
+
+  @include mixins.tablet-small {
+    margin: -2px 0 0;
+    gap: 24px 0;
+  }
+}
+
 .button {
   width: 100%;
   padding: 19px 27px 11px;
 
   @include mixins.tablet-small {
-    margin: 0 -4px;
+    width: calc(100% + 10px);
+    margin: 0 -5px;
     padding: 15px 27px 9px;
     font-size: 17px;
   }

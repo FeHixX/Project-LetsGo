@@ -2,13 +2,13 @@
 
 import { FC, useEffect, useRef, useState } from 'react'
 import useResponsive from '@/shared/hooks/useResponsive'
-import { Button, IconCheckbox } from '@/ui'
+import { Button, IconCheckbox, SliderRange } from '@/ui'
 import classNames from 'classnames'
 
 import { checkboxList } from '../user/user'
+import ButtonHeader from './buttonHeader'
 import styles from './filters.module.scss'
 import { AccordionProps, FiltersProps } from './filters.types'
-import ButtonHeader from './buttonHeader'
 import ListCheckboxes from './listCheckboxes'
 
 const hobbiesList = [
@@ -135,7 +135,13 @@ const Filters: FC<FiltersProps> = ({ className }) => {
           <div
             className={styles.wrapper}
             data-accordion={accordionStates.level}
-          ></div>
+          >
+            <SliderRange
+              className={styles.slider}
+              range={{ min: 0, max: 100 }}
+              start={[30, 100]}
+            />
+          </div>
         </fieldset>
       </form>
       <Button
