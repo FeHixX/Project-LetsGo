@@ -1,4 +1,3 @@
-export { Accordion } from './accordion'
 export { Button } from './button'
 export { CustomCheckbox } from './customCheckbox'
 export { Heading } from './heading'
