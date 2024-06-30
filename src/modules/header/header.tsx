@@ -25,7 +25,7 @@ const siteList: HeaderSiteItemI[] = [
   },
   {
     label: 'directions',
-    href: `${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/directions`,
+    href: `${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/`,
     description: 'Направления'
   },
   {
