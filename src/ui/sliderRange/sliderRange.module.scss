@@ -13,7 +13,7 @@
     top: 50%;
     left: 50%;
     z-index: 5;
-    background-color: white;
+    background-color: var(--color-white-default);
     transform: translate(-50%, -50%);
     pointer-events: none;
   }
@@ -27,7 +27,7 @@
     z-index: 10;
     width: 20px;
     height: 1px;
-    background-color: #cbced9;
+    background-color: var(--color-link-water);
   }
 
   label {
@@ -46,7 +46,7 @@
     text-align: center;
     color: #1d2e5b;
     letter-spacing: 0.04em;
-    border: 1px solid #cbced9;
+    border: 1px solid var(--color-link-water);
     outline: none;
     cursor: pointer;
     transition: border variables.$transition;
@@ -60,12 +60,12 @@
 
     &:hover {
       z-index: 3;
-      border-color: #959bb2;
+      border-color: var(--color-rock-blue);
     }
 
     &:focus-visible {
       z-index: 2;
-      border-color: #161c35;
+      border-color: var(--color-midnight-express-2);
     }
   }
 
