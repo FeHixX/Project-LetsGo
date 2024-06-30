@@ -1,1 +1,1 @@
-export { default as ProgressCircle } from './progressCircle'
+export { default as Select } from './select'
