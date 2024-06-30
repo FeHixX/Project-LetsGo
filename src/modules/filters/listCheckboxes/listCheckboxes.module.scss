@@ -1,0 +1,18 @@
+@use '@styles/func';
+@use '@styles/mixins';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include mixins.tablet {
+    display: grid;
+    gap: 10px 2px;
+    grid-template-columns: repeat(auto-fit, minmax(167px, 1fr));
+  }
+
+  @include mixins.tablet-small {
+    display: flex;
+  }
+}

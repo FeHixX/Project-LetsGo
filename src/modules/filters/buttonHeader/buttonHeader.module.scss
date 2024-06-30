@@ -1,0 +1,90 @@
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
+.root {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 110%;
+  text-align: left;
+  color: var(--color-catalina-blue);
+  text-transform: uppercase;
+  transition: opacity variables.$transition;
+  user-select: none;
+  gap: 0 10px;
+
+  span {
+    display: none;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 10px;
+    height: 6px;
+    margin-left: auto;
+    transition: transform variables.$transition;
+  }
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.6;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+
+  @include mixins.tablet {
+    width: 127px;
+    line-height: 100%;
+    cursor: default;
+    gap: 0;
+
+    span {
+      display: inline;
+    }
+
+    svg {
+      display: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+    }
+
+    &:active {
+      opacity: 1;
+    }
+  }
+
+  @include mixins.tablet-small {
+    width: 100%;
+    padding: 12px 0 9px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 112%;
+    cursor: pointer;
+    gap: 0 10px;
+
+    span {
+      display: none;
+    }
+
+    svg {
+      display: block;
+    }
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.6;
+    }
+
+    &:active {
+      opacity: 0.3;
+    }
+  }
+}

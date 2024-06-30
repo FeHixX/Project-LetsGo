@@ -3777,6 +3777,18 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   resolved "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
 
+nouislider-react@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/nouislider-react/-/nouislider-react-3.4.2.tgz#d27ababb19da617d21368d57f25f5fce94abb1b3"
+  integrity sha512-7YsyHY/j7yxaoNzt4PGZMoJLdh/e8aY5rYZ5xxpBv9LAs/gqt+M/Lk9SAi05+XF4mI749B2ISZjHdEIZUMWY6g==
+  dependencies:
+    nouislider "^14.6.3"
+
+nouislider@^14.6.3:
+  version "14.7.0"
+  resolved "https://registry.yarnpkg.com/nouislider/-/nouislider-14.7.0.tgz#a71db0587c92567b6da1df57d251d3696d942362"
+  integrity sha512-4RtQ1+LHJKesDCNJrXkQcwXAWCrC2aggdLYMstS/G5fEWL+fXZbUA9pwVNHFghMGuFGRATlDLNInRaPeRKzpFQ==
+
 nth-check@^2.0.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/nth-check/-/nth-check-2.1.1.tgz"

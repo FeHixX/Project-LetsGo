@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import { HomeView } from '@views/home'
+import { DirectionsView } from '@/views/directions'
 
 export const metadata: Metadata = {
-  title: 'Поехали?',
-  description: 'В путешествие с крутыми попутчиками!'
+  title: 'Попутчики форма',
+  description: 'Найди попутчика заполнив форму'
 }
 
-export default function Home() {
-  return <HomeView />
+export default function Directions() {
+  return <DirectionsView />
 }
