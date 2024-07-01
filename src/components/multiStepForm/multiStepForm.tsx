@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, ChangeEvent } from 'react';
 import classNames from 'classnames';
 import StepTwoItinerary from '../stepTwoItinerary/stepTwoItinerary';
 import StepThreePastime from '../stepThreePastime/stepThreePastime';
@@ -27,6 +27,8 @@ interface FormData {
   activities: {
     [key: string]: string;
   };
+  hashTags: string[];
+  transport: string[];
 }
 
 const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
@@ -35,7 +37,9 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
   const [formData, setFormData] = useState<FormData>({
     stayDates: { numPeople: 0, duration: 0, dates: ['', ''], children: false },
     route: [],
-    activities: {}
+    activities: {},
+    hashTags: [],
+    transport: []
   });
 
   const nextStep = () => setStep((prevStep) => prevStep + 1);
@@ -61,15 +65,48 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
     setFormData((prevData) => ({ ...prevData, route: updatedCountries }));
   };
 
-const updateActivities = (newData: Partial<FormData['activities']>) => {
-  setFormData((prevData) => ({
-    ...prevData,
-    activities: { ...prevData.activities, ...newData } as { [key: string]: string }
-  }));
-};
+  const updateActivities = (newData: Partial<FormData['activities']>) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      activities: { ...prevData.activities, ...newData }
+    }));
+  };
+
+  const updateHashTags = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      hashTags: e.target.value.split(',').map(tag => tag.trim())
+    }));
+  };
+
+  const updateTransport = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      transport: e.target.value.split(',').map(transport => transport.trim())
+    }));
+  };
 
   return (
     <section className={rootClassName}>
+      <div>
+        <label>
+          Hash Tags:
+          <input
+            type="text"
+            value={formData.hashTags.join(', ')}
+            onChange={updateHashTags}
+          />
+        </label>
+        <br />
+        <label>
+          Transport:
+          <input
+            type="text"
+            value={formData.transport.join(', ')}
+            onChange={updateTransport}
+          />
+        </label>
+      </div>
       <div className={styles.multiStepForm}>
         <h2 className={styles.multiStepFormTitle}>Добавить план:</h2>
         <div className={styles.multiStepFormWrapper}>
@@ -99,8 +136,8 @@ const updateActivities = (newData: Partial<FormData['activities']>) => {
                   name: country.name.rus,
                   description: country.description || ''
                 })),
-                hashTags: '',
-                transport: ''
+                hashTags: formData.hashTags,
+                transport: formData.transport
               }}
               selectedCountries={formData.route}
               updateData={updateActivities}

@@ -52,7 +52,6 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
   const maxDate = addMonths(today, 1);
 
   const handleNext = () => {
-    // Update form data before moving to the next step
     updateData({
       dates: [startDate?.toISOString() || '', endDate?.toISOString() || ''],
       numPeople: companionCount,

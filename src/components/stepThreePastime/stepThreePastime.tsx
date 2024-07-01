@@ -3,6 +3,7 @@ import PolygonPrev from '@icons/polygon-prev.svg';
 import classNames from 'classnames';
 import Image from 'next/image';
 import styles from './stepThreePastime.module.scss';
+import StepList from '../formNavigation/formNavigation';
 
 export interface StepThreePastimeProps {
   className?: string;
@@ -12,8 +13,8 @@ export interface StepThreePastimeProps {
     startDate: string;
     endDate: string;
     countryList: { name: string; description: string }[];
-    hashTags: string;
-    transport: string;
+    hashTags: string[];
+    transport: string[];
   };
   updateData: (data: Partial<{ Bosnia: string; Czechia: string }>) => void;
   prevStep: () => void;
@@ -35,8 +36,8 @@ interface FormData {
   startDate: string;
   endDate: string;
   countryList: { name: string; description: string }[];
-  hashTags: string;
-  transport: string;
+  hashTags: string[];
+  transport: string[];
 }
 
 const StepThreePastime: FC<StepThreePastimeProps> = ({
@@ -77,14 +78,9 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
     setFormData({ ...formData, [field]: updatedArray });
   };
 
-  const handleFieldChange = (e: ChangeEvent<HTMLInputElement>, field: 'hashTags' | 'transport') => {
-    setFormData({ ...formData, [field]: e.target.value });
-  };
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Validate that country names are in Russian and match the predefined list
     const invalidCountries = formData.countryList.filter((country) => {
       return !selectedCountries.some((sc) => sc.name.rus === country.name);
     });
@@ -94,7 +90,6 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       return;
     }
 
-    // Ensure dates are in the correct format
     const startDate = formData.startDate.split('T')[0];
     const endDate = formData.endDate.split('T')[0];
 
@@ -114,7 +109,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       const data = await response.json();
       console.log(data);
       alert('Данные успешно отправлены!');
-      updateData(data); // Use the updateData function here
+      updateData(data);
     }
   };
 
@@ -134,16 +129,9 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
               Можно писать в свободной форме и ставить тэги.
             </p>
           </div>
+          <StepList currentStep={2} activeStep={2} setStep={() => {}} />
         </div>
-        <button
-          className={`${styles.formButton} ${styles.formButtonPrev}`}
-          onClick={handlePrev}
-        >
-          <PolygonPrev />
-          На шаг назад
-        </button>
-      </div>
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
         <label>
           Country List:
           {formData.countryList.map((country, index) => (
@@ -168,31 +156,18 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
             </div>
           ))}
         </label>
-        <br />
-        <label>
-          Hash Tags:
-          <input
-            type="text"
-            placeholder="Hash Tags"
-            value={formData.hashTags}
-            onChange={(e) => handleFieldChange(e, 'hashTags')}
-          />
-        </label>
-        <br />
-        <label>
-          Transport:
-          <input
-            type="text"
-            placeholder="Transport"
-            value={formData.transport}
-            onChange={(e) => handleFieldChange(e, 'transport')}
-          />
-        </label>
-        <br />
         <button type="submit" className={styles.submitButton}>
           Submit
         </button>
       </form>
+        <button
+          className={`${styles.formButton} ${styles.formButtonPrev}`}
+          onClick={handlePrev}
+        >
+          <PolygonPrev />
+          На шаг назад
+        </button>
+      </div>
     </div>
   );
 };
