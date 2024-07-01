@@ -152,41 +152,6 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
         </button>
       </div>
       <form onSubmit={handleSubmit}>
-        <label>
-          Companion Count:
-          <input
-            type="number"
-            value={formData.companionCount}
-            onChange={(e) => handleChange(e, 'companionCount')}
-          />
-        </label>
-        <br />
-        <label>
-          Children:
-          <input
-            type="checkbox"
-            checked={formData.children}
-            onChange={(e) => handleChange(e, 'children')}
-          />
-        </label>
-        <br />
-        <label>
-          Start Date:
-          <input
-            type="date"
-            value={formData.startDate}
-            onChange={(e) => handleChange(e, 'startDate')}
-          />
-        </label>
-        <br />
-        <label>
-          End Date:
-          <input
-            type="date"
-            value={formData.endDate}
-            onChange={(e) => handleChange(e, 'endDate')}
-          />
-        </label>
         <br />
         <label>
           Country List:

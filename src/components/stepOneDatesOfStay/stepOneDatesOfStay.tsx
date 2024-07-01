@@ -46,9 +46,9 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(null)
   const [endDate, setEndDate] = useState<Date | null>(null)
-  const [companions, setCompanions] = useState<number>(2)
+  const [companionCount, setCompanionCount] = useState<number>(2)
   const [duration, setDuration] = useState<number>(3)
-  const [withChildren, setWithChildren] = useState<boolean>(true)
+  const [children, setChildren] = useState<boolean>(true)
   const today = new Date()
   const maxDate = addMonths(today, 1)
 
@@ -101,17 +101,17 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
         <StepList currentStep={0} activeStep={0} setStep={nextStep} />
       </div>
       <div className={styles.inputGroup}>
-        <div className={styles.inputCompanions}>
+        <div className={styles.inputCompanionCount}>
           <label>
             Ищу попутчиков:
             <div className={styles.counter}>
               <button
-                onClick={() => setCompanions(Math.max(1, companions - 1))}
+                onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
               >
                 -
               </button>
-              <span>{companions}</span>
-              <button onClick={() => setCompanions(companions + 1)}>+</button>
+              <span>{companionCount}</span>
+              <button onClick={() => setCompanionCount(companionCount + 1)}>+</button>
               <span>чел.</span>
             </div>
           </label>
@@ -130,8 +130,8 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
         <label>
           <input
             type="checkbox"
-            checked={withChildren}
-            onChange={() => setWithChildren(!withChildren)}
+            checked={children}
+            onChange={() => setChildren(!children)}
           />
           Можно с детьми
         </label>
