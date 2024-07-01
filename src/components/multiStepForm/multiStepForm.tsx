@@ -61,12 +61,12 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
     setFormData((prevData) => ({ ...prevData, route: updatedCountries }));
   };
 
-  const updateActivities = (newData: Partial<FormData['activities']>) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      activities: { ...prevData.activities, ...newData }
-    }));
-  };
+const updateActivities = (newData: Partial<FormData['activities']>) => {
+  setFormData((prevData) => ({
+    ...prevData,
+    activities: { ...prevData.activities, ...newData } as { [key: string]: string }
+  }));
+};
 
   return (
     <section className={rootClassName}>
@@ -99,8 +99,8 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
                   name: country.name.rus,
                   description: country.description || ''
                 })),
-                hashTags: [],
-                transport: []
+                hashTags: '',
+                transport: ''
               }}
               selectedCountries={formData.route}
               updateData={updateActivities}
