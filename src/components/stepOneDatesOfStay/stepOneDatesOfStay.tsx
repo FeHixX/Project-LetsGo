@@ -105,7 +105,7 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
         <StepList currentStep={0} activeStep={0} setStep={nextStep} />
       </div>
       <div className={styles.inputGroup}>
-        <div className={styles.inputCompanions}>
+        <div className={styles.inputCompanionCount}>
           <label>
             Ищу попутчиков:
             <div className={styles.counter}>
