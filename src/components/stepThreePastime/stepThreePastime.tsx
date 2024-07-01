@@ -12,8 +12,8 @@ export interface StepThreePastimeProps {
     startDate: string;
     endDate: string;
     countryList: { name: string; description: string }[];
-    hashTags: string[];
-    transport: string[];
+    hashTags: string;
+    transport: string;
   };
   updateData: (data: Partial<{ Bosnia: string; Czechia: string }>) => void;
   prevStep: () => void;
@@ -35,8 +35,8 @@ interface FormData {
   startDate: string;
   endDate: string;
   countryList: { name: string; description: string }[];
-  hashTags: string[];
-  transport: string[];
+  hashTags: string;
+  transport: string;
 }
 
 const StepThreePastime: FC<StepThreePastimeProps> = ({
@@ -61,7 +61,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
 
   const handleArrayChange = (
     e: ChangeEvent<HTMLInputElement>,
-    field: 'countryList' | 'hashTags' | 'transport',
+    field: 'countryList',
     index: number,
     subfield: 'name' | 'description' | null = null
   ) => {
@@ -73,19 +73,12 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
         [subfield]: value
       };
       updatedArray[index] = updatedCountry;
-    } else {
-      updatedArray[index] = value;
     }
     setFormData({ ...formData, [field]: updatedArray });
   };
 
-  const handleAddField = (field: 'hashTags' | 'transport') => {
-    setFormData({ ...formData, [field]: [...formData[field], ''] });
-  };
-
-  const handleRemoveField = (field: 'hashTags' | 'transport', index: number) => {
-    const updatedArray = formData[field].filter((_, i) => i !== index);
-    setFormData({ ...formData, [field]: updatedArray });
+  const handleFieldChange = (e: ChangeEvent<HTMLInputElement>, field: 'hashTags' | 'transport') => {
+    setFormData({ ...formData, [field]: e.target.value });
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -178,42 +171,22 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
         <br />
         <label>
           Hash Tags:
-          {formData.hashTags.map((tag, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                placeholder="Hash Tag"
-                value={tag}
-                onChange={(e) => handleArrayChange(e, 'hashTags', index)}
-              />
-              <button type="button" onClick={() => handleRemoveField('hashTags', index)}>
-                Remove
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={() => handleAddField('hashTags')}>
-            Add Hash Tag
-          </button>
+          <input
+            type="text"
+            placeholder="Hash Tags"
+            value={formData.hashTags}
+            onChange={(e) => handleFieldChange(e, 'hashTags')}
+          />
         </label>
         <br />
         <label>
           Transport:
-          {formData.transport.map((transport, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                placeholder="Transport"
-                value={transport}
-                onChange={(e) => handleArrayChange(e, 'transport', index)}
-              />
-              <button type="button" onClick={() => handleRemoveField('transport', index)}>
-                Remove
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={() => handleAddField('transport')}>
-            Add Transport
-          </button>
+          <input
+            type="text"
+            placeholder="Transport"
+            value={formData.transport}
+            onChange={(e) => handleFieldChange(e, 'transport')}
+          />
         </label>
         <br />
         <button type="submit" className={styles.submitButton}>
