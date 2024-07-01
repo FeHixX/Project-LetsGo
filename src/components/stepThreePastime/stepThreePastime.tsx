@@ -1,14 +1,20 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FC, FormEvent, useState, useEffect } from 'react';
 import PolygonPrev from '@icons/polygon-prev.svg';
 import classNames from 'classnames';
 import Image from 'next/image';
-
-import StepList from '../formNavigation/formNavigation';
 import styles from './stepThreePastime.module.scss';
 
 export interface StepThreePastimeProps {
   className?: string;
-  data: { [key: string]: string };
+  data: {
+    companionCount: number;
+    children: boolean;
+    startDate: string;
+    endDate: string;
+    countryList: { name: string; description: string }[];
+    hashTags: string[];
+    transport: string[];
+  };
   updateData: (data: Partial<{ Bosnia: string; Czechia: string }>) => void;
   prevStep: () => void;
   selectedCountries: Country[];
@@ -33,29 +39,25 @@ interface FormData {
   transport: string[];
 }
 
-const initialFormData: FormData = {
-  companionCount: 0,
-  children: false,
-  startDate: '',
-  endDate: '',
-  countryList: [],
-  hashTags: [''],
-  transport: ['']
-};
-
 const StepThreePastime: FC<StepThreePastimeProps> = ({
   className,
   prevStep,
-  selectedCountries
+  selectedCountries,
+  updateData,
+  data
 }) => {
   const rootClassName = classNames(styles.root, className);
-  const [formData, setFormData] = useState<FormData>({
-    ...initialFormData,
-    countryList: selectedCountries.map((country) => ({
-      name: country.name.rus,
-      description: country.description || ''
-    }))
-  });
+  const [formData, setFormData] = useState<FormData>(data);
+
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      countryList: selectedCountries.map((country) => ({
+        name: country.name.rus,
+        description: country.description || ''
+      }))
+    }));
+  }, [selectedCountries]);
 
   const handleArrayChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -75,14 +77,6 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       updatedArray[index] = value;
     }
     setFormData({ ...formData, [field]: updatedArray });
-  };
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-    field: keyof FormData
-  ) => {
-    const value = e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value;
-    setFormData({ ...formData, [field]: value });
   };
 
   const handleAddField = (field: 'hashTags' | 'transport') => {
@@ -107,12 +101,16 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       return;
     }
 
+    // Ensure dates are in the correct format
+    const startDate = formData.startDate.split('T')[0];
+    const endDate = formData.endDate.split('T')[0];
+
     const response = await fetch('https://lets-go-8s43.onrender.com/cards/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify({ ...formData, startDate, endDate })
     });
 
     if (!response.ok) {
@@ -122,6 +120,8 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
     } else {
       const data = await response.json();
       console.log(data);
+      alert('Данные успешно отправлены!');
+      updateData(data); // Use the updateData function here
     }
   };
 
@@ -141,7 +141,6 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
               Можно писать в свободной форме и ставить тэги.
             </p>
           </div>
-          <StepList currentStep={2} activeStep={2} setStep={() => {}} />
         </div>
         <button
           className={`${styles.formButton} ${styles.formButtonPrev}`}
@@ -153,55 +152,17 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       </div>
       <form onSubmit={handleSubmit}>
         <label>
-          Companion Count:
-          <input
-            type="number"
-            value={formData.companionCount}
-            onChange={(e) => handleChange(e, 'companionCount')}
-          />
-        </label>
-        <br />
-        <label>
-          Children:
-          <input
-            type="checkbox"
-            checked={formData.children}
-            onChange={(e) => handleChange(e, 'children')}
-          />
-        </label>
-        <br />
-        <label>
-          Start Date:
-          <input
-            type="date"
-            value={formData.startDate}
-            onChange={(e) => handleChange(e, 'startDate')}
-          />
-        </label>
-        <br />
-        <label>
-          End Date:
-          <input
-            type="date"
-            value={formData.endDate}
-            onChange={(e) => handleChange(e, 'endDate')}
-          />
-        </label>
-        <br />
-        <label>
           Country List:
           {formData.countryList.map((country, index) => (
             <div key={country.name}>
               <div className={styles.countryInfo}>
                 <Image
-                  src={selectedCountries[index].flags.png}
+                  src={selectedCountries[index]?.flags.png}
                   alt={`${country.name} flag`}
                   width={70}
                   height={47}
                 />
-                <div className={styles.countryName}>
-                  {country.name}
-                </div>
+                <div className={styles.countryName}>{country.name}</div>
               </div>
               <input
                 type="text"
@@ -221,31 +182,43 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
             <div key={index}>
               <input
                 type="text"
+                placeholder="Hash Tag"
                 value={tag}
                 onChange={(e) => handleArrayChange(e, 'hashTags', index)}
               />
-              <button type="button" onClick={() => handleRemoveField('hashTags', index)}>Remove</button>
+              <button type="button" onClick={() => handleRemoveField('hashTags', index)}>
+                Remove
+              </button>
             </div>
           ))}
-          <button type="button" onClick={() => handleAddField('hashTags')}>Add Tag</button>
+          <button type="button" onClick={() => handleAddField('hashTags')}>
+            Add Hash Tag
+          </button>
         </label>
         <br />
         <label>
           Transport:
-          {formData.transport.map((mode, index) => (
+          {formData.transport.map((transport, index) => (
             <div key={index}>
               <input
                 type="text"
-                value={mode}
+                placeholder="Transport"
+                value={transport}
                 onChange={(e) => handleArrayChange(e, 'transport', index)}
               />
-              <button type="button" onClick={() => handleRemoveField('transport', index)}>Remove</button>
+              <button type="button" onClick={() => handleRemoveField('transport', index)}>
+                Remove
+              </button>
             </div>
           ))}
-          <button type="button" onClick={() => handleAddField('transport')}>Add Transport</button>
+          <button type="button" onClick={() => handleAddField('transport')}>
+            Add Transport
+          </button>
         </label>
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit" className={styles.submitButton}>
+          Submit
+        </button>
       </form>
     </div>
   );
