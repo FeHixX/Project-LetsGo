@@ -12,7 +12,7 @@ import { Level } from '../level'
 import styles from './user.module.scss'
 import { UserProps } from './user.types'
 
-const checkboxList: IconCheckboxItemI[] = [
+export const checkboxList: IconCheckboxItemI[] = [
   {
     label: 'Самолет',
     value: 'plane',

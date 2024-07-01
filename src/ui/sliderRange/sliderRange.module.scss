@@ -1,0 +1,153 @@
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
+.inputs {
+  position: relative;
+  display: flex;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    background-color: var(--color-white-default);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  &::before {
+    width: 5px;
+    height: 14px;
+  }
+
+  &::after {
+    z-index: 10;
+    width: 20px;
+    height: 1px;
+    background-color: var(--color-link-water);
+  }
+
+  label {
+    width: 100%;
+  }
+
+  input {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 13px 15px 8px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    text-align: center;
+    color: #1d2e5b;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--color-link-water);
+    outline: none;
+    cursor: pointer;
+    transition: border variables.$transition;
+    appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &:hover {
+      z-index: 3;
+      border-color: var(--color-rock-blue);
+    }
+
+    &:focus-visible {
+      z-index: 2;
+      border-color: var(--color-midnight-express-2);
+    }
+  }
+
+  label:first-child input {
+    border-radius: 4px 0 0 4px;
+  }
+
+  label:last-child input {
+    margin-left: -1px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  @include mixins.tablet-small {
+    input {
+      padding: 10px 15px 7px;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 93%;
+      letter-spacing: 0.06em;
+    }
+  }
+}
+
+.slider {
+  flex-shrink: 0;
+  height: 3px;
+  background-color: rgba(29 46 91 / 20%);
+  border: none;
+  border-radius: 2px;
+  box-shadow: none;
+
+  & > div > div:first-child > div {
+    background-color: var(--color-catalina-blue);
+  }
+
+  & > div > div:nth-child(2) > div,
+  & > div > div:nth-child(3) > div {
+    top: -5px;
+    right: -7px;
+    width: 13px;
+    height: 13px;
+    background-color: var(--color-catalina-blue);
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+    cursor: pointer;
+    transition:
+      transform variables.$transition,
+      box-shadow variables.$transition;
+
+    &::after,
+    &::before {
+      content: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      outline: none;
+      transform: translateZ(0) scale(1.461);
+    }
+
+    &:active {
+      box-shadow: 0 3px 7px 0 rgba(0 0 0 / 24%);
+      transform: translateZ(0) scale(1.461);
+    }
+  }
+
+  @include mixins.tablet {
+    width: 56%;
+  }
+
+  @include mixins.tablet-small {
+    width: 98%;
+    border-radius: 0;
+
+    & > div > div:nth-child(2) > div,
+    & > div > div:nth-child(3) > div {
+      top: -4px;
+      right: -5px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--color-catalina-blue);
+    }
+  }
+}
