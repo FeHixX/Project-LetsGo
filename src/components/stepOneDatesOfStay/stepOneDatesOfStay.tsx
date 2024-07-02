@@ -45,15 +45,20 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
 }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [companionCount, setCompanionCount] = useState<number>(data.numPeople);
-  const [duration, setDuration] = useState<number>(data.duration);
+  const [companionCount, setCompanionCount] = useState<number>(1);
+  const [duration, setDuration] = useState<number>(2);
   const [children, setChildren] = useState<boolean>(data.children);
   const today = new Date();
   const maxDate = addMonths(today, 1);
 
   const handleNext = () => {
+    const formatDateToISOString = (date: Date | null) => {
+      if (!date) return '';
+      return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toISOString();
+    };
+
     updateData({
-      dates: [startDate?.toISOString() || '', endDate?.toISOString() || ''],
+      dates: [formatDateToISOString(startDate), formatDateToISOString(endDate)],
       numPeople: companionCount,
       duration: duration,
       children: children
@@ -110,22 +115,36 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
             <div className={styles.counter}>
               <button
                 onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
+                disabled={companionCount <= 1}
               >
                 -
               </button>
               <span>{companionCount}</span>
-              <button onClick={() => setCompanionCount(companionCount + 1)}>+</button>
+              <button
+                onClick={() => setCompanionCount(Math.min(10, companionCount + 1))}
+                disabled={companionCount >= 10}
+              >
+                +
+              </button>
               <span>чел.</span>
             </div>
           </label>
           <label>
             Длительность:
             <div className={styles.counter}>
-              <button onClick={() => setDuration(Math.max(1, duration - 1))}>
+              <button
+                onClick={() => setDuration(Math.max(2, duration - 1))}
+                disabled={duration <= 2}
+              >
                 -
               </button>
               <span>{duration}</span>
-              <button onClick={() => setDuration(duration + 1)}>+</button>
+              <button
+                onClick={() => setDuration(Math.min(31, duration + 1))}
+                disabled={duration >= 31}
+              >
+                +
+              </button>
               <span>дн.</span>
             </div>
           </label>

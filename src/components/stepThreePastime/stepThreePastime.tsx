@@ -50,6 +50,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
 }) => {
   const rootClassName = classNames(styles.root, className);
   const [formData, setFormData] = useState<FormData>(data);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     setFormData((prevData) => ({
@@ -59,6 +60,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
         description: country.description || ''
       }))
     }));
+    validateForm();
   }, [selectedCountries]);
 
   const handleArrayChange = (
@@ -77,9 +79,14 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       updatedArray[index] = updatedCountry;
     }
     setFormData({ ...formData, [field]: updatedArray });
+    validateForm();
   };
   
   const router = useRouter();
+  const validateForm = () => {
+    const isValid = formData.countryList.every(country => country.description.trim() !== '');
+    setIsFormValid(isValid);
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -141,34 +148,35 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
           <StepList currentStep={2} activeStep={2} setStep={() => {}} />
         </div>
         <form onSubmit={handleSubmit}>
-        <label>
-          Country List:
-          {formData.countryList.map((country, index) => (
-            <div key={country.name}>
-              <div className={styles.countryInfo}>
-                <Image
-                  src={selectedCountries[index]?.flags.png}
-                  alt={`${country.name} flag`}
-                  width={70}
-                  height={47}
+          <label>
+            Country List:
+            {formData.countryList.map((country, index) => (
+              <div key={country.name}>
+                <div className={styles.countryInfo}>
+                  <Image
+                    src={selectedCountries[index]?.flags.png}
+                    alt={`${country.name} flag`}
+                    width={70}
+                    height={47}
+                  />
+                  <div className={styles.countryName}>{country.name}</div>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Description"
+                  value={country.description}
+                  maxLength={200}
+                  onChange={(e) =>
+                    handleArrayChange(e, 'countryList', index, 'description')
+                  }
                 />
-                <div className={styles.countryName}>{country.name}</div>
               </div>
-              <input
-                type="text"
-                placeholder="Description"
-                value={country.description}
-                onChange={(e) =>
-                  handleArrayChange(e, 'countryList', index, 'description')
-                }
-              />
-            </div>
-          ))}
-        </label>
-        <button type="submit" className={styles.submitButton}>
-          Submit
-        </button>
-      </form>
+            ))}
+          </label>
+          <button type="submit" className={styles.submitButton} disabled={!isFormValid}>
+            Submit
+          </button>
+        </form>
         <button
           className={`${styles.formButton} ${styles.formButtonPrev}`}
           onClick={handlePrev}

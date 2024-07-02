@@ -1,6 +1,7 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { PageHeader } from '@/modules/pageHeader'
 import { UserList } from '@/modules/userList'
 import classNames from 'classnames'
@@ -25,13 +26,16 @@ interface CardData {
 }
 
 const Companions: FC<CompanionsProps> = ({ className }) => {
+  const router = useRouter()
   const rootClassName = classNames(styles.root, className)
   const [cardData, setCardData] = useState<CardData | null>(null)
 
   useEffect(() => {
-    const fetchCardData = async () => {
-      const cardId = localStorage.getItem('cardId')
-      if (cardId) {
+    const cardId = localStorage.getItem('cardId')
+    if (!cardId) {
+      router.push('/directions')
+    } else {
+      const fetchCardData = async () => {
         try {
           const response = await axios.get<CardData>(`https://lets-go-8s43.onrender.com/cards/${cardId}`)
           setCardData(response.data)
@@ -39,16 +43,19 @@ const Companions: FC<CompanionsProps> = ({ className }) => {
           console.error('Error fetching card data:', error)
         }
       }
+      fetchCardData()
     }
+  }, [router])
 
-    fetchCardData()
-  }, [])
+  if (!cardData) {
+    return null 
+  }
 
   return (
     <main className={rootClassName}>
       <PageHeader className={styles.header}>Попутчики</PageHeader>
       <CountriesFilter />
-      <UserList className={styles.list} cardData={cardData || undefined} />
+      <UserList className={styles.list} cardData={cardData} />
     </main>
   )
 }
