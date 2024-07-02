@@ -148,34 +148,35 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
           <StepList currentStep={2} activeStep={2} setStep={() => {}} />
         </div>
         <form onSubmit={handleSubmit}>
-        <label>
-          Country List:
-          {formData.countryList.map((country, index) => (
-            <div key={country.name}>
-              <div className={styles.countryInfo}>
-                <Image
-                  src={selectedCountries[index]?.flags.png}
-                  alt={`${country.name} flag`}
-                  width={70}
-                  height={47}
+          <label>
+            Country List:
+            {formData.countryList.map((country, index) => (
+              <div key={country.name}>
+                <div className={styles.countryInfo}>
+                  <Image
+                    src={selectedCountries[index]?.flags.png}
+                    alt={`${country.name} flag`}
+                    width={70}
+                    height={47}
+                  />
+                  <div className={styles.countryName}>{country.name}</div>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Description"
+                  value={country.description}
+                  maxLength={200}
+                  onChange={(e) =>
+                    handleArrayChange(e, 'countryList', index, 'description')
+                  }
                 />
-                <div className={styles.countryName}>{country.name}</div>
               </div>
-              <input
-                type="text"
-                placeholder="Description"
-                value={country.description}
-                onChange={(e) =>
-                  handleArrayChange(e, 'countryList', index, 'description')
-                }
-              />
-            </div>
-          ))}
-        </label>
-        <button type="submit" className={styles.submitButton} disabled={!isFormValid}>
-          Submit
-        </button>
-      </form>
+            ))}
+          </label>
+          <button type="submit" className={styles.submitButton} disabled={!isFormValid}>
+            Submit
+          </button>
+        </form>
         <button
           className={`${styles.formButton} ${styles.formButtonPrev}`}
           onClick={handlePrev}
