@@ -14,13 +14,13 @@ const Countries: FC<CountriesProps> = ({ item, className }) => {
       <ul>
         {item.map(({ name, img }) => (
           <li className={styles.item} key={name}>
-            <Image
-              src={`${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/images/${img}`}
-              width={35}
-              height={24}
-              quality={85}
-              alt="Флаг страны: ${name}"
-            />
+        <Image
+          src={img} // Используем полный URL флага
+          width={35}
+          height={24}
+          quality={85}
+          alt={`Флаг страны: ${name}`}
+        />
             <p>{name}</p>
           </li>
         ))}

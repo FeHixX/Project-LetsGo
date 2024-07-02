@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
-import Select from '@/ui/select/select'
 import PolygonNext from '@icons/polygon-next.svg'
 import PolygonPrev from '@icons/polygon-prev.svg'
 import axios from 'axios'
@@ -18,16 +17,19 @@ interface Country {
   }
   continent: string[]
   island: boolean
+  description?: string
 }
 
 const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
   className,
   nextStep,
-  prevStep
+  prevStep,
+  updateCountries
 }) => {
   const rootClassName = classNames(styles.root, className)
 
   const handleNext = () => {
+    updateCountries({ countries: selectedCountries.map(country => country.name.rus) })
     nextStep()
   }
 
@@ -60,7 +62,7 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
     if (
       country &&
       selectedCountries.length < 4 &&
-      !selectedCountries.some((c) => c.name.common === country.name.common)
+      !selectedCountries.some((c) => c.name.rus === country.name.rus)
     ) {
       setSelectedCountries([...selectedCountries, country])
     }
@@ -68,7 +70,7 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
 
   const handleCountryRemove = (country: Country) => {
     setSelectedCountries(
-      selectedCountries.filter((c) => c.name.common !== country.name.common)
+      selectedCountries.filter((c) => c.name.rus !== country.name.rus)
     )
   }
 
@@ -120,15 +122,15 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
           <div>
             <ul className={styles.countries}>
               {selectedCountries.map((country) => (
-                <li className={styles.country} key={country.name.common}>
+                <li className={styles.country} key={country.name.rus}>
                   <div className={styles.countryName}>
-                    {country.name.rus} ({country.name.common})
+                    {country.name.rus}
                   </div>
                   <div className={styles.countryIndicator}>
                     <Image
                       className={styles.countryFlags}
                       src={country.flags.png}
-                      alt={`${country.name.common} flag`}
+                      alt={`${country.name.rus} flag`}
                       width={70}
                       height={47}
                     />
@@ -174,17 +176,10 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
                   {filteredCountries.map((country) => (
                     <li
                       className={styles.country}
-                      key={country.name.common}
-                      onClick={() => {
-                        const selectedCountry = countries.find(
-                          (c) => c.name.common === country.name.common
-                        )
-                        if (selectedCountry) {
-                          handleCountrySelect(selectedCountry)
-                        }
-                      }}
+                      key={country.name.rus}
+                      onClick={() => handleCountrySelect(country)}
                     >
-                      {country.name.rus} ({country.name.common})
+                      {country.name.rus}
                     </li>
                   ))}
                 </ul>

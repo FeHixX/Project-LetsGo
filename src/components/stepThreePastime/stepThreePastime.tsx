@@ -1,98 +1,130 @@
-// StepThreePastime.tsx
-
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
-import PolygonPrev from '@icons/polygon-prev.svg'
-import classNames from 'classnames'
-
-import StepList from '../formNavigation/formNavigation'
-import styles from './stepThreePastime.module.scss'
+import React, { ChangeEvent, FC, FormEvent, useState, useEffect } from 'react';
+import PolygonPrev from '@icons/polygon-prev.svg';
+import classNames from 'classnames';
+import Image from 'next/image';
+import styles from './stepThreePastime.module.scss';
+import StepList from '../formNavigation/formNavigation';
+import { useRouter } from 'next/navigation';
 
 export interface StepThreePastimeProps {
-  className?: string
-  data: { Bosnia: string; Czechia: string }
-  updateData: (data: Partial<{ Bosnia: string; Czechia: string }>) => void
-  prevStep: () => void
+  className?: string;
+  data: {
+    companionCount: number;
+    children: boolean;
+    startDate: string;
+    endDate: string;
+    countryList: { name: string; description: string }[];
+    hashTags: string[];
+    transport: string[];
+  };
+  updateData: (data: Partial<{ Bosnia: string; Czechia: string }>) => void;
+  prevStep: () => void;
+  selectedCountries: Country[];
 }
 
 interface Country {
-  name: string
-  description: string
+  name: { common: string; rus: string };
+  flags: {
+    png: string;
+    svg: string;
+  };
+  description?: string;
 }
 
 interface FormData {
-  companionCount: number
-  children: boolean
-  startDate: string
-  endDate: string
-  countryList: Country[]
-  hashTags: string[]
-  transport: string[]
-}
-
-const initialFormData: FormData = {
-  companionCount: 0,
-  children: false,
-  startDate: '',
-  endDate: '',
-  countryList: [{ name: '', description: '' }],
-  hashTags: [''],
-  transport: ['']
+  companionCount: number;
+  children: boolean;
+  startDate: string;
+  endDate: string;
+  countryList: { name: string; description: string }[];
+  hashTags: string[];
+  transport: string[];
 }
 
 const StepThreePastime: FC<StepThreePastimeProps> = ({
   className,
-  prevStep
+  prevStep,
+  selectedCountries,
+  updateData,
+  data
 }) => {
-  const rootClassName = classNames(styles.root, className)
-  const [formData, setFormData] = useState<FormData>(initialFormData)
+  const rootClassName = classNames(styles.root, className);
+  const [formData, setFormData] = useState<FormData>(data);
+
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      countryList: selectedCountries.map((country) => ({
+        name: country.name.rus,
+        description: country.description || ''
+      }))
+    }));
+  }, [selectedCountries]);
 
   const handleArrayChange = (
     e: ChangeEvent<HTMLInputElement>,
-    field: 'countryList' | 'hashTags' | 'transport',
+    field: 'countryList',
     index: number,
     subfield: 'name' | 'description' | null = null
   ) => {
-    const value = e.target.value
-    const updatedArray = [...formData[field]]
+    const value = e.target.value;
+    const updatedArray = [...formData[field]];
     if (field === 'countryList' && subfield) {
       const updatedCountry = {
-        ...(updatedArray[index] as Country), // Type assertion to make sure TypeScript knows it's a Country
+        ...(updatedArray[index] as { name: string; description: string }),
         [subfield]: value
-      }
-      updatedArray[index] = updatedCountry
-    } else {
-      updatedArray[index] = value
+      };
+      updatedArray[index] = updatedCountry;
     }
-    setFormData({ ...formData, [field]: updatedArray })
-  }
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-    field: keyof FormData
-  ) => {
-    const value =
-      e.target.type === 'checkbox'
-        ? (e.target as HTMLInputElement).checked
-        : e.target.value
-    setFormData({ ...formData, [field]: value })
-  }
+    setFormData({ ...formData, [field]: updatedArray });
+  };
+  
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
+  
+    const invalidCountries = formData.countryList.filter((country) => {
+      return !selectedCountries.some((sc) => sc.name.rus === country.name);
+    });
+  
+    if (invalidCountries.length > 0) {
+      alert('Наименование страны должно быть на русском языке из списка предложенных.');
+      return;
+    }
+  
+    const startDate = formData.startDate.split('T')[0];
+    const endDate = formData.endDate.split('T')[0];
+  
     const response = await fetch('https://lets-go-8s43.onrender.com/cards/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(formData)
-    })
-    const data = await response.json()
-    console.log(data)
-  }
+      body: JSON.stringify({ ...formData, startDate, endDate })
+    });
+  
+    if (!response.ok) {
+      const data = await response.json();
+      console.error(data);
+      alert('Ошибка при отправке данных');
+    } else {
+      const data = await response.json();
+      console.log(data);
+      alert('Данные успешно отправлены!');
+      updateData(data);
+  
+      if (data.id) {
+        localStorage.setItem('cardId', data.id);
+        console.log('Сохраненный ID карточки:', data.id);
+        router.push('/companions');
+      }
+    }
+  };
 
   const handlePrev = () => {
-    prevStep()
-  }
+    prevStep();
+  };
 
   return (
     <div className={rootClassName}>
@@ -108,63 +140,20 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
           </div>
           <StepList currentStep={2} activeStep={2} setStep={() => {}} />
         </div>
-        <button
-          className={`${styles.formButton} ${styles.formButtonPrev}`}
-          onClick={handlePrev}
-        >
-          <PolygonPrev />
-          На шаг назад
-        </button>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Companion Count:
-          <input
-            type="number"
-            value={formData.companionCount}
-            onChange={(e) => handleChange(e, 'companionCount')}
-          />
-        </label>
-        <br />
-        <label>
-          Children:
-          <input
-            type="checkbox"
-            checked={formData.children}
-            onChange={(e) => handleChange(e, 'children')}
-          />
-        </label>
-        <br />
-        <label>
-          Start Date:
-          <input
-            type="date"
-            value={formData.startDate}
-            onChange={(e) => handleChange(e, 'startDate')}
-          />
-        </label>
-        <br />
-        <label>
-          End Date:
-          <input
-            type="date"
-            value={formData.endDate}
-            onChange={(e) => handleChange(e, 'endDate')}
-          />
-        </label>
-        <br />
+        <form onSubmit={handleSubmit}>
         <label>
           Country List:
           {formData.countryList.map((country, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                placeholder="Name"
-                value={country.name}
-                onChange={(e) =>
-                  handleArrayChange(e, 'countryList', index, 'name')
-                }
-              />
+            <div key={country.name}>
+              <div className={styles.countryInfo}>
+                <Image
+                  src={selectedCountries[index]?.flags.png}
+                  alt={`${country.name} flag`}
+                  width={70}
+                  height={47}
+                />
+                <div className={styles.countryName}>{country.name}</div>
+              </div>
               <input
                 type="text"
                 placeholder="Description"
@@ -176,35 +165,20 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
             </div>
           ))}
         </label>
-        <br />
-        <label>
-          Hash Tags:
-          {formData.hashTags.map((tag, index) => (
-            <input
-              key={index}
-              type="text"
-              value={tag}
-              onChange={(e) => handleArrayChange(e, 'hashTags', index)}
-            />
-          ))}
-        </label>
-        <br />
-        <label>
-          Transport:
-          {formData.transport.map((mode, index) => (
-            <input
-              key={index}
-              type="text"
-              value={mode}
-              onChange={(e) => handleArrayChange(e, 'transport', index)}
-            />
-          ))}
-        </label>
-        <br />
-        <button type="submit">Submit</button>
+        <button type="submit" className={styles.submitButton}>
+          Submit
+        </button>
       </form>
+        <button
+          className={`${styles.formButton} ${styles.formButtonPrev}`}
+          onClick={handlePrev}
+        >
+          <PolygonPrev />
+          На шаг назад
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default StepThreePastime
+export default StepThreePastime;

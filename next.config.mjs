@@ -31,7 +31,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: false,
-    domains: ['flagcdn.com', 'upload.wikimedia.org'],
+    domains: ['flagcdn.com', 'upload.wikimedia.org', 'xsgames.co','flagcdn.com'],
   }
 };
 

@@ -1,18 +1,16 @@
-'use client'
+import React, { FC, useCallback, useState } from 'react';
+import classNames from 'classnames';
+import { addMonths } from 'date-fns';
+import { ru } from 'date-fns/locale/ru';
+import DatePicker, { registerLocale } from 'react-datepicker';
 
-import React, { FC, useCallback, useState } from 'react'
-import classNames from 'classnames'
-import { addMonths } from 'date-fns'
-import { ru } from 'date-fns/locale/ru'
-import DatePicker, { registerLocale } from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css';
 
-import 'react-datepicker/dist/react-datepicker.css'
+import PolygonNext from '@icons/polygon-next.svg';
 
-import PolygonNext from '@icons/polygon-next.svg'
-
-import StepList from '../formNavigation/formNavigation'
-import styles from './stepOneDatesOfStay.module.scss'
-import { StepOneDatesOfStayProps } from './stepOneDatesOfStay.types'
+import StepList from '../formNavigation/formNavigation';
+import styles from './stepOneDatesOfStay.module.scss';
+import { StepOneDatesOfStayProps } from './stepOneDatesOfStay.types';
 
 const customRu = {
   ...ru,
@@ -35,47 +33,52 @@ const customRu = {
       ][n],
     day: (n: number) => ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'][n]
   }
-}
+};
 
-registerLocale('ru', customRu)
+registerLocale('ru', customRu);
 
 const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
   updateData,
   nextStep,
-  className
+  className,
+  data
 }) => {
-  const [startDate, setStartDate] = useState<Date | null>(null)
-  const [endDate, setEndDate] = useState<Date | null>(null)
-  const [companions, setCompanions] = useState<number>(2)
-  const [duration, setDuration] = useState<number>(3)
-  const [withChildren, setWithChildren] = useState<boolean>(true)
-  const today = new Date()
-  const maxDate = addMonths(today, 1)
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [companionCount, setCompanionCount] = useState<number>(data.numPeople);
+  const [duration, setDuration] = useState<number>(data.duration);
+  const [children, setChildren] = useState<boolean>(data.children);
+  const today = new Date();
+  const maxDate = addMonths(today, 1);
 
   const handleNext = () => {
-    // Implement form validation if needed
-    nextStep()
-  }
+    updateData({
+      dates: [startDate?.toISOString() || '', endDate?.toISOString() || ''],
+      numPeople: companionCount,
+      duration: duration,
+      children: children
+    });
+    nextStep();
+  };
 
-  const rootClassName = classNames(styles.root, className)
+  const rootClassName = classNames(styles.root, className);
 
   const handleDateChange = useCallback(
     (dates: [Date | null, Date | null]) => {
-      const [start, end] = dates
-      setStartDate(start)
-      setEndDate(end)
-      updateData({ dates: dates.map((date) => date?.toISOString() || '') })
+      const [start, end] = dates;
+      setStartDate(start);
+      setEndDate(end);
     },
-    [updateData]
-  )
+    []
+  );
 
   const renderDayContents = useCallback(
     (day: number, date: Date | null) => {
-      let label = null
+      let label = null;
       if (startDate && date?.getTime() === startDate.getTime()) {
-        label = 'Заезд'
+        label = 'Заезд';
       } else if (endDate && date?.getTime() === endDate.getTime()) {
-        label = 'Выезд'
+        label = 'Выезд';
       }
 
       return (
@@ -83,10 +86,10 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
           <span>{day}</span>
           {label && <span>{label}</span>}
         </div>
-      )
+      );
     },
     [startDate, endDate]
-  )
+  );
 
   return (
     <div className={rootClassName}>
@@ -101,17 +104,17 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
         <StepList currentStep={0} activeStep={0} setStep={nextStep} />
       </div>
       <div className={styles.inputGroup}>
-        <div className={styles.inputCompanions}>
+        <div className={styles.inputCompanionCount}>
           <label>
             Ищу попутчиков:
             <div className={styles.counter}>
               <button
-                onClick={() => setCompanions(Math.max(1, companions - 1))}
+                onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
               >
                 -
               </button>
-              <span>{companions}</span>
-              <button onClick={() => setCompanions(companions + 1)}>+</button>
+              <span>{companionCount}</span>
+              <button onClick={() => setCompanionCount(companionCount + 1)}>+</button>
               <span>чел.</span>
             </div>
           </label>
@@ -130,8 +133,8 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
         <label>
           <input
             type="checkbox"
-            checked={withChildren}
-            onChange={() => setWithChildren(!withChildren)}
+            checked={children}
+            onChange={() => setChildren(!children)}
           />
           Можно с детьми
         </label>
@@ -149,14 +152,17 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
           locale="ru"
           fixedHeight
           renderDayContents={renderDayContents}
+          placeholderText="Выберите даты"
         />
       </div>
-      <button className={styles.formButton} onClick={handleNext}>
-        Следующий шаг
-        <PolygonNext></PolygonNext>
-      </button>
+      <div className={styles.buttons}>
+        <button onClick={handleNext}>
+          Далее
+          <PolygonNext />
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default StepOneDatesOfStay
+export default StepOneDatesOfStay;
