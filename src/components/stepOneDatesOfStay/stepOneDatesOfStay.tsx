@@ -52,8 +52,13 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
   const maxDate = addMonths(today, 1);
 
   const handleNext = () => {
+    const formatDateToISOString = (date: Date | null) => {
+      if (!date) return '';
+      return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())).toISOString();
+    };
+
     updateData({
-      dates: [startDate?.toISOString() || '', endDate?.toISOString() || ''],
+      dates: [formatDateToISOString(startDate), formatDateToISOString(endDate)],
       numPeople: companionCount,
       duration: duration,
       children: children
