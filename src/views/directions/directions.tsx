@@ -1,8 +1,8 @@
-'use client';
+'use client'
+
 import { FC } from 'react'
-import { PageHeader } from '@/modules/pageHeader'
-import { User } from '@/modules/user'
 import { MultiStepForm } from '@/components'
+import { PageHeader } from '@/modules/pageHeader'
 import classNames from 'classnames'
 
 import styles from './directions.module.scss'
@@ -14,7 +14,6 @@ const Directions: FC<DirectionsProps> = ({ className }) => {
   return (
     <main className={rootClassName}>
       <PageHeader className={styles.header}>Направления</PageHeader>
-      <User />
       <MultiStepForm />
     </main>
   )

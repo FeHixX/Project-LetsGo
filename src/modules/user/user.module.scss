@@ -2,20 +2,6 @@
 @use '@styles/mixins';
 @use '@styles/variables';
 
-.root {
-  margin: -188px 0 0;
-  padding: 0 0 73px;
-
-  @include mixins.tablet {
-    margin: 0;
-    padding: 66px 0 61px;
-  }
-
-  @include mixins.tablet-small {
-    padding: 24px 0 32px;
-  }
-}
-
 .form {
   padding: 0 0 0 64px;
 
@@ -140,7 +126,7 @@
     letter-spacing: 0.07em;
   }
 
-  label{
+  label {
     display: flex;
     padding: 35px 39px 33px;
   }
@@ -171,7 +157,7 @@
       transform: translateX(-50%);
     }
 
-    label{
+    label {
       padding: 35px 39px 32px;
     }
 
@@ -190,7 +176,7 @@
       letter-spacing: 0;
     }
 
-    label{
+    label {
       padding: 26px 24px 22px;
     }
 
