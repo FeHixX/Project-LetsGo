@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export interface UserListProps {
   className?: string
   cardData?: {
@@ -14,4 +16,15 @@ export interface UserListProps {
       transport: string[]
     }>
   }
+}
+
+export interface TransformedUserData {
+  name: string
+  photo: string
+  online: boolean
+  tags: string
+  likes: number
+  countries: { name: string; img: string }[]
+  transport: { icon: ReactNode; checked: boolean }[]
+  level: number
 }

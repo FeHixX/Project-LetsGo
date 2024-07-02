@@ -19,26 +19,21 @@ interface Country {
 }
 
 const CountriesFilter: FC = () => {
-  const [selectedContinent, setSelectedContinent] = useState('ЕВРОПА')
   const [countries, setCountries] = useState<Country[]>([])
   const [lettersAndCountries, setLettersAndCountries] = useState<{ [key: string]: Country[] }>({})
   const [selectedLetter, setSelectedLetter] = useState<string>('А')
-  const [selectedCountries, setSelectedCountries] = useState<Country[]>([])
+  const [selectedContinent, setSelectedContinent] = useState<string | null>(null)
 
   const { isMobile, isTablet, isDesktop } = useResponsive()
   const [active, setActive] = useState<boolean>(false)
 
   useEffect(() => {
     const fetchCountries = async () => {
-      const response = await axios.get(
-        'https://lets-go-8s43.onrender.com/countries/'
-      )
+      const response = await axios.get('https://lets-go-8s43.onrender.com/countries/')
       if (response.data && typeof response.data === 'object') {
-        const flattenedCountries = Object.values(
-          response.data
-        ).flat() as Country[]
         const data = response.data as { [key: string]: Country[] }
         setLettersAndCountries(data)
+        const flattenedCountries = Object.values(data).flat() as Country[]
         setCountries(flattenedCountries)
       }
     }
@@ -52,7 +47,8 @@ const CountriesFilter: FC = () => {
   ]
 
   const filteredCountries = countries.filter((country) =>
-    country.name.rus.startsWith(selectedLetter)
+    country.name.rus.startsWith(selectedLetter) &&
+    (selectedContinent === null || country.continent.includes(selectedContinent))
   )
 
   return (

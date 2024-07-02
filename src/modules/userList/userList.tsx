@@ -11,11 +11,11 @@ import classNames from 'classnames'
 import { Filters } from '../filters'
 import { UserCard } from '../userCard'
 import styles from './userList.module.scss'
-import { UserListProps } from './userList.types'
+import { UserListProps, TransformedUserData } from './userList.types'
 
 const UserList: FC<UserListProps> = ({ className, cardData }) => {
   const rootClassName = classNames(styles.root, className)
-  const [userData, setUserData] = useState([])
+  const [userData, setUserData] = useState<TransformedUserData[]>([])
 
   useEffect(() => {
     if (cardData && cardData.cardList) {
