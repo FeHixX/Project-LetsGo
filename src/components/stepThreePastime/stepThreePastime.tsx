@@ -50,6 +50,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
 }) => {
   const rootClassName = classNames(styles.root, className);
   const [formData, setFormData] = useState<FormData>(data);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     setFormData((prevData) => ({
@@ -59,6 +60,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
         description: country.description || ''
       }))
     }));
+    validateForm();
   }, [selectedCountries]);
 
   const handleArrayChange = (
@@ -77,9 +79,14 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       updatedArray[index] = updatedCountry;
     }
     setFormData({ ...formData, [field]: updatedArray });
+    validateForm();
   };
   
   const router = useRouter();
+  const validateForm = () => {
+    const isValid = formData.countryList.every(country => country.description.trim() !== '');
+    setIsFormValid(isValid);
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -165,7 +172,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
             </div>
           ))}
         </label>
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" className={styles.submitButton} disabled={!isFormValid}>
           Submit
         </button>
       </form>
