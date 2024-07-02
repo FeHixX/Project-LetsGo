@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import styles from './stepThreePastime.module.scss';
 import StepList from '../formNavigation/formNavigation';
+import { useRouter } from 'next/navigation';
 
 export interface StepThreePastimeProps {
   className?: string;
@@ -77,22 +78,24 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
     }
     setFormData({ ...formData, [field]: updatedArray });
   };
+  
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
+  
     const invalidCountries = formData.countryList.filter((country) => {
       return !selectedCountries.some((sc) => sc.name.rus === country.name);
     });
-
+  
     if (invalidCountries.length > 0) {
       alert('Наименование страны должно быть на русском языке из списка предложенных.');
       return;
     }
-
+  
     const startDate = formData.startDate.split('T')[0];
     const endDate = formData.endDate.split('T')[0];
-
+  
     const response = await fetch('https://lets-go-8s43.onrender.com/cards/', {
       method: 'POST',
       headers: {
@@ -100,7 +103,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       },
       body: JSON.stringify({ ...formData, startDate, endDate })
     });
-
+  
     if (!response.ok) {
       const data = await response.json();
       console.error(data);
@@ -110,6 +113,12 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       console.log(data);
       alert('Данные успешно отправлены!');
       updateData(data);
+  
+      if (data.id) {
+        localStorage.setItem('cardId', data.id);
+        console.log('Сохраненный ID карточки:', data.id);
+        router.push('/companions');
+      }
     }
   };
 

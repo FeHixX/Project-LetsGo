@@ -16,7 +16,7 @@ const GroupImage: FC<GroupImageProps> = ({
   return (
     <div className={rootClassName}>
       <Image
-        src={`${process.env.NODE_ENV === 'production' ? '/intern-pognali-1-6' : ''}/images/${userPhoto}`}
+        src={userPhoto} // Используем полный URL аватара
         width={285}
         height={285}
         quality={85}

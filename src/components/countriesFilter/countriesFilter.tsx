@@ -7,6 +7,7 @@ import axios from 'axios'
 import styles from './countriesFilter.module.scss'
 
 const continents = ['Европа', 'Азия', 'Америка', 'Острова']
+
 interface Country {
   name: { common: string; rus: string }
   flags: {
@@ -20,7 +21,7 @@ interface Country {
 const CountriesFilter: FC = () => {
   const [selectedContinent, setSelectedContinent] = useState('ЕВРОПА')
   const [countries, setCountries] = useState<Country[]>([])
-  const [lettersAndCountries, setLetterAndCountries] = useState([])
+  const [lettersAndCountries, setLettersAndCountries] = useState<{ [key: string]: Country[] }>({})
   const [selectedLetter, setSelectedLetter] = useState<string>('А')
   const [selectedCountries, setSelectedCountries] = useState<Country[]>([])
 
@@ -36,13 +37,9 @@ const CountriesFilter: FC = () => {
         const flattenedCountries = Object.values(
           response.data
         ).flat() as Country[]
-        const data = response.data
-        const countries = Object.entries(data).map((data) => ({
-          [data[0]]: data[1]
-        }))
-        setLetterAndCountries(countries)
+        const data = response.data as { [key: string]: Country[] }
+        setLettersAndCountries(data)
         setCountries(flattenedCountries)
-        console.log(countries)
       }
     }
 
@@ -50,31 +47,8 @@ const CountriesFilter: FC = () => {
   }, [])
 
   const letters = [
-    'А',
-    'Б',
-    'В',
-    'Г',
-    'Д',
-    'Е',
-    'З',
-    'И',
-    'К',
-    'Л',
-    'М',
-    'Н',
-    'О',
-    'П',
-    'Р',
-    'С',
-    'Т',
-    'У',
-    'Ф',
-    'Х',
-    'Ч',
-    'Ш',
-    'Э',
-    'Ю',
-    'Я'
+    'А', 'Б', 'В', 'Г', 'Д', 'Е', 'З', 'И', 'К', 'Л', 'М', 'Н', 'О',
+    'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ч', 'Ш', 'Э', 'Ю', 'Я'
   ]
 
   const filteredCountries = countries.filter((country) =>
@@ -83,28 +57,12 @@ const CountriesFilter: FC = () => {
 
   return (
     <div className={styles.root}>
-      <div
-        className={
-          active ? `${styles.filter} ${styles.activefilter}` : styles.filter
-        }
-      >
+      <div className={active ? `${styles.filter} ${styles.activefilter}` : styles.filter}>
         <div className={styles.filterList}>
-          <span
-            className={
-              active
-                ? `${styles.filterListTitle} ${styles.activeFilterListTitle}`
-                : styles.filterListTitle
-            }
-          >
+          <span className={active ? `${styles.filterListTitle} ${styles.activeFilterListTitle}` : styles.filterListTitle}>
             Фильтрация по странам:
           </span>
-          <ul
-            className={
-              active
-                ? `${styles.continents} ${styles.activecontinents}`
-                : styles.continents
-            }
-          >
+          <ul className={active ? `${styles.continents} ${styles.activecontinents}` : styles.continents}>
             {continents.map((continent) => (
               <li
                 key={continent}
@@ -118,20 +76,12 @@ const CountriesFilter: FC = () => {
         </div>
         <button
           onClick={() => setActive(!active)}
-          className={
-            active
-              ? `${styles.filterCloseButton} ${styles.filterButton}`
-              : `${styles.filterOpenButton} ${styles.filterButton}`
-          }
+          className={active ? `${styles.filterCloseButton} ${styles.filterButton}` : `${styles.filterOpenButton} ${styles.filterButton}`}
         >
-          <span
-            className={`${styles.filterButtonText} ${styles.filterOpenButtonText}`}
-          >
+          <span className={`${styles.filterButtonText} ${styles.filterOpenButtonText}`}>
             Показать все
           </span>
-          <span
-            className={`${styles.filterButtonText} ${styles.filterCloseButtonText}`}
-          >
+          <span className={`${styles.filterButtonText} ${styles.filterCloseButtonText}`}>
             Свернуть
           </span>
         </button>
@@ -139,18 +89,18 @@ const CountriesFilter: FC = () => {
       <div className={active ? styles.activecontainer : styles.container}>
         {isDesktop && (
           <div className={styles.wrapper}>
-            {/* {countries.map((item) => (
-              <div className={styles.countries} key={item.letter}>
-                <h4 className={styles.letter}>{item.letter}</h4>
+            {Object.entries(lettersAndCountries).map(([letter, countriesList]) => (
+              <div className={styles.countries} key={letter}>
+                <h4 className={styles.letter}>{letter}</h4>
                 <ul className={styles.list}>
-                  {item.countries.map((country) => (
-                    <li className={styles.country} key={country}>
-                      <span className={styles.countryText}>{country}</span>
+                  {countriesList.map((country) => (
+                    <li className={styles.country} key={country.name.common}>
+                      <span className={styles.countryText}>{country.name.rus}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            ))} */}
+            ))}
           </div>
         )}
         {(isTablet || isMobile) && (
@@ -179,7 +129,7 @@ const CountriesFilter: FC = () => {
           onClick={() => setActive(!active)}
           className={styles.bigCloseButton}
         >
-          <span className={styles.bigCloseButtonText}>Свенуть</span>
+          <span className={styles.bigCloseButtonText}>Свернуть</span>
         </button>
       </div>
     </div>

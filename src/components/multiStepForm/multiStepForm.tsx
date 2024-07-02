@@ -68,7 +68,7 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
   const updateActivities = (newData: Partial<FormData['activities']>) => {
     setFormData((prevData) => ({
       ...prevData,
-      activities: { ...prevData.activities, ...newData }
+      activities: { ...prevData.activities, ...newData } as FormData['activities']
     }));
   };
 
