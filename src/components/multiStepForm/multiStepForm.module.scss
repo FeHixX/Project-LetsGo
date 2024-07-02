@@ -1,16 +1,10 @@
-@use "@styles/func";
-@use "@styles/mixins";
-@use "@styles/variables";
-  
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
 .root {
 	display: flex;
 	flex-direction: column;
-	background-color: #AED0EB;
-	align-items: center;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	border-top-left-radius: 50px;
-	border-top-right-radius: 50px;
 
 	.multiStepFormTitle {
 		margin-bottom: 40px;
@@ -18,21 +12,38 @@
 	}
 
 	.multiStepForm {
-		display: flex;
-		flex-direction: column;
+		background-color: #aed0eb;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		border-top-left-radius: 50px;
+		border-top-right-radius: 50px;
 	}
 
 	.multiStepFormWrapper {
 		display: flex;
-    background: white;
-    border-radius: 50px;
-    padding: 30px;
+		background: white;
+		border-radius: 50px;
+		padding: 30px;
+	}
+}
+
+.user {
+	margin: -188px 0 0;
+	padding: 0 0 76px;
+
+	@include mixins.tablet {
+		margin: 0;
+		padding: 66px 0 61px;
+	}
+
+	@include mixins.tablet-small {
+		padding: 24px 0 32px;
 	}
 }
 
 .formHead {
 	display: flex;
-	justify-content: space-between
+	justify-content: space-between;
 }
 
 .formDescription {

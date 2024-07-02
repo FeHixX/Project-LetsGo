@@ -39,7 +39,13 @@ export const checkboxList: IconCheckboxItemI[] = [
   }
 ]
 
-const User: FC<UserProps> = ({ className }) => {
+const User: FC<UserProps> = ({
+  className,
+  // valueHashtags,
+  // valueTransport,
+  // onChangeHashtags,
+  // onChangeTransport
+}) => {
   const rootClassName = classNames(styles.root, className)
 
   return (
@@ -69,6 +75,8 @@ const User: FC<UserProps> = ({ className }) => {
                 maxLength={70}
                 placeholder="Коротко о себе в виде 5-8 хештэгов"
                 rows={1}
+                // value={valueHashtags}
+                // onChange={onChangeHashtags}
               />
             </fieldset>
             <div className={styles.load}>
@@ -79,7 +87,11 @@ const User: FC<UserProps> = ({ className }) => {
             </div>
             <fieldset className={styles.transport}>
               <legend className={styles.label}>Транспорт</legend>
-              <IconCheckbox items={checkboxList} />
+              <IconCheckbox
+                items={checkboxList}
+                // value={valueTransport}
+                // onChange={onChangeTransport}
+              />
             </fieldset>
           </form>
         </div>
