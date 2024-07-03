@@ -7,6 +7,9 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import PolygonNext from '@icons/polygon-next.svg';
+import Minus from '@icons/minus.svg';
+import Plus from '@icons/plus.svg';
+import IconCheckMark from '@icons/icon-check-mark.svg'
 
 import StepList from '../formNavigation/formNavigation';
 import styles from './stepOneDatesOfStay.module.scss';
@@ -100,8 +103,8 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
     <div className={rootClassName}>
       <div className={styles.formHead}>
         <div className={styles.formDescription}>
-          <h2>Шаг 1. Даты пребывания</h2>
-          <p>
+          <h2 className={styles.formTitle}>Шаг 1. Даты пребывания</h2>
+          <p className={styles.formSubtitle}>
             Укажите предпочтительное количество попутчиков, которых <br />
             вы хотели бы позвать в поездку, и ее предполагаемую длительность.
           </p>
@@ -110,42 +113,46 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
       </div>
       <div className={styles.inputGroup}>
         <div className={styles.inputCompanionCount}>
-          <label>
-            Ищу попутчиков:
+          <label className={styles.inputCompanionCountWrapper}>
+            ИЩУ ПОПУТЧИКОВ:
             <div className={styles.counter}>
+            <div className={styles.counterWrapper}>
               <button
                 onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
                 disabled={companionCount <= 1}
               >
-                -
+                <Minus />
               </button>
               <span>{companionCount}</span>
               <button
                 onClick={() => setCompanionCount(Math.min(10, companionCount + 1))}
                 disabled={companionCount >= 10}
               >
-                +
+                <Plus />
               </button>
-              <span>чел.</span>
+              </div>
+              <span>ЧЕЛ.</span>
             </div>
           </label>
-          <label>
-            Длительность:
+          <label className={styles.inputDurationCountWrapper}>
+            ДЛИТЕЛЬНОСТЬ:
             <div className={styles.counter}>
+              <div className={styles.counterWrapper}>
               <button
                 onClick={() => setDuration(Math.max(2, duration - 1))}
                 disabled={duration <= 2}
               >
-                -
+                <Minus />
               </button>
               <span>{duration}</span>
               <button
                 onClick={() => setDuration(Math.min(31, duration + 1))}
                 disabled={duration >= 31}
               >
-                +
+                <Plus />
               </button>
-              <span>дн.</span>
+              </div>
+              <span>ДН.</span>
             </div>
           </label>
         </div>
@@ -155,7 +162,10 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
             checked={children}
             onChange={() => setChildren(!children)}
           />
-          Можно с детьми
+        <span className={styles.mark}>
+          <IconCheckMark />
+        </span>
+          МОЖНО С ДЕТЬМИ
         </label>
       </div>
       <div className={styles.dateWrapper}>

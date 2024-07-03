@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, ChangeEvent, useEffect, useRef, useState } from 'react'
 import useResponsive from '@/shared/hooks/useResponsive'
 import { Button, IconCheckbox, SliderRange } from '@/ui'
 import classNames from 'classnames'
@@ -31,7 +31,12 @@ const foodsList = [
 
 const Filters: FC<FiltersProps> = ({ className }) => {
   const rootClassName = classNames(styles.root, className)
+  const [selectedTransport, setSelectedTransport] = useState<string[]>([]);
 
+  const handleTransportChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSelectedTransport(prev => prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]);
+  };
   const [accordionStates, setAccordionStates] = useState<AccordionProps>({
     hobbies: false,
     music: false,
@@ -119,8 +124,13 @@ const Filters: FC<FiltersProps> = ({ className }) => {
           <div
             className={styles.wrapper}
             data-accordion={accordionStates.transport}
-          >
-            <IconCheckbox className={styles.transport} items={checkboxList} />
+            >
+            <IconCheckbox 
+              className={styles.transport} 
+              items={checkboxList} 
+              value={selectedTransport}
+              onChange={handleTransportChange}
+            />
           </div>
         </fieldset>
         <fieldset

@@ -16,18 +16,21 @@ import { UserListProps, TransformedUserData } from './userList.types'
 const UserList: FC<UserListProps> = ({ className, cardData }) => {
   const rootClassName = classNames(styles.root, className)
   const [userData, setUserData] = useState<TransformedUserData[]>([])
+  const [visibleCards, setVisibleCards] = useState(4)
+  const [currentPage, setCurrentPage] = useState(1)
+  const cardsPerPage = 4
 
   useEffect(() => {
     if (cardData && cardData.cardList) {
       const transformedData = cardData.cardList.map(card => ({
         name: card.name,
-        photo: card.avatarUrl, // Используем полный URL аватара
+        photo: card.avatarUrl,
         online: false,
         tags: card.hashTags.join(' '),
         likes: 0,
         countries: card.countryList.map(country => ({
           name: country.countryData.name.rus,
-          img: country.countryData.flags.png // Используем полный URL флага
+          img: country.countryData.flags.png
         })),
         transport: [
           { icon: <IconPlane />, checked: card.transport.includes('plane') },
@@ -41,23 +44,42 @@ const UserList: FC<UserListProps> = ({ className, cardData }) => {
     }
   }, [cardData])
 
+  const handleShowMore = () => {
+    setVisibleCards(prevVisible => prevVisible + 4)
+  }
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+  }
+
+  const indexOfLastCard = currentPage * cardsPerPage
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage
+  const currentCards = userData.slice(indexOfFirstCard, indexOfLastCard)
+
   return (
     <section className={rootClassName}>
       <h2 className="visually-hidden">Список попутчиков</h2>
       <Wrapper className={styles.wrapper}>
         <Filters className={styles.filters} />
         <ul className={styles.list}>
-          {userData.map((item, index) => (
+          {currentCards.map((item, index) => (
             <li key={index}>
               <UserCard item={item} />
             </li>
           ))}
         </ul>
-        <button className={styles.button} type="button" data-button="show">
-          <IconPlus />
-          Показать еще
-        </button>
-        <Pagination className={styles.pagination} />
+        {visibleCards < userData.length && (
+          <button className={styles.button} type="button" onClick={handleShowMore}>
+            <IconPlus />
+            Показать еще
+          </button>
+        )}
+        <Pagination 
+          className={styles.pagination} 
+          currentPage={currentPage}
+          totalPages={Math.ceil(userData.length / cardsPerPage)}
+          onPageChange={handlePageChange}
+        />
       </Wrapper>
     </section>
   )
