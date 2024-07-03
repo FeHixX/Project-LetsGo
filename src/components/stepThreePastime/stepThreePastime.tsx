@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, FormEvent, useState, useEffect } from 'react';
 import PolygonPrev from '@icons/polygon-prev.svg';
+import PolygonNext from '@icons/polygon-next.svg';
 import classNames from 'classnames';
 import Image from 'next/image';
 import styles from './stepThreePastime.module.scss';
@@ -178,7 +179,8 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
             ))}
           </label>
           <button type="submit" className={styles.submitButton} disabled={!isFormValid}>
-            Submit
+            Отправить
+            <PolygonNext />
           </button>
         </form>
         <button
