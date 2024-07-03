@@ -1,25 +1,31 @@
-import { FC } from 'react'
-import classNames from 'classnames'
+import { FC, ChangeEvent } from 'react';
+import classNames from 'classnames';
 
-import styles from './iconCheckbox.module.scss'
-import { IconCheckboxProps } from './iconCheckbox.types'
+import styles from './iconCheckbox.module.scss';
+import { IconCheckboxProps, IconCheckboxItemI } from './iconCheckbox.types';
 
-const IconCheckbox: FC<IconCheckboxProps> = ({ items, className }) => {
-  const rootClassName = classNames(styles.root, className)
+const IconCheckbox: FC<IconCheckboxProps> = ({ className, items, value, onChange }) => {
+  const rootClassName = classNames(styles.root, className);
 
   return (
     <ul className={rootClassName}>
-      {items.map(({ label, value, name, icon }) => (
-        <li className={styles.item} key={value}>
+      {items.map(({ label, value: itemValue, name, icon }) => (
+        <li className={styles.item} key={itemValue}>
           <label>
             <span className="visually-hidden">{label}</span>
-            <input type="checkbox" value={value} name={name} />
+            <input
+              type="checkbox"
+              name={name}
+              value={itemValue}
+              checked={value.includes(itemValue)}
+              onChange={onChange}
+            />
             {icon}
           </label>
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};
 
-export default IconCheckbox
+export default IconCheckbox;

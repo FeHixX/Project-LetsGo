@@ -8,7 +8,9 @@ const Textarea: FC<TextareaProps> = ({
   name,
   maxLength,
   placeholder,
-  rows
+  rows,
+  value,
+  onChange
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -31,6 +33,8 @@ const Textarea: FC<TextareaProps> = ({
         placeholder={placeholder}
         rows={rows}
         onInput={adjustHeight}
+        value={value}
+        onChange={onChange}
       />
     </label>
   )

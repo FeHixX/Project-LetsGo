@@ -1,16 +1,16 @@
-import { FC } from 'react'
-import Image from 'next/image'
-import { IconCheckbox, Textarea, Wrapper } from '@/ui'
-import { IconCheckboxItemI } from '@/ui/iconCheckbox/iconCheckbox.types'
-import IconBicycle from '@icons/icon-bicycle.svg'
-import IconBus from '@icons/icon-bus.svg'
-import IconPlane from '@icons/icon-plane.svg'
-import IconRun from '@icons/icon-run.svg'
-import classNames from 'classnames'
+import React, { FC, ChangeEvent } from 'react';
+import Image from 'next/image';
+import { IconCheckbox, Textarea, Wrapper } from '@/ui';
+import { IconCheckboxItemI } from '@/ui/iconCheckbox/iconCheckbox.types';
+import IconBicycle from '@icons/icon-bicycle.svg';
+import IconBus from '@icons/icon-bus.svg';
+import IconPlane from '@icons/icon-plane.svg';
+import IconRun from '@icons/icon-run.svg';
+import classNames from 'classnames';
 
-import { Level } from '../level'
-import styles from './user.module.scss'
-import { UserProps } from './user.types'
+import { Level } from '../level';
+import styles from './user.module.scss';
+import { UserProps } from './user.types';
 
 export const checkboxList: IconCheckboxItemI[] = [
   {
@@ -37,16 +37,28 @@ export const checkboxList: IconCheckboxItemI[] = [
     name: 'transport',
     icon: <IconRun />
   }
-]
+];
 
 const User: FC<UserProps> = ({
   className,
-  // valueHashtags,
-  // valueTransport,
-  // onChangeHashtags,
-  // onChangeTransport
+  valueHashtags,
+  valueTransport,
+  onChangeHashtags,
+  onChangeTransport
 }) => {
-  const rootClassName = classNames(styles.root, className)
+  const rootClassName = classNames(styles.root, className);
+
+  const handleHashtagChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (onChangeHashtags) {
+      onChangeHashtags(e as unknown as ChangeEvent<HTMLInputElement>);
+    }
+  };
+
+  const handleTransportChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (onChangeTransport) {
+      onChangeTransport(e);
+    }
+  };
 
   return (
     <section className={rootClassName}>
@@ -75,8 +87,8 @@ const User: FC<UserProps> = ({
                 maxLength={70}
                 placeholder="Коротко о себе в виде 5-8 хештэгов"
                 rows={1}
-                // value={valueHashtags}
-                // onChange={onChangeHashtags}
+                value={valueHashtags}
+                onChange={handleHashtagChange}
               />
             </fieldset>
             <div className={styles.load}>
@@ -89,15 +101,15 @@ const User: FC<UserProps> = ({
               <legend className={styles.label}>Транспорт</legend>
               <IconCheckbox
                 items={checkboxList}
-                // value={valueTransport}
-                // onChange={onChangeTransport}
+                value={valueTransport}
+                onChange={handleTransportChange}
               />
             </fieldset>
           </form>
         </div>
       </Wrapper>
     </section>
-  )
-}
+  );
+};
 
-export default User
+export default User;
