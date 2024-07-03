@@ -27,13 +27,13 @@ export const checkboxList: IconCheckboxItemI[] = [
   },
   {
     label: 'Велосипед',
-    value: 'bicycle',
+    value: 'bike',
     name: 'transport',
     icon: <IconBicycle />
   },
   {
     label: 'Пешком',
-    value: 'run',
+    value: 'walk',
     name: 'transport',
     icon: <IconRun />
   }
