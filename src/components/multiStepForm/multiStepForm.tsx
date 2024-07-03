@@ -92,10 +92,10 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
         valueTransport={formData.transport.join(', ')}
         onChangeTransport={updateTransport}
       />
-      <div className={styles.multiStepForm}>
+      <div className={styles.form}>
         <Wrapper>
-          <h2 className={styles.multiStepFormTitle}>Добавить план:</h2>
-          <div className={styles.multiStepFormWrapper}>
+          <h2 className={styles.title}>Добавить план:</h2>
+          <div className={styles.wrapper}>
             {step === 1 && (
               <StepOneDatesOfStay
                 data={formData.stayDates}
