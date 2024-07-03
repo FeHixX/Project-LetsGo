@@ -1,10 +1,9 @@
-import { FC, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 import classNames from 'classnames';
-
 import styles from './iconCheckbox.module.scss';
-import { IconCheckboxProps, IconCheckboxItemI } from './iconCheckbox.types';
+import { IconCheckboxProps } from './iconCheckbox.types';
 
-const IconCheckbox: FC<IconCheckboxProps> = ({ className, items, value, onChange }) => {
+const IconCheckbox: FC<IconCheckboxProps> = ({ className, items, value = [], onChange }) => {
   const rootClassName = classNames(styles.root, className);
 
   return (
