@@ -42,7 +42,7 @@ export const checkboxList: IconCheckboxItemI[] = [
 const User: FC<UserProps> = ({
   className,
   valueHashtags,
-  valueTransport,
+  valueTransport = '',
   onChangeHashtags,
   onChangeTransport
 }) => {
@@ -87,7 +87,7 @@ const User: FC<UserProps> = ({
                 maxLength={70}
                 placeholder="Коротко о себе в виде 5-8 хештэгов"
                 rows={1}
-                value={valueHashtags}
+                value={valueHashtags || ''}
                 onChange={handleHashtagChange}
               />
             </fieldset>
@@ -101,7 +101,7 @@ const User: FC<UserProps> = ({
               <legend className={styles.label}>Транспорт</legend>
               <IconCheckbox
                 items={checkboxList}
-                value={valueTransport}
+                value={valueTransport.split(', ')}
                 onChange={handleTransportChange}
               />
             </fieldset>

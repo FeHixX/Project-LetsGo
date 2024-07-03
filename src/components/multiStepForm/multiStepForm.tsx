@@ -1,72 +1,72 @@
-import React, { ChangeEvent, FC, useState } from 'react'
-import { User } from '@/modules/user'
-import { Wrapper } from '@/ui'
-import classNames from 'classnames'
+import React, { ChangeEvent, FC, useState } from 'react';
+import { User } from '@/modules/user';
+import { Wrapper } from '@/ui';
+import classNames from 'classnames';
 
-import StepOneDatesOfStay from '../stepOneDatesOfStay/stepOneDatesOfStay'
-import StepThreePastime from '../stepThreePastime/stepThreePastime'
-import StepTwoItinerary from '../stepTwoItinerary/stepTwoItinerary'
-import styles from './multiStepForm.module.scss'
+import StepOneDatesOfStay from '../stepOneDatesOfStay/stepOneDatesOfStay';
+import StepThreePastime from '../stepThreePastime/stepThreePastime';
+import StepTwoItinerary from '../stepTwoItinerary/stepTwoItinerary';
+import styles from './multiStepForm.module.scss';
 
 interface Country {
-  name: { common: string; rus: string }
+  name: { common: string; rus: string };
   flags: {
-    png: string
-    svg: string
-  }
-  continent: string[]
-  island: boolean
-  description?: string
+    png: string;
+    svg: string;
+  };
+  continent: string[];
+  island: boolean;
+  description?: string;
 }
 
 interface FormData {
   stayDates: {
-    numPeople: number
-    duration: number
-    dates: string[]
-    children: boolean
-  }
-  route: Country[]
+    numPeople: number;
+    duration: number;
+    dates: string[];
+    children: boolean;
+  };
+  route: Country[];
   activities: {
-    [key: string]: string
-  }
-  hashTags: string[]
-  transport: string[]
+    [key: string]: string;
+  };
+  hashTags: string[];
+  transport: string[];
 }
 
 const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
-  const rootClassName = classNames(styles.root, className)
-  const [step, setStep] = useState(1)
+  const rootClassName = classNames(styles.root, className);
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     stayDates: { numPeople: 0, duration: 0, dates: ['', ''], children: false },
     route: [],
     activities: {},
     hashTags: [],
     transport: []
-  })
+  });
 
-  const nextStep = () => setStep((prevStep) => prevStep + 1)
-  const prevStep = () => setStep((prevStep) => prevStep - 1)
+  const nextStep = () => setStep((prevStep) => prevStep + 1);
+  const prevStep = () => setStep((prevStep) => prevStep - 1);
 
   const updateStayDates = (newData: Partial<FormData['stayDates']>) => {
     setFormData((prevData) => ({
       ...prevData,
       stayDates: { ...prevData.stayDates, ...newData }
-    }))
-  }
+    }));
+  };
 
   const updateRoute = (newRoute: { countries: string[] }) => {
     const updatedCountries = newRoute.countries.map((rusName) => {
-      const country = formData.route.find((c) => c.name.rus === rusName)
+      const country = formData.route.find((c) => c.name.rus === rusName);
       return {
         name: { common: country ? country.name.common : '', rus: rusName },
         flags: { png: '', svg: '' },
         continent: [],
         island: false
-      }
-    })
-    setFormData((prevData) => ({ ...prevData, route: updatedCountries }))
-  }
+      };
+    });
+    setFormData((prevData) => ({ ...prevData, route: updatedCountries }));
+  };
 
   const updateActivities = (newData: Partial<FormData['activities']>) => {
     setFormData((prevData) => ({
@@ -75,22 +75,22 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
         ...prevData.activities,
         ...newData
       } as FormData['activities']
-    }))
-  }
+    }));
+  };
 
   const updateHashTags = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => ({
       ...prevData,
       hashTags: e.target.value.split(',').map((tag) => tag.trim())
-    }))
-  }
+    }));
+  };
 
   const updateTransport = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => ({
       ...prevData,
       transport: e.target.value.split(',').map((transport) => transport.trim())
-    }))
-  }
+    }));
+  };
 
   return (
     <section className={rootClassName}>
@@ -145,7 +145,7 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
         </Wrapper>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default MultiStepForm
+export default MultiStepForm;
