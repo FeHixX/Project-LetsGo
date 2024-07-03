@@ -1,1 +1,1 @@
-export { default as stepThreePastime } from './stepThreePastime'
+export { default as StepThreePastime } from './stepThreePastime'

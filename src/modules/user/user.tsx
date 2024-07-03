@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent } from 'react';
+import { FC, ChangeEvent } from 'react';
 import Image from 'next/image';
 import { IconCheckbox, Textarea, Wrapper } from '@/ui';
 import { IconCheckboxItemI } from '@/ui/iconCheckbox/iconCheckbox.types';
