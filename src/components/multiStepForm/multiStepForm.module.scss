@@ -6,25 +6,33 @@
 	display: flex;
 	flex-direction: column;
 
-	.multiStepFormTitle {
-		margin-bottom: 40px;
-		padding-left: 20px;
+	.title {
+		margin-bottom: 54px;
+		padding-left: 69px;
+		font-weight: 700;
+		font-size: 36px;
+		line-height: 100%;
+		color: var(--color-catalina-blue);
 	}
 
-	.multiStepForm {
-		background-color: #aed0eb;
-		padding-top: 20px;
-		padding-bottom: 20px;
-		border-top-left-radius: 50px;
-		border-top-right-radius: 50px;
+	.form {
+		background-color: var(--color-pale-cornflower-blue-2);
+		border-radius: 56px 56px 0 0;
+		padding: 55px 0 124px;
 	}
 
-	.multiStepFormWrapper {
+	.wrapper {
 		display: flex;
-		background: white;
-		border-radius: 50px;
-		padding: 30px;
+		background: var(--color-white-default);
+		border-radius: 60px;
+		padding: 101px 30px 106px;
 		justify-content: center;
+	}
+
+	@include mixins.tablet {
+		.title {
+			font-size: 24px;
+		}
 	}
 }
 

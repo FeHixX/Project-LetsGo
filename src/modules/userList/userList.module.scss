@@ -5,10 +5,10 @@
 .root {
   display: flex;
   flex-direction: column;
-  padding: 48px 0 119px;
+  padding: 48px 0 79px;
 
   @include mixins.tablet {
-    padding: 43px 0 102px;
+    padding: 43px 0 62px;
   }
 
   @include mixins.tablet-small {

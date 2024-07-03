@@ -4,14 +4,5 @@
 
 .root {
   width: 100%;
-  padding: 0 0 72px;
   background-color: var(--color-solitude);
-
-  @include mixins.tablet {
-    padding: 0 0 63px;
-  }
-
-  @include mixins.tablet-small {
-    padding: 0 0 43px;
-  }
 }

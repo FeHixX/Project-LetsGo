@@ -1,34 +1,37 @@
-@use "@styles/func";
-@use "@styles/mixins";
-@use "@styles/variables";
-  
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
+
 .root {
-	
   .list {
-    list-style-type: none;
-    padding: 0;
-  
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0;
+
     li {
-      font-size: 1.2rem;
-      margin: 10px 0;
       position: relative;
-      padding-left: 20px;
-  
+      padding-left: 53px;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 120%;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.6;
+
       &::before {
-        content: '•';
+        content: '';
+        top: 6px;
+        width: 7px;
+        height: 6px;
         position: absolute;
         left: 0;
-        color: lightgray;
+        background-color: var(--color-catalina-blue);
+        border-radius: 50%;
       }
     }
-  
+
     .active {
-      font-weight: bold;
-  
-      &::before {
-        color: #1a1a1a; /* Dark blue color */
-      }
+      opacity: 1;
     }
   }
-
 }
