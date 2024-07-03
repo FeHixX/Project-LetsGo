@@ -29,7 +29,7 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
   const rootClassName = classNames(styles.root, className)
 
   const handleNext = () => {
-    updateCountries({ countries: selectedCountries.map(country => country.name.rus) })
+    updateCountries({ countries: selectedCountries })
     nextStep()
   }
 

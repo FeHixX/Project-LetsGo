@@ -55,17 +55,8 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
     }));
   };
 
-  const updateRoute = (newRoute: { countries: string[] }) => {
-    const updatedCountries = newRoute.countries.map((rusName) => {
-      const country = formData.route.find((c) => c.name.rus === rusName);
-      return {
-        name: { common: country ? country.name.common : '', rus: rusName },
-        flags: { png: '', svg: '' },
-        continent: [],
-        island: false
-      };
-    });
-    setFormData((prevData) => ({ ...prevData, route: updatedCountries }));
+  const updateRoute = (newRoute: { countries: Country[] }) => {
+    setFormData((prevData) => ({ ...prevData, route: newRoute.countries }));
   };
 
   const updateActivities = (newData: Partial<FormData['activities']>) => {
@@ -124,22 +115,22 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
             )}
             {step === 3 && (
               <StepThreePastime
-                data={{
-                  companionCount: formData.stayDates.numPeople,
-                  children: formData.stayDates.children,
-                  startDate: formData.stayDates.dates[0],
-                  endDate: formData.stayDates.dates[1],
-                  countryList: formData.route.map((country) => ({
-                    name: country.name.rus,
-                    description: country.description || ''
-                  })),
-                  hashTags: formData.hashTags,
-                  transport: formData.transport
-                }}
-                selectedCountries={formData.route}
-                updateData={updateActivities}
-                prevStep={prevStep}
-              />
+  data={{
+    companionCount: formData.stayDates.numPeople,
+    children: formData.stayDates.children,
+    startDate: formData.stayDates.dates[0],
+    endDate: formData.stayDates.dates[1],
+    countryList: formData.route.map((country) => ({
+      name: country.name.rus,
+      description: country.description || ''
+    })),
+    hashTags: formData.hashTags,
+    transport: formData.transport
+  }}
+  selectedCountries={formData.route}
+  updateData={updateActivities}
+  prevStep={prevStep}
+/>
             )}
           </div>
         </Wrapper>
