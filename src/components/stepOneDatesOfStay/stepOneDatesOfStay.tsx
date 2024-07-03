@@ -176,7 +176,7 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
       </div>
       <div className={styles.buttons}>
         <button onClick={handleNext}>
-          Далее
+          Следующий шаг
           <PolygonNext />
         </button>
       </div>
