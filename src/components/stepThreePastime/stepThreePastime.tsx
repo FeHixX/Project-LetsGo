@@ -157,16 +157,16 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
             Country List:
             {formData.countryList.map((country, index) => (
               <div key={country.name}>
-<div className={styles.countryInfo}>
-  <Image
-    className={styles.countryFlags}
-    src={selectedCountries.find(c => c.name.rus === country.name)?.flags.png || ''}
-    alt={`${country.name} flag`}
-    width={70}
-    height={47}
-  />
-  <div className={styles.countryName}>{country.name}</div>
-</div>
+                <div className={styles.countryInfo}>
+                  <Image
+                    className={styles.countryFlags}
+                    src={selectedCountries.find(c => c.name.rus === country.name)?.flags.png || ''}
+                    alt={`${country.name} flag`}
+                    width={70}
+                    height={47}
+                  />
+                  <div className={styles.countryName}>{country.name}</div>
+                </div>
                 <input
                   type="text"
                   placeholder="Description"

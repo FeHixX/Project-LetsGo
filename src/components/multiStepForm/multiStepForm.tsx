@@ -45,22 +45,22 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
     transport: []
   });
 
-  const nextStep = () => setStep((prevStep) => prevStep + 1);
-  const prevStep = () => setStep((prevStep) => prevStep - 1);
+  const nextStep = () => setStep(prevStep => prevStep + 1);
+  const prevStep = () => setStep(prevStep => prevStep - 1);
 
   const updateStayDates = (newData: Partial<FormData['stayDates']>) => {
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
       stayDates: { ...prevData.stayDates, ...newData }
     }));
   };
 
   const updateRoute = (newRoute: { countries: Country[] }) => {
-    setFormData((prevData) => ({ ...prevData, route: newRoute.countries }));
+    setFormData(prevData => ({ ...prevData, route: newRoute.countries }));
   };
 
   const updateActivities = (newData: Partial<FormData['activities']>) => {
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
       activities: {
         ...prevData.activities,
@@ -70,16 +70,16 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
   };
 
   const updateHashTags = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
-      hashTags: e.target.value.split(',').map((tag) => tag.trim())
+      hashTags: e.target.value.split(',').map(tag => tag.trim())
     }));
   };
 
   const updateTransport = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
-      transport: e.target.value.split(',').map((transport) => transport.trim())
+      transport: e.target.value.split(',').map(transport => transport.trim())
     }));
   };
 
@@ -106,7 +106,7 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
             {step === 2 && (
               <StepTwoItinerary
                 data={{
-                  countries: formData.route.map((country) => country.name.rus)
+                  countries: formData.route.map(country => country.name.rus)
                 }}
                 updateCountries={updateRoute}
                 nextStep={nextStep}
@@ -115,22 +115,22 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
             )}
             {step === 3 && (
               <StepThreePastime
-  data={{
-    companionCount: formData.stayDates.numPeople,
-    children: formData.stayDates.children,
-    startDate: formData.stayDates.dates[0],
-    endDate: formData.stayDates.dates[1],
-    countryList: formData.route.map((country) => ({
-      name: country.name.rus,
-      description: country.description || ''
-    })),
-    hashTags: formData.hashTags,
-    transport: formData.transport
-  }}
-  selectedCountries={formData.route}
-  updateData={updateActivities}
-  prevStep={prevStep}
-/>
+                data={{
+                  companionCount: formData.stayDates.numPeople,
+                  children: formData.stayDates.children,
+                  startDate: formData.stayDates.dates[0],
+                  endDate: formData.stayDates.dates[1],
+                  countryList: formData.route.map(country => ({
+                    name: country.name.rus,
+                    description: country.description || ''
+                  })),
+                  hashTags: formData.hashTags,
+                  transport: formData.transport
+                }}
+                selectedCountries={formData.route}
+                updateData={updateActivities}
+                prevStep={prevStep}
+              />
             )}
           </div>
         </Wrapper>
