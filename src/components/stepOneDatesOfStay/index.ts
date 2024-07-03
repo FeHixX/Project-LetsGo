@@ -1,1 +1,1 @@
-export { default as stepOneDatesOfStay } from './stepOneDatesOfStay'
+export { default as StepOneDatesOfStay } from './stepOneDatesOfStay'

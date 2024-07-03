@@ -1,10 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import { ReactNode, ChangeEvent } from 'react';
 
 export interface IconCheckboxItemI {
   label: string;
   value: string;
   name: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
 }
 
 export interface IconCheckboxProps {

@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent } from 'react';
+import { FC, ChangeEvent } from 'react';
 import classNames from 'classnames';
 import styles from './iconCheckbox.module.scss';
 import { IconCheckboxProps } from './iconCheckbox.types';

@@ -1,1 +1,1 @@
-export { default as stepTwoItinerary } from './stepTwoItinerary'
+export { default as StepTwoItinerary } from './stepTwoItinerary'
