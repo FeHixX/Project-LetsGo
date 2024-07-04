@@ -120,6 +120,19 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
       </div>
       <div className={styles.inputGroup}>
         <div className={styles.inputCompanionCount}>
+        {isMobile && (
+            <label>
+              <input
+                type="checkbox"
+                checked={children}
+                onChange={() => setChildren(!children)}
+              />
+              <span className={styles.mark}>
+                <IconCheckMark />
+              </span>
+              МОЖНО С ДЕТЬМИ
+            </label>
+          )}
           <label className={styles.inputCompanionCountWrapper}>
             ИЩУ ПОПУТЧИКОВ:
             <div className={styles.counter}>
@@ -141,19 +154,7 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
               <span>ЧЕЛ.</span>
             </div>
           </label>
-          {isMobile && (
-            <label>
-              <input
-                type="checkbox"
-                checked={children}
-                onChange={() => setChildren(!children)}
-              />
-              <span className={styles.mark}>
-                <IconCheckMark />
-              </span>
-              МОЖНО С ДЕТЬМИ
-            </label>
-          )}
+
           <label className={styles.inputDurationCountWrapper}>
             ДЛИТЕЛЬНОСТЬ:
             <div className={styles.counter}>
@@ -186,7 +187,6 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
             <span className={styles.mark}>
               <IconCheckMark />
             </span>
-
           </label>
         )}
       </div>

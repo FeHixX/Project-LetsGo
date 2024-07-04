@@ -6,6 +6,8 @@
 	display: flex;
 	flex-direction: column;
 
+
+
 	.title {
 		margin-bottom: 54px;
 		padding-left: 69px;
@@ -40,6 +42,8 @@
 		@include mixins.tablet {
 			padding: 110px 30px 106px;
 			border-radius: 30px;
+			margin-left: 35px;
+			margin-right: 35px;
 	}
 	}
 }
