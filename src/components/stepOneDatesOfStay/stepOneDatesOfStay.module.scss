@@ -15,6 +15,7 @@
       border: none;
       background: none;
       font-size: 18px;
+      padding-bottom: 54px;
   
       h2 {
         color: var(--color-catalina-blue);
@@ -93,8 +94,29 @@
       border-bottom: 1px solid #dcdcdc; 
     }
 
+    .react-datepicker__day-names {
+      display: flex;
+    }
+
+    .react-datepicker__day-name {
+      width: 138px;
+      display: flex;
+      padding-left: 20px;
+
+      @media (max-width: 1300px) {
+        width: 115px;
+      }
+
+      @media (max-width: 1024px) {
+        width: 86px;
+      }
+
+      @media (max-width: 768px) {
+        width: 20px;
+      }
+    }
+
   
-    .react-datepicker__day-name,
     .react-datepicker__day,
     .react-datepicker__time-name {
       width: 143px;
@@ -153,6 +175,7 @@
     .inputCompanionCountWrapper,
     .inputDurationCountWrapper {
       margin-bottom: 20px;
+      color: #1D2E5B;
     }
   
     label:last-child {
@@ -162,12 +185,12 @@
   }
 
   .inputGroup {
-    padding-top: 20px;
+    padding-top: 35px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 24px;
 
     label {
       display: flex;
@@ -203,9 +226,14 @@
     justify-content: center;
   }
   
-  .inputCompanionCountWrapper{
+  .inputCompanionCountWrapper {
     gap: 29px;
-    
+    color: #1D2E5B;
+  }
+
+  .inputDurationCountWrapper{
+    gap: 56px;
+    color: #1D2E5B;
   }
 
   .inputCompanions {
@@ -220,8 +248,8 @@
     border-radius: 3px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 17px;
+    padding-bottom: 17px;
     gap: 20px;
     border-radius: 3px;
     align-items: center;
@@ -232,7 +260,7 @@
     align-items: flex-end;
     cursor: pointer;
     transition: color variables.$transition;
-    gap: 13px;
+    gap: 21px;
 
     &:hover {
       color: rgb(0 0 0 / 60%);
@@ -275,28 +303,57 @@
 
 }
 
+.inputCompanionCount {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.inputChildrenWrapper {
+  padding-top: 15px;
+  color: #1D2E5B;
+  font-size: 20px;
+  letter-spacing: 2.4px;
+  position: relative;
+  width: 239px;
+}
+
+.inputChildrenWrapper {
+  
+}
+
+.inputChildrenWrapper::after {
+  content: "МОЖНО С ДЕТЬМИ";
+  position: absolute;
+  top: 65%;
+  left: 19%;
+  transform: translateY(-50%);
+  margin-left: 10px;
+  white-space: nowrap;
+  color: #1D2E5B;
+}
 
 
 .formButton {
   border-radius: 20px;
   background-color: #a8d2f4;
   display: flex;
-  max-width: 286px;
-  gap: 20px;
+  max-width: 285px;
+  gap: 16px;
   font-size: 24px;
   color: var(--basic_blue_light, #1d2e5b);
   font-weight: 700;
   white-space: nowrap;
   line-height: 100%;
-  padding: 29px 36px;
+  padding: 28px 35px;
 }
 
 
 .formHead {
   display: flex;
-  justify-content: space-between;
   padding-bottom: 51px;
   border-bottom: 1px solid var(--color-light-grayish-blue);
+  gap: 115px;
 }
 
 .formDescription {
@@ -307,6 +364,7 @@
 
 .formTitle {
   font-size: 36px;
+  color: #1D2E5B;
 }
 
 .formSubtitle {
@@ -322,8 +380,8 @@
   align-items: center;
   align-self: flex-start;
   border: 1px solid rgba(203, 206, 217, 1);
-  width: 24px;
-  height: 24px;
+  width: 35px;
+  height: 35px;
   background-color: var(--color-white-default);
   border-radius: 4px;
   transition: background-color variables.$transition;
@@ -354,12 +412,12 @@
   }
 
   @include mixins.tablet-small {
-    width: 18px;
-    height: 18px;
+    width: 35px;
+    height: 35px;
 
     svg {
-      width: 9px;
-      height: 9px;
+      width: 11px;
+      height: 14px;
     }
   }
 }
