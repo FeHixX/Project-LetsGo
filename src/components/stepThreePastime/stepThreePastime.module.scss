@@ -4,6 +4,8 @@
 
 .root {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .formHead {
@@ -21,6 +23,32 @@
 
 .formButton {
   border-radius: 20px;
+  display: flex;
+  max-width: 286px;
+  gap: 20px;
+  font-size: 24px;
+  color: var(--basic_blue_light, #1d2e5b);
+  font-weight: 700;
+  white-space: nowrap;
+  line-height: 100%;
+  padding: 29px 36px;
+}
+
+.formButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formFinalStep {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.submitButton {
+  border-radius: 20px;
+  background-color: #a8d2f4;
   display: flex;
   max-width: 286px;
   gap: 20px;
