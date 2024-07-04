@@ -3,10 +3,19 @@
 @use '@styles/variables';
 
 .root {
+
+  @media (max-width: 1023px) {
+		display: none;
+	}
+
   .list {
     display: flex;
     flex-direction: column;
     gap: 20px 0;
+
+    @media (max-width: 1023px) {
+      flex-direction: row;
+    }
 
     li {
       position: relative;

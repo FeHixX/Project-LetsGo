@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { addMonths } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
@@ -9,7 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import PolygonNext from '@icons/polygon-next.svg';
 import Minus from '@icons/minus.svg';
 import Plus from '@icons/plus.svg';
-import IconCheckMark from '@icons/icon-check-mark.svg'
+import IconCheckMark from '@icons/icon-check-mark.svg';
 
 import StepList from '../formNavigation/formNavigation';
 import styles from './stepOneDatesOfStay.module.scss';
@@ -51,8 +51,15 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
   const [companionCount, setCompanionCount] = useState<number>(1);
   const [duration, setDuration] = useState<number>(2);
   const [children, setChildren] = useState<boolean>(data.children);
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 1024);
   const today = new Date();
   const maxDate = addMonths(today, 1);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleNext = () => {
     const formatDateToISOString = (date: Date | null) => {
@@ -116,57 +123,72 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
           <label className={styles.inputCompanionCountWrapper}>
             ИЩУ ПОПУТЧИКОВ:
             <div className={styles.counter}>
-            <div className={styles.counterWrapper}>
-              <button
-                onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
-                disabled={companionCount <= 1}
-              >
-                <Minus />
-              </button>
-              <span>{companionCount}</span>
-              <button
-                onClick={() => setCompanionCount(Math.min(10, companionCount + 1))}
-                disabled={companionCount >= 10}
-              >
-                <Plus />
-              </button>
+              <div className={styles.counterWrapper}>
+                <button
+                  onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
+                  disabled={companionCount <= 1}
+                >
+                  <Minus />
+                </button>
+                <span>{companionCount}</span>
+                <button
+                  onClick={() => setCompanionCount(Math.min(10, companionCount + 1))}
+                  disabled={companionCount >= 10}
+                >
+                  <Plus />
+                </button>
               </div>
               <span>ЧЕЛ.</span>
             </div>
           </label>
+          {isMobile && (
+            <label>
+              <input
+                type="checkbox"
+                checked={children}
+                onChange={() => setChildren(!children)}
+              />
+              <span className={styles.mark}>
+                <IconCheckMark />
+              </span>
+              МОЖНО С ДЕТЬМИ
+            </label>
+          )}
           <label className={styles.inputDurationCountWrapper}>
             ДЛИТЕЛЬНОСТЬ:
             <div className={styles.counter}>
               <div className={styles.counterWrapper}>
-              <button
-                onClick={() => setDuration(Math.max(2, duration - 1))}
-                disabled={duration <= 2}
-              >
-                <Minus />
-              </button>
-              <span>{duration}</span>
-              <button
-                onClick={() => setDuration(Math.min(31, duration + 1))}
-                disabled={duration >= 31}
-              >
-                <Plus />
-              </button>
+                <button
+                  onClick={() => setDuration(Math.max(2, duration - 1))}
+                  disabled={duration <= 2}
+                >
+                  <Minus />
+                </button>
+                <span>{duration}</span>
+                <button
+                  onClick={() => setDuration(Math.min(31, duration + 1))}
+                  disabled={duration >= 31}
+                >
+                  <Plus />
+                </button>
               </div>
               <span>ДН.</span>
             </div>
           </label>
         </div>
-        <label>
-          <input
-            type="checkbox"
-            checked={children}
-            onChange={() => setChildren(!children)}
-          />
-        <span className={styles.mark}>
-          <IconCheckMark />
-        </span>
-          МОЖНО С ДЕТЬМИ
-        </label>
+        {!isMobile && (
+          <label>
+            <input
+              type="checkbox"
+              checked={children}
+              onChange={() => setChildren(!children)}
+            />
+            <span className={styles.mark}>
+              <IconCheckMark />
+            </span>
+            МОЖНО С ДЕТЬМИ
+          </label>
+        )}
       </div>
       <div className={styles.dateWrapper}>
         <DatePicker

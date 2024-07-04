@@ -7,6 +7,7 @@ import StepOneDatesOfStay from '../stepOneDatesOfStay/stepOneDatesOfStay';
 import StepThreePastime from '../stepThreePastime/stepThreePastime';
 import StepTwoItinerary from '../stepTwoItinerary/stepTwoItinerary';
 import styles from './multiStepForm.module.scss';
+import StepList from '../formNavigation/formNavigation';
 
 interface Country {
   name: { common: string; rus: string };
@@ -94,7 +95,16 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
       />
       <div className={styles.form}>
         <Wrapper>
-          <h2 className={styles.title}>Добавить план:</h2>
+        <div className={styles.titleWrapper}>
+        <h2 className={styles.title}>Добавить план:</h2>
+        <StepList
+          className={styles.stepList}
+          currentStep={step - 1}
+          activeStep={step - 1}
+          setStep={(newStep) => setStep(newStep + 1)}
+          showStepNames={false}
+        />
+        </div>
           <div className={styles.wrapper}>
             {step === 1 && (
               <StepOneDatesOfStay

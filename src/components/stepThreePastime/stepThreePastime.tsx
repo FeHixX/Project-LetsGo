@@ -140,58 +140,58 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
 
   return (
     <div className={rootClassName}>
-      <div>
-        <div className={styles.formHead}>
-          <div className={styles.formDescription}>
-            <h2>Шаг 3. Деятельность</h2>
-            <p>
-              Наконец, расскажите о своих планах времяпровождения.
-              <br />
-              Можно писать в свободной форме и ставить тэги.
-            </p>
-          </div>
-          <StepList currentStep={2} activeStep={2} setStep={() => {}} />
+      <div className={styles.formHead}>
+        <div className={styles.formDescription}>
+          <h2>Шаг 3. Деятельность</h2>
+          <p>
+            Наконец, расскажите о своих планах времяпровождения.
+            <br />
+            Можно писать в свободной форме и ставить тэги.
+          </p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Country List:
-            {formData.countryList.map((country, index) => (
-              <div key={country.name}>
-                <div className={styles.countryInfo}>
-                  <Image
-                    className={styles.countryFlags}
-                    src={selectedCountries.find(c => c.name.rus === country.name)?.flags.png || ''}
-                    alt={`${country.name} flag`}
-                    width={70}
-                    height={47}
-                  />
-                  <div className={styles.countryName}>{country.name}</div>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Description"
-                  value={country.description}
-                  maxLength={200}
-                  onChange={(e) =>
-                    handleArrayChange(e, 'countryList', index, 'description')
-                  }
+        <StepList currentStep={2} activeStep={2} setStep={() => {}} />
+      </div>
+      <form className={styles.formFinalStep} onSubmit={handleSubmit}>
+        <label>
+          Country List:
+          {formData.countryList.map((country, index) => (
+            <div key={country.name}>
+              <div className={styles.countryInfo}>
+                <Image
+                  className={styles.countryFlags}
+                  src={selectedCountries.find(c => c.name.rus === country.name)?.flags.png || ''}
+                  alt={`${country.name} flag`}
+                  width={70}
+                  height={47}
                 />
+                <div className={styles.countryName}>{country.name}</div>
               </div>
-            ))}
-          </label>
+              <input
+                type="text"
+                placeholder="Description"
+                value={country.description}
+                maxLength={200}
+                onChange={(e) =>
+                  handleArrayChange(e, 'countryList', index, 'description')
+                }
+              />
+            </div>
+          ))}
+        </label>
+        <div className={styles.formButtons}>
           <button type="submit" className={styles.submitButton} disabled={!isFormValid}>
             Отправить
             <PolygonNext />
           </button>
-        </form>
-        <button
-          className={`${styles.formButton} ${styles.formButtonPrev}`}
-          onClick={handlePrev}
-        >
-          <PolygonPrev />
-          На шаг назад
-        </button>
-      </div>
+          <button
+            className={`${styles.formButton} ${styles.formButtonPrev}`}
+            onClick={handlePrev}
+          >
+            <PolygonPrev />
+            На шаг назад
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

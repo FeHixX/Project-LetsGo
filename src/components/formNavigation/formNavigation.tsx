@@ -4,9 +4,10 @@ import classNames from 'classnames'
 import styles from './formNavigation.module.scss'
 import { FormNavigationProps } from './formNavigation.types'
 
-const StepList: FC<FormNavigationProps & { activeStep: number }> = ({
+const StepList: FC<FormNavigationProps> = ({
   className,
-  activeStep
+  activeStep,
+  showStepNames = true
 }) => {
   const rootClassName = classNames(styles.root, className)
 
@@ -17,7 +18,7 @@ const StepList: FC<FormNavigationProps & { activeStep: number }> = ({
       <ul className={styles.list}>
         {steps.map((step, index) => (
           <li key={index} className={index === activeStep ? styles.active : ''}>
-            {step}
+            {showStepNames ? step : null}
           </li>
         ))}
       </ul>
@@ -26,7 +27,6 @@ const StepList: FC<FormNavigationProps & { activeStep: number }> = ({
 }
 
 export default StepList
-
 //Заготовка списка навигации для многошаговой формы направления, на случай если понадобится навигация.)
 
 // import React, { FC } from 'react';
