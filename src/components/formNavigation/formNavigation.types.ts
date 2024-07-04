@@ -3,4 +3,5 @@ export interface FormNavigationProps {
   currentStep: number;
   setStep: (step: number) => void;
   activeStep: number;
+  showStepNames?: boolean;
 }

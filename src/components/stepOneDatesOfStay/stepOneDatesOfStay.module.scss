@@ -7,7 +7,7 @@
   justify-content: center;
   flex-direction: column;
   background-color: white;
-  width: 1000px;
+  max-width: 1000px;
 
   :global {
     .react-datepicker {
@@ -20,6 +20,10 @@
         color: var(--color-catalina-blue);
         font-size: 36px;
         margin-bottom: 10px;
+
+        @media (max-width: 768px) {
+          font-size: 20px;
+         }
       }
     }
   
@@ -88,11 +92,26 @@
     .react-datepicker__month .react-datepicker__week:nth-child(6) .react-datepicker__day-name {
       border-bottom: 1px solid #dcdcdc; 
     }
+
   
     .react-datepicker__day-name,
     .react-datepicker__day,
     .react-datepicker__time-name {
       width: 143px;
+
+      @media (max-width: 1300px) {
+        width: 115px;
+      }
+
+      @media (max-width: 1024px) {
+        width: 86px;
+      }
+
+      @media (max-width: 768px) {
+        width: 20px;
+      }
+
+ 
     }
   
     .react-datepicker__day-names .react-datepicker__day-name:nth-child(6),
@@ -119,6 +138,26 @@
     .react-datepicker__header {
       background: none;
       border: none;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .inputGroup {
+      flex-direction: column;
+    }
+  
+    .inputCompanionCount {
+      flex-direction: column;
+    }
+  
+    .inputCompanionCountWrapper,
+    .inputDurationCountWrapper {
+      margin-bottom: 20px;
+    }
+  
+    label:last-child {
+      order: -1;
+      margin-bottom: 20px;
     }
   }
 
@@ -157,6 +196,11 @@
         text-align: center;
       }
     }
+  }
+
+  .dateWrapper {
+    display: flex;
+    justify-content: center;
   }
   
   .inputCompanionCountWrapper{

@@ -59,3 +59,16 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.stepList {
+  display: none;
+
+	@media (max-width: 1023px) {
+		display: block;
+	}
+}
+
+.titleWrapper {
+	display: flex;
+	justify-content: space-between;
+}
