@@ -13,12 +13,21 @@
 		font-size: 36px;
 		line-height: 100%;
 		color: var(--color-catalina-blue);
+
+		@include mixins.tablet {
+			padding-left: 30px;
+	}
 	}
 
 	.form {
 		background-color: var(--color-pale-cornflower-blue-2);
 		border-radius: 56px 56px 0 0;
 		padding: 55px 0 124px;
+
+		@include mixins.tablet {
+			border-radius: 25px 25px 0 0;
+			padding-top: 50px;
+	}
 	}
 
 	.wrapper {
@@ -27,12 +36,11 @@
 		border-radius: 60px;
 		padding: 110px 30px 106px;
 		justify-content: center;
-	}
 
-	@include mixins.tablet {
-		.title {
-			font-size: 24px;
-		}
+		@include mixins.tablet {
+			padding: 110px 30px 106px;
+			border-radius: 30px;
+	}
 	}
 }
 
@@ -65,6 +73,8 @@
 
 	@media (max-width: 1023px) {
 		display: block;
+		padding-right: 11px;
+		padding-top: 8px;
 	}
 }
 

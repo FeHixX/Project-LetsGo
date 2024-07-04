@@ -177,7 +177,7 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
           </label>
         </div>
         {!isMobile && (
-          <label>
+          <label className={styles.inputChildrenWrapper}>
             <input
               type="checkbox"
               checked={children}
@@ -186,7 +186,7 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
             <span className={styles.mark}>
               <IconCheckMark />
             </span>
-            МОЖНО С ДЕТЬМИ
+
           </label>
         )}
       </div>
