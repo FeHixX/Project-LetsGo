@@ -6,6 +6,8 @@
 	display: flex;
 	flex-direction: column;
 
+
+
 	.title {
 		margin-bottom: 54px;
 		padding-left: 69px;
@@ -17,6 +19,12 @@
 		@include mixins.tablet {
 			padding-left: 30px;
 	}
+
+	@include mixins.tablet-small {
+		padding-left: 30px;
+		font-size: 24px;
+		padding-left: 0px;
+}
 	}
 
 	.form {
@@ -28,6 +36,11 @@
 			border-radius: 25px 25px 0 0;
 			padding-top: 50px;
 	}
+
+	@include mixins.tablet-small {
+		border-radius: 28px 28px 0 0;
+		padding-top: 30px;
+}
 	}
 
 	.wrapper {
@@ -38,9 +51,18 @@
 		justify-content: center;
 
 		@include mixins.tablet {
-			padding: 110px 30px 106px;
+			padding: 59px 37px 55px;
 			border-radius: 30px;
+			margin-left: 35px;
+			margin-right: 35px;
 	}
+
+	@include mixins.tablet-small {
+		padding: 59px 37px 55px;
+		border-radius: 10px;
+		margin-left: 0px;
+		margin-right: 0px;
+}
 	}
 }
 
@@ -76,6 +98,11 @@
 		padding-right: 11px;
 		padding-top: 8px;
 	}
+
+	@include mixins.tablet-small {
+		padding-right: 4px;
+    padding-top: 3px;
+}
 }
 
 .titleWrapper {
