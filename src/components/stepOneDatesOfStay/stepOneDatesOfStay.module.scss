@@ -16,6 +16,11 @@
       background: none;
       font-size: 18px;
       padding-bottom: 54px;
+
+
+      @media (max-width: 768px) {
+        padding-bottom: 40px;
+       }
   
       h2 {
         color: var(--color-catalina-blue);
@@ -23,8 +28,13 @@
         margin-bottom: 10px;
 
         @media (max-width: 768px) {
-          font-size: 20px;
+          font-size: 36px;
+          margin-bottom: 30px;
          }
+
+         @media (max-width: 740px) {
+          font-size: 20px;
+        }
       }
     }
   
@@ -32,6 +42,10 @@
       display: flex;
       flex-direction: column;
       margin-top: 10px;
+
+      @media (max-width: 768px) {
+        margin-top: 0px;
+      }
     }
   
     .react-datepicker__day {
@@ -49,6 +63,19 @@
       align-items: start;
       padding: 8px 10px 35px 15px;
       height: 70px;
+
+      @media (max-width: 768px) {
+        padding: 22px 10px 35px 15px;
+        height: 68px;
+        align-items: center;
+      }
+
+      @media (max-width: 740px) {
+        padding: 0px 0px 0px 0px;
+        height: 30px;
+        align-items: center;
+        font-size: 13px;
+      }
     }
   
     .react-datepicker__day::after {
@@ -96,6 +123,10 @@
 
     .react-datepicker__day-names {
       display: flex;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
     }
 
     .react-datepicker__day-name {
@@ -104,15 +135,25 @@
       padding-left: 20px;
 
       @media (max-width: 1300px) {
-        width: 115px;
+        width: 90px;
       }
 
       @media (max-width: 1024px) {
-        width: 86px;
+        width: 72px;
+        font-size: 16px;
+        padding-left: 0px;
       }
 
       @media (max-width: 768px) {
-        width: 20px;
+        width: 72px;
+        font-size: 16px;
+        padding-left: 0px;
+      }
+
+      @media (max-width: 740px) {
+        width: 30px;
+        font-size: 13px;
+        padding-left: 0px;
       }
     }
 
@@ -122,15 +163,26 @@
       width: 143px;
 
       @media (max-width: 1300px) {
-        width: 115px;
+        width: 90px;
       }
 
       @media (max-width: 1024px) {
-        width: 86px;
+        width: 77px;
+        div span:nth-of-type(2) {
+          display: none;
+      }
       }
 
       @media (max-width: 768px) {
-        width: 20px;
+        width: 77px;
+        div span:nth-of-type(2) {
+          display: none;
+      }
+
+      @media (max-width: 740px) {
+        width: 30px;
+        line-height: 1rem;
+      }
       }
 
  
@@ -145,6 +197,18 @@
       padding: 25px 0 18px;
       border-top: 1px solid var(--color-light-grayish-blue);
       border-bottom: 1px solid var(--color-light-grayish-blue);
+
+      @media (max-width: 1300px) {
+        font-size: 36px;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 36px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 36px;
+      }
     }
   
     .react-datepicker__navigation {
@@ -155,6 +219,24 @@
       border-width: 3px 3px 0 0;
       height: 17px;
       width: 17px;
+
+      @media (max-width: 768px) {
+        height: 27px;
+        width: 16px;
+        left: -23px;
+       }
+    }
+
+    .react-datepicker__navigation-icon--previous::before {
+      border-width: 3px 3px 0 0;
+      height: 17px;
+      width: 17px;
+
+      @media (max-width: 768px) {
+        height: 16px;
+        width: 16px;
+        left: -1px;
+       }
     }
   
     .react-datepicker__header {
@@ -170,12 +252,22 @@
   
     .inputCompanionCount {
       flex-direction: column;
+
+      @media (max-width: 768px) {
+        flex-direction: column-reverse;
+        width: 100%;
+       }
     }
   
     .inputCompanionCountWrapper,
     .inputDurationCountWrapper {
       margin-bottom: 20px;
       color: #1D2E5B;
+
+      @media (max-width: 768px) {
+        flex-direction: column-reverse;
+        margin-bottom: 10px;
+       }
     }
   
     label:last-child {
@@ -202,6 +294,10 @@
       align-items: center;
       gap: 30px;
 
+      @media (max-width: 768px) {
+        width: 100%;
+       }
+
       button {
         background-color: #fff;
         color: rgba(153, 153, 153, 1);
@@ -225,15 +321,40 @@
     display: flex;
     justify-content: center;
   }
+
+  .inputCompanionCountSpan {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    letter-spacing: 2px;
+  }
+
+  .inputCompanionSecond {
+    color: gray;
+  }
   
   .inputCompanionCountWrapper {
     gap: 29px;
     color: #1D2E5B;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      margin-left: 7px;
+      margin-right: 7px;
+      gap: 24px;
+     }
   }
 
   .inputDurationCountWrapper{
     gap: 56px;
     color: #1D2E5B;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      margin-left: 7px;
+      margin-right: 7px;
+      gap: 24px;
+     }
   }
 
   .inputCompanions {
@@ -253,6 +374,11 @@
     gap: 20px;
     border-radius: 3px;
     align-items: center;
+
+    @media (max-width: 768px) {
+    width: 100%;
+    justify-content: space-between;
+     }
   }
 
   label {
@@ -307,6 +433,10 @@
 display: flex;
 flex-direction: column;
 gap: 15px;
+
+@media (max-width: 768px) {
+  gap: 0px;
+   }
 }
 
 .inputChildrenWrapper {
@@ -316,6 +446,14 @@ gap: 15px;
   letter-spacing: 2.4px;
   position: relative;
   width: 239px;
+
+  @media (max-width: 768px) {
+    margin-left: 8px;
+    padding-bottom: 26px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--color-light-grayish-blue);
+    width: 100%;
+   }
 }
 
 .inputChildrenWrapper::after {
@@ -327,6 +465,15 @@ gap: 15px;
   margin-left: 10px;
   white-space: nowrap;
   color: #1D2E5B;
+
+  @media (max-width: 1300px) {
+    left: 15%;
+   }
+
+  @media (max-width: 768px) {
+    top: 44%;
+    left: 8%;
+   }
 }
 
 
@@ -342,6 +489,16 @@ gap: 15px;
   white-space: nowrap;
   line-height: 100%;
   padding: 28px 35px;
+
+  @media (max-width: 740px) {
+    top: 44%;
+    left: 8%;
+    display: flex;
+    max-width: 230px;
+    font-size: 17px;
+    line-height: 100%;
+    padding: 11px 29px;
+   }
 }
 
 
@@ -350,6 +507,10 @@ gap: 15px;
   padding-bottom: 51px;
   border-bottom: 1px solid var(--color-light-grayish-blue);
   gap: 115px;
+
+  @media (max-width: 768px) {
+    padding-bottom: 25px;
+   }
 }
 
 .formDescription {
@@ -361,10 +522,29 @@ gap: 15px;
 .formTitle {
   font-size: 36px;
   color: #1D2E5B;
+
+  @media (max-width: 1300px) {
+    margin-bottom: 78px;
+   }
+
+   @media (max-width: 740px) {
+    font-size: 20px;
+   }
 }
 
 .formSubtitle {
   line-height: 26px;
+
+  @media (max-width: 740px) {
+    font-size: 13px;
+   }
+
+  @media (max-width: 768px) {
+    br {
+      display: none;
+      
+    }
+   }
 }
 
 

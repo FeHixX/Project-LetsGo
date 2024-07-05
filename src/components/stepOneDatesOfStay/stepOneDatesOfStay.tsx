@@ -106,6 +106,130 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
     [startDate, endDate]
   );
 
+  const renderDesktopInputs = () => (
+    <div className={styles.inputGroup}>
+      <div className={styles.inputCompanionCount}>
+        <label className={styles.inputCompanionCountWrapper}>
+          ИЩУ ПОПУТЧИКОВ:
+          <div className={styles.counter}>
+            <div className={styles.counterWrapper}>
+              <button
+                onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
+                disabled={companionCount <= 1}
+              >
+                <Minus />
+              </button>
+              <span>{companionCount}</span>
+              <button
+                onClick={() => setCompanionCount(Math.min(10, companionCount + 1))}
+                disabled={companionCount >= 10}
+              >
+                <Plus />
+              </button>
+            </div>
+            <span>ЧЕЛ.</span>
+          </div>
+        </label>
+
+        <label className={styles.inputDurationCountWrapper}>
+          ДЛИТЕЛЬНОСТЬ:
+          <div className={styles.counter}>
+            <div className={styles.counterWrapper}>
+              <button
+                onClick={() => setDuration(Math.max(2, duration - 1))}
+                disabled={duration <= 2}
+              >
+                <Minus />
+              </button>
+              <span>{duration}</span>
+              <button
+                onClick={() => setDuration(Math.min(31, duration + 1))}
+                disabled={duration >= 31}
+              >
+                <Plus />
+              </button>
+            </div>
+            <span>ДН.</span>
+          </div>
+        </label>
+      </div>
+      <label className={styles.inputChildrenWrapper}>
+        <input
+          type="checkbox"
+          checked={children}
+          onChange={() => setChildren(!children)}
+        />
+        <span className={styles.mark}>
+          <IconCheckMark />
+        </span>
+      </label>
+    </div>
+  );
+
+  const renderMobileInputs = () => (
+    <div className={styles.inputGroup}>
+      <div className={styles.inputCompanionCount}>
+        <label className={styles.inputChildrenWrapper}>
+          <input
+            type="checkbox"
+            checked={children}
+            onChange={() => setChildren(!children)}
+          />
+          <span className={styles.mark}>
+            <IconCheckMark />
+          </span>
+        </label>
+        <label className={styles.inputCompanionCountWrapper}>
+          <div className={styles.inputCompanionCountSpan}>
+            <span>ИЩУ ПОПУТЧИКОВ:</span>
+            <span className={styles.inputCompanionSecond}>ЧЕЛ.</span>
+          </div>
+          <div className={styles.counter}>
+            <div className={styles.counterWrapper}>
+              <button
+                onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
+                disabled={companionCount <= 1}
+              >
+                <Minus />
+              </button>
+              <span>{companionCount}</span>
+              <button
+                onClick={() => setCompanionCount(Math.min(10, companionCount + 1))}
+                disabled={companionCount >= 10}
+              >
+                <Plus />
+              </button>
+            </div>
+          </div>
+        </label>
+
+        <label className={styles.inputDurationCountWrapper}>
+          <div className={styles.inputCompanionCountSpan}>
+            <span>ДЛИТЕЛЬНОСТЬ:</span>
+            <span className={styles.inputCompanionSecond}>ДН.</span>
+          </div>
+          <div className={styles.counter}>
+            <div className={styles.counterWrapper}>
+              <button
+                onClick={() => setDuration(Math.max(2, duration - 1))}
+                disabled={duration <= 2}
+              >
+                <Minus />
+              </button>
+              <span>{duration}</span>
+              <button
+                onClick={() => setDuration(Math.min(31, duration + 1))}
+                disabled={duration >= 31}
+              >
+                <Plus />
+              </button>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  );
+
   return (
     <div className={rootClassName}>
       <div className={styles.formHead}>
@@ -118,78 +242,7 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
         </div>
         <StepList currentStep={0} activeStep={0} setStep={nextStep} />
       </div>
-      <div className={styles.inputGroup}>
-        <div className={styles.inputCompanionCount}>
-        {isMobile && (
-            <label>
-              <input
-                type="checkbox"
-                checked={children}
-                onChange={() => setChildren(!children)}
-              />
-              <span className={styles.mark}>
-                <IconCheckMark />
-              </span>
-              МОЖНО С ДЕТЬМИ
-            </label>
-          )}
-          <label className={styles.inputCompanionCountWrapper}>
-            ИЩУ ПОПУТЧИКОВ:
-            <div className={styles.counter}>
-              <div className={styles.counterWrapper}>
-                <button
-                  onClick={() => setCompanionCount(Math.max(1, companionCount - 1))}
-                  disabled={companionCount <= 1}
-                >
-                  <Minus />
-                </button>
-                <span>{companionCount}</span>
-                <button
-                  onClick={() => setCompanionCount(Math.min(10, companionCount + 1))}
-                  disabled={companionCount >= 10}
-                >
-                  <Plus />
-                </button>
-              </div>
-              <span>ЧЕЛ.</span>
-            </div>
-          </label>
-
-          <label className={styles.inputDurationCountWrapper}>
-            ДЛИТЕЛЬНОСТЬ:
-            <div className={styles.counter}>
-              <div className={styles.counterWrapper}>
-                <button
-                  onClick={() => setDuration(Math.max(2, duration - 1))}
-                  disabled={duration <= 2}
-                >
-                  <Minus />
-                </button>
-                <span>{duration}</span>
-                <button
-                  onClick={() => setDuration(Math.min(31, duration + 1))}
-                  disabled={duration >= 31}
-                >
-                  <Plus />
-                </button>
-              </div>
-              <span>ДН.</span>
-            </div>
-          </label>
-        </div>
-        {!isMobile && (
-          <label className={styles.inputChildrenWrapper}>
-            <input
-              type="checkbox"
-              checked={children}
-              onChange={() => setChildren(!children)}
-            />
-            <span className={styles.mark}>
-              <IconCheckMark />
-            </span>
-          </label>
-        )}
-      </div>
+      {isMobile ? renderMobileInputs() : renderDesktopInputs()}
       <div className={styles.dateWrapper}>
         <DatePicker
           selected={startDate || undefined}
