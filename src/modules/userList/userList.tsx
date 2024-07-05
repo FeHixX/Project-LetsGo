@@ -33,10 +33,10 @@ const UserList: FC<UserListProps> = ({ className, cardData }) => {
           img: country.countryData.flags.png
         })),
         transport: [
-          { icon: <IconPlane />, checked: card.transport.includes('plane') },
-          { icon: <IconBus />, checked: card.transport.includes('bus') },
-          { icon: <IconBicycle />, checked: card.transport.includes('bike') },
-          { icon: <IconRun />, checked: card.transport.includes('walk') }
+          { icon: <IconPlane />, label: 'Авиаперелет', checked: card.transport.includes('plane') },
+          { icon: <IconBus />, label: 'Автотранспорт', checked: card.transport.includes('bus') },
+          { icon: <IconBicycle />, label: 'Велосипед', checked: card.transport.includes('bike') },
+          { icon: <IconRun />, label: 'Пешком', checked: card.transport.includes('walk') }
         ],
         level: 0
       }))

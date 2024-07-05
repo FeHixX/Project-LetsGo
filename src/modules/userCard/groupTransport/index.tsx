@@ -9,13 +9,13 @@ import { GroupTransportProps } from './groupTransport.types'
 const GroupTransport: FC<GroupTransportProps> = ({
   className,
   userLevel,
-  item
+  items
 }) => {
   const rootClassName = classNames(styles.root, className)
 
   return (
     <div className={rootClassName}>
-      <Transport className={styles.transport} item={item} />
+      <Transport className={styles.transport} items={items} />
       <LevelWrapper className={styles.level} level={userLevel} />
     </div>
   )
