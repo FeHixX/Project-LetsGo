@@ -97,39 +97,43 @@
   border-radius: 2px;
   box-shadow: none;
 
-  & > div > div:first-child > div {
-    background-color: var(--color-catalina-blue);
-  }
-
-  & > div > div:nth-child(2) > div,
-  & > div > div:nth-child(3) > div {
-    top: -5px;
-    right: -7px;
-    width: 13px;
-    height: 13px;
-    background-color: var(--color-catalina-blue);
-    border: none;
-    border-radius: 50%;
-    box-shadow: none;
-    cursor: pointer;
-    transition:
-      transform variables.$transition,
-      box-shadow variables.$transition;
-
-    &::after,
-    &::before {
-      content: none;
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  :global {
+    /* stylelint-disable-next-line selector-class-pattern */
+    .noUi-connect {
+      background-color: var(--color-catalina-blue);
     }
 
-    &:hover,
-    &:focus-visible {
-      outline: none;
-      transform: translateZ(0) scale(1.461);
-    }
+    /* stylelint-disable-next-line selector-class-pattern */
+    .noUi-handle {
+      top: -5px;
+      right: -7px;
+      width: 13px;
+      height: 13px;
+      background-color: var(--color-catalina-blue);
+      border: none;
+      border-radius: 50%;
+      box-shadow: none;
+      cursor: pointer;
+      transition:
+        transform variables.$transition,
+        box-shadow variables.$transition;
 
-    &:active {
-      box-shadow: 0 3px 7px 0 rgba(0 0 0 / 24%);
-      transform: translateZ(0) scale(1.461);
+      &::after,
+      &::before {
+        content: none;
+      }
+
+      &:hover,
+      &:focus-visible {
+        outline: none;
+        transform: translateZ(0) scale(1.461);
+      }
+
+      &:active {
+        box-shadow: 0 3px 7px 0 rgba(0 0 0 / 24%);
+        transform: translateZ(0) scale(1.461);
+      }
     }
   }
 
@@ -141,13 +145,16 @@
     width: 98%;
     border-radius: 0;
 
-    & > div > div:nth-child(2) > div,
-    & > div > div:nth-child(3) > div {
-      top: -4px;
-      right: -5px;
-      width: 10px;
-      height: 10px;
-      background-color: var(--color-catalina-blue);
+    /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+    :global {
+      /* stylelint-disable-next-line selector-class-pattern */
+      .noUi-handle {
+        top: -4px;
+        right: -5px;
+        width: 10px;
+        height: 10px;
+        background-color: var(--color-catalina-blue);
+      }
     }
   }
 }
