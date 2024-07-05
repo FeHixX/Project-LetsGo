@@ -13,6 +13,7 @@ const Transport: FC<TransportProps> = ({ items, className }) => {
       <ul className={styles.list}>
         {items.map(({ icon, checked, label }, index) => (
           <li key={index} data-checked={checked}>
+            <span>{label}</span>
             {icon}
           </li>
         ))}
