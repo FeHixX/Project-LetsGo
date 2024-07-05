@@ -2,7 +2,7 @@
 @use '@styles/mixins';
 
 .root {
-  span {
+  > span {
     position: fixed;
     transform: scale(0);
   }
@@ -32,12 +32,24 @@
   }
 
   @include mixins.tablet {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
 
-    span {
+    &::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      right: -25px;
+      left: -35px;
+      z-index: 0;
+      height: 1px;
+      background-color: var(--color-solitude);
+    }
+
+    > span {
       position: relative;
       margin: 0 0 0 49px;
       font-weight: 400;
@@ -51,21 +63,10 @@
         content: '';
         position: absolute;
         left: -12px;
+        right: -12px;
         z-index: -1;
-        width: calc(100% + 24px);
         height: 100%;
         background-color: var(--color-white-default);
-      }
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: -100vw;
-        left: -100vw;
-        z-index: -2;
-        height: 1px;
-        background-color: var(--color-solitude);
       }
     }
 
@@ -89,7 +90,11 @@
   @include mixins.tablet-small {
     gap: 17px;
 
-    span {
+    &::before {
+      left: -25px;
+    }
+
+    > span {
       margin: 0;
       font-size: 14px;
       line-height: 114%;

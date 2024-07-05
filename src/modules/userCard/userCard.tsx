@@ -35,7 +35,7 @@ const UserCard: FC<UserCardProps> = ({
       <GroupButton className={styles.button} likeCounter={likes} />
       <GroupTransport
         className={styles.transport}
-        item={transport}
+        items={transport}
         userLevel={level}
       />
     </article>

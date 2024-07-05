@@ -8,6 +8,7 @@
   justify-content: center;
 
   label {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +18,52 @@
     border-radius: 50%;
     cursor: pointer;
     transition: background-color variables.$transition;
+
+    span {
+      position: absolute;
+      top: calc(100% + 3px);
+      left: 50%;
+      z-index: 100;
+      width: max-content;
+      max-width: 185px;
+      padding: 18px 14px;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 100%;
+      text-align: center;
+      color: var(--color-white-default);
+      word-wrap: break-word;
+      hyphens: auto;
+      background-color: var(--color-midnight-express-3);
+      border-radius: 4px;
+      transform: translateX(-50%);
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        visibility variables.$transition,
+        opacity variables.$transition;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: 50%;
+        width: 15px;
+        height: 15px;
+        background-color: var(--color-midnight-express-3);
+        transform: translateX(-50%) rotate(45deg);
+      }
+    }
+
+    &:hover span {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    & span:has(+ input:focus-visible) {
+      visibility: visible;
+      opacity: 1;
+    }
 
     &:has(input:active) {
       background-color: var(--color-solitude-2);
@@ -64,6 +111,12 @@
     label {
       width: 32px;
       height: 32px;
+
+      span {
+        max-width: 133px;
+        padding: 14px 10px;
+        font-size: 15px;
+      }
     }
 
     svg {

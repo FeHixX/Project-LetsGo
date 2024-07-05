@@ -14,13 +14,13 @@ import { UserProps } from './user.types';
 
 export const checkboxList: IconCheckboxItemI[] = [
   {
-    label: 'Самолет',
+    label: 'Авиаперелет',
     value: 'plane',
     name: 'transport',
     icon: <IconPlane />
   },
   {
-    label: 'Автобус',
+    label: 'Автотранспорт',
     value: 'bus',
     name: 'transport',
     icon: <IconBus />

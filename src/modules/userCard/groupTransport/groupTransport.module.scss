@@ -13,9 +13,21 @@
   }
 
   @include mixins.tablet-small {
+    position: relative;
     flex-flow: row nowrap;
     align-items: start;
     gap: 15px;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    right: -21px;
+    left: -27px;
+    z-index: 0;
+    height: 1px;
+    background-color: var(--color-solitude);
   }
 }
 
@@ -27,6 +39,7 @@
   }
 
   @include mixins.tablet-small {
-    margin-top: 0;
+    flex-grow: 1;
+    margin: 0;
   }
 }

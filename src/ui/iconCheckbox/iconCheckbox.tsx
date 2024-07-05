@@ -27,7 +27,7 @@ const IconCheckbox: FC<IconCheckboxProps> = ({ className, items, value = [], onC
       {items.map(({ label, value: itemValue, name, icon }) => (
         <li className={styles.item} key={itemValue}>
           <label>
-            <span className="visually-hidden">{label}</span>
+          <span>{label}</span>
             <input
               type="checkbox"
               name={name}

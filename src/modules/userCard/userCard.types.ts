@@ -7,6 +7,7 @@ export interface UserCountriesItemI {
 
 export interface UserTransportItemI {
   icon: ReactNode
+  label?: string
   checked: boolean
 }
 
