@@ -9,14 +9,42 @@
 .formHead {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 30px;
+  padding-bottom: 52px;
   border-bottom: 1px solid var(--color-light-grayish-blue);
 }
 
 .formDescription {
   display: flex;
   flex-direction: column;
-  justify-content: space-between
+  justify-content: space-between;
+
+  & h2 {
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: bold;
+  }
+
+  & p {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: regular;
+  }
+}
+
+.formContainer {
+  position: relative;
+  padding: 62px 0 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    left: 773px;
+    top: 0;
+    bottom: 0;
+    background-color: #E1E3E9;
+  }
 }
 
 .country {
@@ -24,22 +52,63 @@
   justify-content: space-between;
   align-items: center;
   gap: 85px;
-  margin: 0 0 15px;
+  margin: 0 0 13px;
 }
 
 .countryName {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
   min-width: 730px;
   width: 100%;
   max-width: 730px;
   padding: 26px 23px 22px 25px;
   border: 1px solid #CBCED9;
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: 25px;
+    right: -53px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #1D2E5B;
+  }
+}
+
+.countryNameText {
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: medium;
+}
+
+.countryArrow {
+  position: relative;
+  cursor: pointer;
+  width: 22px;
+  height: 24px;
+}
+
+.countryArrowButtom {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  width: 11px;
+  height: 11px;
+  cursor: pointer;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #000000;
+  z-index: 3;
+  transform: rotate(135deg);
 }
 
 .countryIndicator {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 88px;
+  gap: 95px;
 }
 
 .countryDelete {
@@ -52,9 +121,9 @@
   &::after {
     content: "";
     position: absolute;
-    left: -4px;
+    left: -6px;
     transform: translateX(50%);
-    width: 28px;
+    width: 22px;
     height: 2px;
     background-color: var(--color-light-grey);
   }
@@ -72,7 +141,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 88px;
+  gap: 250px;
+  margin: 0 0 142px;
 }
 
 .formSelect {
@@ -80,14 +150,63 @@
 }
 
 .formSelectButton {
+  position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   min-width: 730px;
-  padding: 26px 23px 22px 25px;
+  padding: 21px 12px;
   border: 1px solid #CBCED9;
   font-size: 20px;
   line-height: 20px;
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: 25px;
+    right: -53px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid #CBCED9;
+    background-color: #ffffff;
+  }
+}
+
+.formSelectButtonText {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: medium;
+  letter-spacing: 10%;
+  text-transform: uppercase;
+}
+
+.formSelectArrowCross {
+  position: relative;
+  display: block;
+  width: 18px;
+  height: 16px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: -9px;
+    transform: translateX(50%);
+    width: 28px;
+    height: 2px;
+    background-color: var(--color-light-grey);
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
 }
 
 .lettersAndCountries {
@@ -102,20 +221,19 @@
   right: 0;
   top: 70px;
   display: flex;
-  justify-content: space-between;
-  padding: 32px 26px 36px;
+  align-items: flex-start;
+  gap: 135px;
+  padding: 32px 34px 36px 23px;
   background-color: #ffffff;
 }
 
 .letters {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 0 16px;
-  flex-grow: 1;
+  gap: 14px 16px;
 }
 
 .letter {
-  margin: 0 0 16px;
   padding: 27px 24px;
   max-width: 60px;
   max-height: 70px;
@@ -155,4 +273,8 @@
 
 .formButtonNext {
   background-color: #a8d2f4;
+}
+
+.formButtonPrev {
+  padding: 0;
 }

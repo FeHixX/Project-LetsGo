@@ -3,10 +3,11 @@
 @use '@styles/variables';
 
 .root {
+  margin: 7px 38px 0 0;
 
   @media (max-width: 1023px) {
-		display: none;
-	}
+    display: none;
+  }
 
   .list {
     display: flex;
@@ -21,18 +22,18 @@
       position: relative;
       padding-left: 50px;
       font-weight: 400;
-      font-size: 23px;
-      line-height: 102%;
+      font-size: 20px;
+      line-height: 24px;
       text-transform: uppercase;
       opacity: 0.6;
 
       @include mixins.tablet {
         padding-left: 34px;
-    }
+      }
 
-    @include mixins.tablet-small {
-      padding-left: 20px;
-  }
+      @include mixins.tablet-small {
+        padding-left: 20px;
+      }
 
       &::before {
         content: '';
@@ -47,7 +48,7 @@
         @include mixins.tablet-small {
           width: 5px;
           height: 5px;
-      }
+        }
       }
     }
 

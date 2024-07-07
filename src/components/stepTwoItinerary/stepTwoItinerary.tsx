@@ -119,30 +119,33 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
           <StepList currentStep={1} activeStep={1} setStep={nextStep} />
         </div>
         <div className={styles.formContainer}>
-          <div>
-            <ul className={styles.countries}>
-              {selectedCountries.map((country) => (
-                <li className={styles.country} key={country.name.rus}>
-                  <div className={styles.countryName}>
+          <ul className={styles.countries}>
+            {selectedCountries.map((country) => (
+              <li className={styles.country} key={country.name.rus}>
+                <div className={styles.countryName}>
+                  <span className={styles.countryNameText}>
                     {country.name.rus}
+                  </span>
+                  <div className={styles.countryArrow}>
+                    <span className={styles.countryArrowButtom}></span>
                   </div>
-                  <div className={styles.countryIndicator}>
-                    <Image
-                      className={styles.countryFlags}
-                      src={country.flags.png}
-                      alt={`${country.name.rus} flag`}
-                      width={70}
-                      height={47}
-                    />
-                    <button
-                      className={styles.countryDelete}
-                      onClick={() => handleCountryRemove(country)}
-                    ></button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+                </div>
+                <div className={styles.countryIndicator}>
+                  <Image
+                    className={styles.countryFlags}
+                    src={country.flags.png}
+                    alt={`${country.name.rus} flag`}
+                    width={70}
+                    height={47}
+                  />
+                  <button
+                    className={styles.countryDelete}
+                    onClick={() => handleCountryRemove(country)}
+                  ></button>
+                </div>
+              </li>
+            ))}
+          </ul>
           <div className={styles.formSelectContainer}>
             <div className={styles.formSelect}>
               <button
@@ -152,6 +155,7 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
                 <span className={styles.formSelectButtonText}>
                   Выберите страну
                 </span>
+                <span className={styles.formSelectArrowCross}></span>
               </button>
               <div
                 className={
@@ -187,22 +191,22 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
             </div>
             <button className={styles.countryDelete}></button>
           </div>
-        </div>
-        <div className={styles.formButtons}>
-          <button
-            className={`${styles.formButton} ${styles.formButtonNext}`}
-            onClick={handleNext}
-          >
-            Следующий шаг
-            <PolygonNext />
-          </button>
-          <button
-            className={`${styles.formButton} ${styles.formButtonPrev}`}
-            onClick={handlePrev}
-          >
-            <PolygonPrev />
-            На шаг назад
-          </button>
+          <div className={styles.formButtons}>
+            <button
+              className={`${styles.formButton} ${styles.formButtonNext}`}
+              onClick={handleNext}
+            >
+              Следующий шаг
+              <PolygonNext />
+            </button>
+            <button
+              className={`${styles.formButton} ${styles.formButtonPrev}`}
+              onClick={handlePrev}
+            >
+              <PolygonPrev />
+              На шаг назад
+            </button>
+          </div>
         </div>
       </div>
     </div>
