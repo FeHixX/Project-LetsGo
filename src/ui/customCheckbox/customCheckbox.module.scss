@@ -105,6 +105,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 100%;
+  hyphens: auto;
 
   @include mixins.tablet-small {
     font-size: 15px;
