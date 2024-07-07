@@ -21,6 +21,11 @@
   justify-content: space-between
 }
 
+.errorMessage {
+  color: red;
+  margin-bottom: 10px;
+}
+
 .formButton {
   border-radius: 20px;
   display: flex;
