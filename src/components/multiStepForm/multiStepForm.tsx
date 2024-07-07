@@ -71,16 +71,20 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
   }
 
   const updateHashTags = (e: ChangeEvent<HTMLInputElement>) => {
+    const newHashTags = e.target.value.split(',').map((tag) => tag.trim())
     setFormData((prevData) => ({
       ...prevData,
-      hashTags: e.target.value.split(',').map((tag) => tag.trim())
+      hashTags: newHashTags
     }))
   }
 
   const updateTransport = (e: ChangeEvent<HTMLInputElement>) => {
+    const newTransport = e.target.value
+      .split(',')
+      .map((transport) => transport.trim())
     setFormData((prevData) => ({
       ...prevData,
-      transport: e.target.value.split(',').map((transport) => transport.trim())
+      transport: newTransport
     }))
   }
 
@@ -140,6 +144,8 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
                 selectedCountries={formData.route}
                 updateData={updateActivities}
                 prevStep={prevStep}
+                updateHashTags={updateHashTags}
+                updateTransport={updateTransport}
               />
             )}
           </div>

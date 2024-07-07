@@ -26,21 +26,22 @@ interface CardData {
 }
 
 const Companions: FC<CompanionsProps> = ({ className }) => {
-  const router = useRouter()
   const rootClassName = classNames(styles.root, className)
   const [cardData, setCardData] = useState<CardData | null>(null)
+  const router = useRouter()
 
   useEffect(() => {
     const cardId = localStorage.getItem('cardId')
     if (!cardId) {
-      router.push('/directions')
+      router.push('/') // Редирект на главную страницу, если нет cardId
     } else {
       const fetchCardData = async () => {
         try {
           const response = await axios.get<CardData>(`https://lets-go-8s43.onrender.com/cards/${cardId}`)
           setCardData(response.data)
         } catch (error) {
-          console.error('Error fetching card data:', error)
+          console.error('Ошибка при получении данных карточки:', error)
+          router.push('/') // Редирект на главную страницу в случае ошибки
         }
       }
       fetchCardData()
