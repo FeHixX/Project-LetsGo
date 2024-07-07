@@ -5,6 +5,10 @@
 .root {
   margin: 7px 38px 0 0;
 
+  @include mixins.tablet-small {
+		margin: 0px;
+	}
+
   @media (max-width: 1023px) {
     display: none;
   }
