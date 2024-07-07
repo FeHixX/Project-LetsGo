@@ -12,6 +12,7 @@
   text-align: left;
   color: var(--color-catalina-blue);
   text-transform: uppercase;
+  hyphens: auto;
   transition: opacity variables.$transition;
   user-select: none;
   gap: 0 10px;
