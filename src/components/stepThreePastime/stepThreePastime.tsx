@@ -21,6 +21,8 @@ export interface StepThreePastimeProps {
   updateData: (data: Partial<{ Bosnia: string; Czechia: string }>) => void;
   prevStep: () => void;
   selectedCountries: Country[];
+  updateHashTags: (e: ChangeEvent<HTMLInputElement>) => void;
+  updateTransport: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface Country {
@@ -47,22 +49,39 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
   prevStep,
   selectedCountries,
   updateData,
-  data
+  data,
 }) => {
   const rootClassName = classNames(styles.root, className);
   const [formData, setFormData] = useState<FormData>(data);
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
-      countryList: selectedCountries.map((country) => ({
-        name: country.name.rus,
-        description: country.description || ''
-      }))
+      countryList:
+        prevData.countryList.length === 0
+          ? selectedCountries.map((country) => ({
+              name: country.name.rus,
+              description: country.description || '',
+            }))
+          : prevData.countryList,
+      hashTags: data.hashTags,
+      transport: data.transport,
     }));
     validateForm();
-  }, [selectedCountries]);
+  }, [selectedCountries, data.startDate, data.endDate, data.hashTags, data.transport]);
+
+  const validateForm = () => {
+    const isValid =
+      formData.countryList.every((country) => country.description.trim() !== '') &&
+      formData.startDate !== '' &&
+      formData.endDate !== '' &&
+      formData.hashTags.length > 0 &&
+      formData.transport.length > 0;
+    setIsFormValid(isValid);
+  };
 
   const handleArrayChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -75,7 +94,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
     if (field === 'countryList' && subfield) {
       const updatedCountry = {
         ...(updatedArray[index] as { name: string; description: string }),
-        [subfield]: value
+        [subfield]: value,
       };
       updatedArray[index] = updatedCountry;
     }
@@ -83,17 +102,13 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
     validateForm();
   };
 
-  const router = useRouter();
-  const validateForm = () => {
-    const isValid = formData.countryList.every(country => country.description.trim() !== '');
-    setIsFormValid(isValid);
-  };
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const validTransports = ['plane', 'bus', 'bike', 'walk'];
-    const filteredTransport = formData.transport.filter(transport => validTransports.includes(transport));
+    const filteredTransport = formData.transport.filter((transport) =>
+      validTransports.includes(transport)
+    );
     const updatedFormData = { ...formData, transport: filteredTransport };
 
     const invalidCountries = updatedFormData.countryList.filter((country) => {
@@ -111,9 +126,9 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
     const response = await fetch('https://lets-go-8s43.onrender.com/cards/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...updatedFormData, startDate, endDate })
+      body: JSON.stringify({ ...updatedFormData, startDate, endDate }),
     });
 
     if (!response.ok) {
@@ -159,7 +174,10 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
               <div className={styles.countryInfo}>
                 <Image
                   className={styles.countryFlags}
-                  src={selectedCountries.find(c => c.name.rus === country.name)?.flags.png || ''}
+                  src={
+                    selectedCountries.find((c) => c.name.rus === country.name)?.flags.png ||
+                    ''
+                  }
                   alt={`${country.name} flag`}
                   width={70}
                   height={47}
@@ -179,7 +197,11 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
           ))}
         </label>
         <div className={styles.formButtons}>
-          <button type="submit" className={styles.submitButton} disabled={!isFormValid}>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={!isFormValid}
+          >
             Отправить
             <PolygonNext />
           </button>
