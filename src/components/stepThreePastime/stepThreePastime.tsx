@@ -53,6 +53,8 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
   const [formData, setFormData] = useState<FormData>(data);
   const [isFormValid, setIsFormValid] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
@@ -62,7 +64,16 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       }))
     }));
     validateForm();
-  }, [selectedCountries]);
+  }, [selectedCountries, formData.startDate, formData.endDate, formData.hashTags, formData.transport]);
+
+  const validateForm = () => {
+    const isValid = formData.countryList.every(country => country.description.trim() !== '') &&
+      formData.startDate !== '' &&
+      formData.endDate !== '' &&
+      formData.hashTags.length > 0 &&
+      formData.transport.length > 0;
+    setIsFormValid(isValid);
+  };
 
   const handleArrayChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -81,12 +92,6 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
     }
     setFormData({ ...formData, [field]: updatedArray });
     validateForm();
-  };
-
-  const router = useRouter();
-  const validateForm = () => {
-    const isValid = formData.countryList.every(country => country.description.trim() !== '');
-    setIsFormValid(isValid);
   };
 
   const handleSubmit = async (e: FormEvent) => {
