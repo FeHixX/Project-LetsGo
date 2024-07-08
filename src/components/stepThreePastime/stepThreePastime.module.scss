@@ -6,19 +6,256 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @include mixins.tablet {
+    padding: 35px 5px 0;
+  }
+
+  @include mixins.tablet-small {
+    padding: 0;
+  }
 }
 
 .formHead {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 30px;
+  padding-bottom: 52px;
   border-bottom: 1px solid var(--color-light-grayish-blue);
+
+  @include mixins.tablet {
+    padding: 0 15px 10px 4px;
+  }
 }
 
 .formDescription {
   display: flex;
   flex-direction: column;
-  justify-content: space-between
+  justify-content: space-between;
+
+  & h2 {
+    font-size: 36px;
+    line-height: 36px;
+    font-weight: bold;
+
+    @include mixins.tablet {
+      margin: 0 0 35px;
+    }
+
+    @include mixins.tablet-small {
+      margin: 0 45px 15px 0;
+      font-size: 20px;
+      line-height: 20px;
+    }
+  }
+
+  & p {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: regular;
+
+    @include mixins.tablet-small {
+      font-size: 13px;
+      line-height: 22px;
+    }
+  }
+}
+
+.formFinalStep {
+  padding: 75px 0;
+
+  @include mixins.tablet {
+    padding: 26px 0 0;
+  }
+}
+
+.label {
+  margin: 0 0 10px;
+
+  @include mixins.tablet {
+    margin: 0 5px 5px;
+  }
+}
+
+.country {
+  position: relative;
+  padding: 0 0 45px;
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 100%;
+    top: 20px;
+    bottom: 0;
+    right: 0;
+    background-color: #1D2E5B;
+  }
+
+  @include mixins.tablet {
+    padding: 0 0 35px;
+
+    &::after {
+      right: 5px;
+    }
+  }
+
+  @include mixins.tablet-small {
+    padding: 0 0 20px;
+
+    &::after {
+      top: 10px;
+      left: -14px;
+    }
+  }
+}
+
+.country:last-child {
+  &::after {
+    display: none;
+  }
+
+  @include mixins.tablet {
+    padding: 0 0 15px;
+  }
+}
+
+.countryInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 85px;
+  margin: 0 113px 22px 0;
+
+  @include mixins.tablet {
+    gap: 0;
+    margin: 0 32px 30px 0;
+  }
+
+  @include mixins.tablet-small {
+    margin: 0 0 15px 0;
+  }
+}
+
+.countryName {
+  width: 100%;
+  min-width: 730px;
+
+  @include mixins.tablet {
+    min-width: auto;
+  }
+
+  @include mixins.tablet-small {
+    position: relative;
+    min-width: auto;
+    margin: 0 0 0 10px;
+
+    &::after {
+      position: absolute;
+      content: "";
+      top: 5px;
+      left: -14px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 1px solid #1D2E5B;
+      background-color: #1D2E5B;
+    }
+
+    &::before {
+      position: absolute;
+      content: "";
+      top: 8px;
+      left: -24px;
+      width: 14px;
+      height: 2px;
+      background-color: #1D2E5B;
+    }
+  }
+}
+
+.countryNameText {
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 700;
+
+  @include mixins.tablet-small {
+    font-size: 18px;
+    line-height: 18px;
+    letter-spacing: 1%;
+  }
+}
+
+.countryImage {
+  position: relative;
+  background-color: #1D2E5B;
+  width: 70px;
+  height: 47px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: 12px;
+    left: -50px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1px solid #1D2E5B;
+    background-color: #1D2E5B;
+
+  }
+
+  @include mixins.tablet {
+    &::after {
+      top: 18px;
+      left: 120px;
+    }
+  }
+
+  @include mixins.tablet-small {
+    width: 35px;
+    height: 24px;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.countryInput {
+  textarea {
+    max-width: 730px;
+    min-height: 142px;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+    font: inherit;
+    line-height: 110%;
+    color: var(--color-charcoal);
+    background-color: transparent;
+    border: 1px solid #CBCED9;
+    outline: none;
+    resize: none;
+
+    &::placeholder {
+      opacity: 0.6;
+    }
+
+    @include mixins.tablet {
+      padding: 15px;
+      max-width: 500px;
+    }
+
+    @include mixins.tablet-small {
+      max-width: 220px;
+      min-height: 220px;
+    }
+  }
 }
 
 .errorMessage {
@@ -36,13 +273,29 @@
   font-weight: 700;
   white-space: nowrap;
   line-height: 100%;
-  padding: 29px 36px;
+  padding: 29px 0;
+
+  @include mixins.tablet-small {
+    padding: 5px 0;
+    min-width: 230px;
+    justify-content: center;
+    font-size: 17px;
+    line-height: 30px;
+
+    & svg {
+      display: none;
+    }
+  }
 }
 
 .formButtons {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include mixins.tablet-small {
+    flex-direction: column;
+  }
 }
 
 .formFinalStep {
@@ -56,11 +309,23 @@
   background-color: #a8d2f4;
   display: flex;
   max-width: 286px;
-  gap: 20px;
+  gap: 70px;
   font-size: 24px;
   color: var(--basic_blue_light, #1d2e5b);
   font-weight: 700;
   white-space: nowrap;
   line-height: 100%;
   padding: 29px 36px;
+
+  @include mixins.tablet-small {
+    min-width: 230px;
+    justify-content: center;
+    padding: 8px;
+    font-size: 17px;
+    line-height: 30px;
+
+    & svg {
+      display: none;
+    }
+  }
 }
