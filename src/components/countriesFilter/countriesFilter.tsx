@@ -18,11 +18,24 @@ interface Country {
   island: boolean
 }
 
-const CountriesFilter: FC = () => {
+const CountriesFilter: FC<{ onFilterChange: (continent: string | null, country: string | null) => void }> = ({ onFilterChange }) => {
   const [countries, setCountries] = useState<Country[]>([])
   const [lettersAndCountries, setLettersAndCountries] = useState<{ [key: string]: Country[] }>({})
   const [selectedLetter, setSelectedLetter] = useState<string>('А')
   const [selectedContinent, setSelectedContinent] = useState<string | null>(null)
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
+
+  const handleContinentClick = (continent: string) => {
+    setSelectedContinent(continent === selectedContinent ? null : continent)
+    setSelectedCountry(null)
+    onFilterChange(continent === selectedContinent ? null : continent, null)
+  }
+
+  const handleCountryClick = (country: string) => {
+    const newSelectedCountry = country === selectedCountry ? null : country;
+    setSelectedCountry(newSelectedCountry);
+    onFilterChange(selectedContinent, newSelectedCountry);
+  }
 
   const { isMobile, isTablet, isDesktop } = useResponsive()
   const [active, setActive] = useState<boolean>(false)
@@ -62,8 +75,8 @@ const CountriesFilter: FC = () => {
             {continents.map((continent) => (
               <li
                 key={continent}
-                className={styles.continent}
-                onClick={() => setSelectedContinent(continent)}
+                className={`${styles.continent} ${selectedContinent === continent ? styles.selectedContinent : ''}`}
+                onClick={() => handleContinentClick(continent)}
               >
                 {continent}
               </li>
@@ -90,7 +103,11 @@ const CountriesFilter: FC = () => {
                 <h4 className={styles.letter}>{letter}</h4>
                 <ul className={styles.list}>
                   {countriesList.map((country) => (
-                    <li className={styles.country} key={country.name.common}>
+                    <li
+                      className={`${styles.country} ${selectedCountry === country.name.rus ? styles.selectedCountry : ''}`}
+                      key={country.name.common}
+                      onClick={() => handleCountryClick(country.name.rus)}
+                    >
                       <span className={styles.countryText}>{country.name.rus}</span>
                     </li>
                   ))}
@@ -114,9 +131,13 @@ const CountriesFilter: FC = () => {
             </div>
             <ul className={styles.list}>
               {filteredCountries.map((country) => (
-                <li key={country.name.common}>
-                  <span className={styles.countryText}>{country.name.rus}</span>
-                </li>
+                <li
+                key={country.name.common}
+                className={`${styles.country} ${selectedCountry === country.name.rus ? styles.selectedCountry : ''}`}
+                onClick={() => handleCountryClick(country.name.rus)}
+              >
+                <span className={styles.countryText}>{country.name.rus}</span>
+              </li>
               ))}
             </ul>
           </div>

@@ -81,8 +81,16 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
   const handleDateChange = useCallback(
     (dates: [Date | null, Date | null]) => {
       const [start, end] = dates;
-      setStartDate(start);
-      setEndDate(end);
+      if (start && end && start.getTime() >= end.getTime()) {
+        // Если конечная дата меньше или равна начальной, устанавливаем её на следующий день
+        const newEnd = new Date(start);
+        newEnd.setDate(newEnd.getDate() + 1);
+        setStartDate(start);
+        setEndDate(newEnd);
+      } else {
+        setStartDate(start);
+        setEndDate(end);
+      }
     },
     []
   );
