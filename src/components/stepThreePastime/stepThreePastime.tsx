@@ -71,6 +71,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       transport: data.transport,
     }));
     validateForm();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedCountries, data.startDate, data.endDate, data.hashTags, data.transport]);
 
   const validateForm = () => {

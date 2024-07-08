@@ -1,22 +1,24 @@
 import { ReactNode } from 'react'
 
 export interface UserListProps {
-  className?: string
+  className?: string;
   initialCardData?: {
-    cardId?: string
+    cardId?: string;
     cardList?: Array<{
-      name: string
-      avatarUrl: string
-      hashTags: string[]
+      name: string;
+      avatarUrl: string;
+      hashTags: string[];
       countryList: Array<{
         countryData: {
-          name: { rus: string }
-          flags: { png: string }
-        }
-      }>
-      transport: string[]
-    }>
-  }
+          name: { rus: string };
+          flags: { png: string };
+        };
+      }>;
+      transport: string[];
+    }>;
+  };
+  selectedContinent?: string | null;
+  selectedCountry?: string | null;
 }
 
 export interface TransformedUserData {

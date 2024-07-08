@@ -28,7 +28,14 @@ interface CardData {
 const Companions: FC<CompanionsProps> = ({ className }) => {
   const rootClassName = classNames(styles.root, className)
   const [cardData, setCardData] = useState<CardData | null>(null)
+  const [selectedContinent, setSelectedContinent] = useState<string | null>(null)
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
   const router = useRouter()
+
+  const handleFilterChange = (continent: string | null, country: string | null) => {
+    setSelectedContinent(continent)
+    setSelectedCountry(country)
+  }
 
   useEffect(() => {
     const cardId = localStorage.getItem('cardId')
@@ -55,8 +62,13 @@ const Companions: FC<CompanionsProps> = ({ className }) => {
   return (
     <main className={rootClassName}>
       <PageHeader className={styles.header}>Попутчики</PageHeader>
-      <CountriesFilter />
-      <UserList className={styles.list} initialCardData={cardData} />
+      <CountriesFilter onFilterChange={handleFilterChange} />
+      <UserList
+        className={styles.list}
+        initialCardData={cardData}
+        selectedContinent={selectedContinent}
+        selectedCountry={selectedCountry}
+      />
     </main>
   )
 }

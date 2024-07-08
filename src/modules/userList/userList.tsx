@@ -27,12 +27,23 @@ interface CardData {
   transport: string[];
 }
 
-const UserList: FC<UserListProps> = ({ className }) => {
+interface Country {
+  name: { common: string; rus: string };
+  flags: {
+    png: string;
+    svg: string;
+  };
+  continent: string[];
+  island: boolean;
+}
+
+const UserList: FC<UserListProps> = ({ className, selectedContinent, selectedCountry }) => {
   const rootClassName = classNames(styles.root, className);
   const [userData, setUserData] = useState<TransformedUserData[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCards, setTotalCards] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [countries, setCountries] = useState<Country[]>([]);
   const cardsPerPage = 4;
 
   const fetchCardData = async (page: number) => {
@@ -51,6 +62,18 @@ const UserList: FC<UserListProps> = ({ className }) => {
     } catch (error) {
       console.error('Error fetching card data:', error);
       return null;
+    }
+  };
+
+  const fetchCountries = async () => {
+    try {
+      const response = await axios.get('https://lets-go-8s43.onrender.com/countries/');
+      if (response.data && typeof response.data === 'object') {
+        const flattenedCountries = Object.values(response.data).flat() as Country[];
+        setCountries(flattenedCountries);
+      }
+    } catch (error) {
+      console.error('Error fetching countries:', error);
     }
   };
 
@@ -87,6 +110,8 @@ const UserList: FC<UserListProps> = ({ className }) => {
 
   useEffect(() => {
     loadCardData(currentPage);
+    fetchCountries();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handlePageChange = (page: number) => {
@@ -101,13 +126,37 @@ const UserList: FC<UserListProps> = ({ className }) => {
     setTotalPages((prevPages) => prevPages - 1);
   };
 
+  const filteredUserData = userData.filter((user) => {
+    if (!selectedContinent && !selectedCountry) return true;
+    
+    const matchesContinent = !selectedContinent || user.countries.some(country => {
+      const countryData = countries.find(c => c.name.rus === country.name);
+      if (!countryData) return false;
+      
+      const continentMap = {
+        'Европа': ['Europe'],
+        'Азия': ['Asia'],
+        'Америка': ['North America', 'South America'],
+        'Острова': ['Oceania']
+      };
+      
+      return continentMap[selectedContinent as keyof typeof continentMap]?.some((continent: string) => 
+        countryData.continent.includes(continent)
+      );
+    });
+  
+    const matchesCountry = !selectedCountry || user.countries.some(country => country.name === selectedCountry);
+        
+    return matchesContinent && matchesCountry;
+  });
+
   return (
     <section className={rootClassName}>
       <h2 className="visually-hidden">Список попутчиков</h2>
       <Wrapper className={styles.wrapper}>
         <Filters className={styles.filters} />
         <ul className={styles.list}>
-          {userData.map((item, index) => (
+          {filteredUserData.map((item, index) => (
             <li key={index}>
               <UserCard item={item} />
             </li>
