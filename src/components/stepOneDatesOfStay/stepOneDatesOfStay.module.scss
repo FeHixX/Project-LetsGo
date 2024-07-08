@@ -34,6 +34,7 @@
 
          @media (max-width: 740px) {
           font-size: 20px;
+          margin-bottom: 15px;
         }
       }
     }
@@ -45,6 +46,16 @@
 
       @media (max-width: 768px) {
         margin-top: 0px;
+      }
+    }
+
+    .dateWrapper {
+      .react-datepicker__day-name {
+        @media (max-width: 740px) {
+          &::before {
+            content: attr(data-short-name);
+          }
+        }
       }
     }
   
@@ -71,8 +82,8 @@
       }
 
       @media (max-width: 740px) {
-        padding: 0px 0px 0px 0px;
-        height: 30px;
+        padding: 10px 0px 10px 0px;
+        height: 32px;
         align-items: center;
         font-size: 13px;
       }
@@ -209,10 +220,18 @@
       @media (max-width: 768px) {
         font-size: 36px;
       }
+
+      @media (max-width: 740px) {
+        padding: 10px 0 10px;
+      }
     }
   
     .react-datepicker__navigation {
       top: 35px;
+
+      @media (max-width: 740px) {
+        top: 15px;
+      }
     }
   
     .react-datepicker__navigation-icon::before {
@@ -225,6 +244,12 @@
         width: 16px;
         left: -23px;
        }
+
+       @media (max-width: 740px) {
+        height: 10px;
+        width: 10px;
+        left: -13px;
+      }
     }
 
     .react-datepicker__navigation-icon--previous::before {
@@ -237,6 +262,12 @@
         width: 16px;
         left: -1px;
        }
+
+       @media (max-width: 740px) {
+        height: 10px;
+        width: 10px;
+        left: -13px;
+      }
     }
   
     .react-datepicker__header {
@@ -307,6 +338,12 @@
         svg {
           width: 20px;
           height: 20px;
+
+
+          @include mixins.tablet-small {
+            width: 14px;
+            height: 14px;
+          }
         }
       }
 
@@ -327,6 +364,11 @@
     width: 100%;
     justify-content: space-between;
     letter-spacing: 2px;
+    font-weight: 500;
+
+    @include mixins.tablet-small {
+			font-size: 15px;
+		}
   }
 
   .inputCompanionSecond {
@@ -379,6 +421,14 @@
     width: 100%;
     justify-content: space-between;
      }
+
+     @include mixins.tablet-small {
+			font-size: 14px;
+      padding-left: 13px;
+      padding-right: 13px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+		}
   }
 
   label {
@@ -454,6 +504,11 @@ gap: 15px;
     border-bottom: 1px solid var(--color-light-grayish-blue);
     width: 100%;
    }
+
+   @include mixins.tablet-small {
+    font-size: 12px;
+  }
+   
 }
 
 .inputChildrenWrapper::after {
@@ -465,6 +520,7 @@ gap: 15px;
   margin-left: 10px;
   white-space: nowrap;
   color: #1D2E5B;
+  font-weight: 500;
 
   @media (max-width: 1300px) {
     left: 15%;
@@ -474,6 +530,12 @@ gap: 15px;
     top: 44%;
     left: 8%;
    }
+
+   @include mixins.tablet-small {
+    font-size: 12px;
+    top: 47%;
+    left: 12%;
+  }
 }
 
 
@@ -537,6 +599,8 @@ gap: 15px;
 
   @media (max-width: 740px) {
     font-size: 13px;
+    width: 223px;
+    line-height: 22px;
    }
 
   @media (max-width: 768px) {
@@ -588,8 +652,8 @@ gap: 15px;
   }
 
   @include mixins.tablet-small {
-    width: 35px;
-    height: 35px;
+    width: 25px;
+    height: 25px;
 
     svg {
       width: 11px;
