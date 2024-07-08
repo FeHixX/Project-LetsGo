@@ -1,16 +1,16 @@
-import { FC, ChangeEvent } from 'react';
-import Image from 'next/image';
-import { IconCheckbox, Textarea, Wrapper } from '@/ui';
-import { IconCheckboxItemI } from '@/ui/iconCheckbox/iconCheckbox.types';
-import IconBicycle from '@icons/icon-bicycle.svg';
-import IconBus from '@icons/icon-bus.svg';
-import IconPlane from '@icons/icon-plane.svg';
-import IconRun from '@icons/icon-run.svg';
-import classNames from 'classnames';
+import { ChangeEvent, FC } from 'react'
+import Image from 'next/image'
+import { IconCheckbox, Textarea, Wrapper } from '@/ui'
+import { IconCheckboxItemI } from '@/ui/iconCheckbox/iconCheckbox.types'
+import IconBicycle from '@icons/icon-bicycle.svg'
+import IconBus from '@icons/icon-bus.svg'
+import IconPlane from '@icons/icon-plane.svg'
+import IconRun from '@icons/icon-run.svg'
+import classNames from 'classnames'
 
-import { Level } from '../level';
-import styles from './user.module.scss';
-import { UserProps } from './user.types';
+import { Level } from '../level'
+import styles from './user.module.scss'
+import { UserProps } from './user.types'
 
 export const checkboxList: IconCheckboxItemI[] = [
   {
@@ -37,7 +37,7 @@ export const checkboxList: IconCheckboxItemI[] = [
     name: 'transport',
     icon: <IconRun />
   }
-];
+]
 
 const User: FC<UserProps> = ({
   className,
@@ -46,40 +46,42 @@ const User: FC<UserProps> = ({
   onChangeHashtags,
   onChangeTransport
 }) => {
-  const rootClassName = classNames(styles.root, className);
+  const rootClassName = classNames(styles.root, className)
 
   const handleHashtagChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (onChangeHashtags) {
-      const value = e.target.value;
-      const words = value.split(' ');
-      const formattedWords = words.map(word => {
+      const value = e.target.value
+      const words = value.split(' ')
+      const formattedWords = words.map((word) => {
         if (word.startsWith('#')) {
-          return word.slice(0, 20);
+          return word.slice(0, 20)
         } else {
-          return '#' + word.slice(0, 19);
+          return '#' + word.slice(0, 19)
         }
-      });
-      const formattedValue = formattedWords.join(' ');
-      
-      const hashTagsArray = formattedValue.split(' ').filter(tag => tag.trim() !== '');
-      
+      })
+      const formattedValue = formattedWords.join(' ')
+
+      const hashTagsArray = formattedValue
+        .split(' ')
+        .filter((tag) => tag.trim() !== '')
+
       const syntheticEvent = {
         ...e,
         target: {
           ...e.target,
           value: hashTagsArray
         }
-      } as unknown as ChangeEvent<HTMLInputElement>;
-      
-      onChangeHashtags(syntheticEvent);
+      } as unknown as ChangeEvent<HTMLInputElement>
+
+      onChangeHashtags(syntheticEvent)
     }
-  };
+  }
 
   const handleTransportChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (onChangeTransport) {
-      onChangeTransport(e);
+      onChangeTransport(e)
     }
-  };
+  }
 
   return (
     <section className={rootClassName}>
@@ -108,7 +110,11 @@ const User: FC<UserProps> = ({
                 maxLength={70}
                 placeholder="Коротко о себе в виде 5-8 хештэгов"
                 rows={1}
-                value={Array.isArray(valueHashtags) ? valueHashtags.join(' ') : valueHashtags || ''}
+                value={
+                  Array.isArray(valueHashtags)
+                    ? valueHashtags.join(' ')
+                    : valueHashtags || ''
+                }
                 onChange={handleHashtagChange}
               />
             </fieldset>
@@ -130,7 +136,7 @@ const User: FC<UserProps> = ({
         </div>
       </Wrapper>
     </section>
-  );
-};
+  )
+}
 
-export default User;
+export default User
