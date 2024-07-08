@@ -71,7 +71,7 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
   }
 
   const updateHashTags = (e: ChangeEvent<HTMLInputElement>) => {
-    const newHashTags = e.target.value.split(',').map((tag) => tag.trim())
+    const newHashTags = Array.isArray(e.target.value) ? e.target.value : e.target.value.split(' ').filter(tag => tag.trim() !== '');
     setFormData((prevData) => ({
       ...prevData,
       hashTags: newHashTags
@@ -92,7 +92,7 @@ const MultiStepForm: FC<{ className?: string }> = ({ className }) => {
     <section className={rootClassName}>
       <User
         className={styles.user}
-        valueHashtags={formData.hashTags.join(', ')}
+        valueHashtags={formData.hashTags}
         onChangeHashtags={updateHashTags}
         valueTransport={formData.transport.join(', ')}
         onChangeTransport={updateTransport}

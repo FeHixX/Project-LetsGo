@@ -32,8 +32,9 @@ const CountriesFilter: FC<{ onFilterChange: (continent: string | null, country: 
   }
 
   const handleCountryClick = (country: string) => {
-    setSelectedCountry(country === selectedCountry ? null : country)
-    onFilterChange(selectedContinent, country === selectedCountry ? null : country)
+    const newSelectedCountry = country === selectedCountry ? null : country;
+    setSelectedCountry(newSelectedCountry);
+    onFilterChange(selectedContinent, newSelectedCountry);
   }
 
   const { isMobile, isTablet, isDesktop } = useResponsive()
@@ -131,12 +132,12 @@ const CountriesFilter: FC<{ onFilterChange: (continent: string | null, country: 
             <ul className={styles.list}>
               {filteredCountries.map((country) => (
                 <li
-                  key={country.name.common}
-                  className={`${styles.country} ${selectedCountry === country.name.rus ? styles.selectedCountry : ''}`}
-                  onClick={() => handleCountryClick(country.name.rus)}
-                >
-                  <span className={styles.countryText}>{country.name.rus}</span>
-                </li>
+                key={country.name.common}
+                className={`${styles.country} ${selectedCountry === country.name.rus ? styles.selectedCountry : ''}`}
+                onClick={() => handleCountryClick(country.name.rus)}
+              >
+                <span className={styles.countryText}>{country.name.rus}</span>
+              </li>
               ))}
             </ul>
           </div>
