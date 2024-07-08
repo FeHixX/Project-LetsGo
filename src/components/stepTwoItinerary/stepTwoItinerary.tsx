@@ -112,7 +112,7 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
           <div className={styles.formDescription}>
             <h2>Шаг 2. Маршрут</h2>
             <p>
-              Укажите страны, которые вы хотели бы посетить. <br />
+              Укажите&nbsp;страны,&nbsp;которые&nbsp;вы&nbsp;хотели бы посетить.
               Это может быть одна или сразу несколько.
             </p>
           </div>
@@ -131,13 +131,15 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
                   </div>
                 </div>
                 <div className={styles.countryIndicator}>
-                  <Image
-                    className={styles.countryFlags}
-                    src={country.flags.png}
-                    alt={`${country.name.rus} flag`}
-                    width={70}
-                    height={47}
-                  />
+                  <div className={styles.countryImage}>
+                    <Image
+                      className={styles.countryFlags}
+                      src={country.flags.png}
+                      alt={`${country.name.rus} flag`}
+                      width={70}
+                      height={47}
+                    />
+                  </div>
                   <button
                     className={styles.countryDelete}
                     onClick={() => handleCountryRemove(country)}
@@ -176,10 +178,10 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
                     </li>
                   ))}
                 </ul>
-                <ul className={styles.countries}>
+                <ul className={styles.countriesAlphabet}>
                   {filteredCountries.map((country) => (
                     <li
-                      className={styles.country}
+                      className={styles.countryAlphabet}
                       key={country.name.rus}
                       onClick={() => handleCountrySelect(country)}
                     >
@@ -189,7 +191,7 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
                 </ul>
               </div>
             </div>
-            <button className={styles.countryDelete}></button>
+            <button className={styles.countryAlphabetDelete}></button>
           </div>
           <div className={styles.formButtons}>
             <button

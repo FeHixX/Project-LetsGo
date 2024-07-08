@@ -51,17 +51,17 @@
 		justify-content: center;
 
 		@include mixins.tablet {
-			padding: 59px 37px 55px;
+			padding: 47px 37px 55px;
 			border-radius: 30px;
 			margin-left: 35px;
 			margin-right: 35px;
 		}
 
 		@include mixins.tablet-small {
-			padding: 59px 37px 55px;
+			padding: 23px 37px 55px;
 			border-radius: 10px;
-			margin-left: 0px;
-			margin-right: 0px;
+			margin-left: 0;
+			margin-right: 0;
 		}
 	}
 }
