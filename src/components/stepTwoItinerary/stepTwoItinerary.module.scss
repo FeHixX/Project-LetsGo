@@ -11,6 +11,14 @@
   justify-content: space-between;
   padding-bottom: 52px;
   border-bottom: 1px solid var(--color-light-grayish-blue);
+
+  @include mixins.tablet {
+    padding-bottom: 32px;
+  }
+
+  @include mixins.tablet-small {
+    padding: 0;
+  }
 }
 
 .formDescription {
@@ -22,12 +30,27 @@
     font-size: 36px;
     line-height: 36px;
     font-weight: bold;
+
+    @include mixins.tablet {
+      margin: 0 0 70px;
+    }
+
+    @include mixins.tablet-small {
+      margin: 0 0 35px;
+      font-size: 20px;
+      line-height: 20px;
+    }
   }
 
   & p {
     font-size: 20px;
     line-height: 24px;
     font-weight: regular;
+
+    @include mixins.tablet-small {
+      font-size: 13px;
+      line-height: 22px;
+    }
   }
 }
 
@@ -45,6 +68,23 @@
     bottom: 0;
     background-color: #E1E3E9;
   }
+
+  @include mixins.tablet {
+    padding: 40px 0 0;
+
+    &::before {
+      left: 396px;
+      height: 80%;
+    }
+  }
+
+  @include mixins.tablet-small {
+    padding: 18px 0 0;
+
+    &::before {
+      display: none;
+    }
+  }
 }
 
 .country {
@@ -53,6 +93,15 @@
   align-items: center;
   gap: 85px;
   margin: 0 0 13px;
+
+  @include mixins.tablet {
+    gap: 52px;
+    margin: 0 0 18px;
+  }
+
+  @include mixins.tablet-small {
+    gap: 0;
+  }
 }
 
 .countryName {
@@ -74,6 +123,28 @@
     height: 14px;
     border-radius: 50%;
     background-color: #1D2E5B;
+    z-index: 3;
+  }
+
+  @include mixins.tablet {
+    min-width: 369px;
+
+    &::after {
+      right: -34px;
+    }
+  }
+
+  @include mixins.tablet-small {
+    padding: 13px 10px;
+    min-width: 168px;
+    border-radius: 4px;
+
+    &::after {
+      top: 18px;
+      right: -5px;
+      width: 8px;
+      height: 8px;
+    }
   }
 }
 
@@ -82,6 +153,12 @@
   font-size: 20px;
   line-height: 20px;
   font-weight: medium;
+
+  @include mixins.tablet-small {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 10%;
+  }
 }
 
 .countryArrow {
@@ -89,6 +166,11 @@
   cursor: pointer;
   width: 22px;
   height: 24px;
+
+  @include mixins.tablet {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .countryArrowButtom {
@@ -109,6 +191,33 @@
   align-items: center;
   justify-content: center;
   gap: 95px;
+
+  @include mixins.tablet {
+    gap: 25px;
+  }
+
+  @include mixins.tablet-small {
+    position: relative;
+    padding: 9px;
+    border: 1px solid #CBCED9;
+    border-radius: 4px;
+  }
+}
+
+.countryImage {
+  width: 70px;
+  height: 47px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @include mixins.tablet-small {
+    width: 35px;
+    height: 24px;
+  }
 }
 
 .countryDelete {
@@ -135,6 +244,21 @@
   &::after {
     transform: rotate(-45deg);
   }
+
+  @include mixins.tablet-small {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    padding: 7px;
+    background-color: #EDEFF6;
+    border-radius: 50%;
+
+    &::before,
+    &::after {
+      width: 12px;
+      left: 4px;
+    }
+  }
 }
 
 .formSelectContainer {
@@ -143,6 +267,15 @@
   justify-content: space-between;
   gap: 250px;
   margin: 0 0 142px;
+
+  @include mixins.tablet {
+    gap: 147px;
+  }
+
+  @include mixins.tablet-small {
+    display: block;
+    margin: 0 0 165px;
+  }
 }
 
 .formSelect {
@@ -172,6 +305,25 @@
     border: 1px solid #CBCED9;
     background-color: #ffffff;
   }
+
+  @include mixins.tablet {
+    min-width: 369px;
+
+    &::after {
+      right: -35px;
+    }
+  }
+
+  @include mixins.tablet-small {
+    padding: 15px 18px;
+    min-width: 100%;
+    font-size: 14px;
+    line-height: 18px;
+
+    &::after {
+      display: none;
+    }
+  }
 }
 
 .formSelectButtonText {
@@ -180,6 +332,12 @@
   font-weight: medium;
   letter-spacing: 10%;
   text-transform: uppercase;
+
+  @include mixins.tablet-small {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 2%;
+  }
 }
 
 .formSelectArrowCross {
@@ -207,6 +365,18 @@
   &::after {
     transform: rotate(-45deg);
   }
+
+  @include mixins.tablet-small {
+    width: 9px;
+    height: 9px;
+
+    &::before,
+    &::after {
+      top: 2px;
+      left: 0;
+      width: 10px;
+    }
+  }
 }
 
 .lettersAndCountries {
@@ -222,15 +392,37 @@
   top: 70px;
   display: flex;
   align-items: flex-start;
-  gap: 135px;
   padding: 32px 34px 36px 23px;
   background-color: #ffffff;
+
+  @include mixins.tablet {
+    right: -208px;
+    padding: 32px 34px 36px 29px;
+  }
+
+  @include mixins.tablet-small {
+    padding: 0;
+    top: 45px;
+    right: 0;
+    flex-direction: column;
+  }
 }
 
 .letters {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 14px 16px;
+  padding: 0 135px 0 0;
+  background-color: #ffffff;
+
+  @include mixins.tablet {
+    gap: 0;
+    padding: 0 96px 0 0;
+  }
+
+  @include mixins.tablet-small {
+    padding: 0;
+  }
 }
 
 .letter {
@@ -241,14 +433,64 @@
   font-size: 20px;
   font-weight: medium;
   line-height: 20px;
+  cursor: pointer;
 
   @include mixins.tablet {
     margin: 0;
+    padding: 24px 17px;
   }
 
   @include mixins.tablet-small {
+    padding: 11px 15px;
     font-size: 14px;
     line-height: 18px;
+  }
+}
+
+.countriesAlphabet {
+  @include mixins.tablet-small {
+    padding: 16px 20px;
+  }
+}
+
+.countryAlphabet {
+  margin: 0 0 13px;
+  cursor: pointer;
+
+  @include mixins.tablet-small {
+    margin: 0 0 4px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+.countryAlphabetDelete {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: -6px;
+    transform: translateX(50%);
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-light-grey);
+  }
+
+  &::before {
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  @include mixins.tablet-small {
+    display: none;
   }
 }
 
@@ -256,6 +498,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include mixins.tablet-small {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
 .formButton {
@@ -269,6 +516,13 @@
   white-space: nowrap;
   line-height: 100%;
   padding: 29px 36px;
+
+  @include mixins.tablet-small {
+    padding: 7px 40px;
+    max-width: 221px;
+    font-size: 17px;
+    line-height: 30px;
+  }
 }
 
 .formButtonNext {
@@ -277,4 +531,5 @@
 
 .formButtonPrev {
   padding: 0;
+  align-items: center;
 }
