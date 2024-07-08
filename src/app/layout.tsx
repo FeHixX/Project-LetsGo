@@ -33,7 +33,7 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" data-lt-installed="true">
       <body className={font.className}>
         <Provider>
           <div id="root">

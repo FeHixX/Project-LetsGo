@@ -31,7 +31,11 @@ const nextConfig = {
   },
   images: {
     unoptimized: false,
-    domains: ['flagcdn.com', 'upload.wikimedia.org', 'xsgames.co','flagcdn.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'flagcdn.com' },
+      { protocol: 'https', hostname: 'upload.wikimedia.org' },
+      { protocol: 'https', hostname: 'xsgames.co' },
+    ],
   }
 };
 
