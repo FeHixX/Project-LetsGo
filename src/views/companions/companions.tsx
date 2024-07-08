@@ -56,7 +56,7 @@ const Companions: FC<CompanionsProps> = ({ className }) => {
     <main className={rootClassName}>
       <PageHeader className={styles.header}>Попутчики</PageHeader>
       <CountriesFilter />
-      <UserList className={styles.list} cardData={cardData} />
+      <UserList className={styles.list} initialCardData={cardData} />
     </main>
   )
 }

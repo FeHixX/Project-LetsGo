@@ -2,8 +2,9 @@ import { ReactNode } from 'react'
 
 export interface UserListProps {
   className?: string
-  cardData?: {
-    cardList: Array<{
+  initialCardData?: {
+    cardId?: string
+    cardList?: Array<{
       name: string
       avatarUrl: string
       hashTags: string[]
