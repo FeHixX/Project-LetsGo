@@ -50,7 +50,30 @@ const User: FC<UserProps> = ({
 
   const handleHashtagChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (onChangeHashtags) {
-      onChangeHashtags(e as unknown as ChangeEvent<HTMLInputElement>)
+      const value = e.target.value
+      const words = value.split(' ')
+      const formattedWords = words.map((word) => {
+        if (word.startsWith('#')) {
+          return word.slice(0, 20)
+        } else {
+          return '#' + word.slice(0, 19)
+        }
+      })
+      const formattedValue = formattedWords.join(' ')
+
+      const hashTagsArray = formattedValue
+        .split(' ')
+        .filter((tag) => tag.trim() !== '')
+
+      const syntheticEvent = {
+        ...e,
+        target: {
+          ...e.target,
+          value: hashTagsArray
+        }
+      } as unknown as ChangeEvent<HTMLInputElement>
+
+      onChangeHashtags(syntheticEvent)
     }
   }
 
@@ -87,7 +110,11 @@ const User: FC<UserProps> = ({
                 maxLength={70}
                 placeholder="Коротко о себе в виде 5-8 хештэгов"
                 rows={1}
-                value={valueHashtags || ''}
+                value={
+                  Array.isArray(valueHashtags)
+                    ? valueHashtags.join(' ')
+                    : valueHashtags || ''
+                }
                 onChange={handleHashtagChange}
               />
             </fieldset>
