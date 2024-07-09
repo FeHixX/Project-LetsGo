@@ -60,9 +60,9 @@ const User: FC<UserProps> = ({
         }
       })
       
-      // Ограничиваем количество хэштегов до 6
-      const limitedWords = formattedWords.slice(0, 6)
-      const formattedValue = limitedWords.join(' ')
+      // Удаляем дубликаты и ограничиваем количество хэштегов до 6
+      const uniqueWords = Array.from(new Set(formattedWords)).slice(0, 6)
+      const formattedValue = uniqueWords.join(' ')
   
       const hashTagsArray = formattedValue
         .split(' ')
