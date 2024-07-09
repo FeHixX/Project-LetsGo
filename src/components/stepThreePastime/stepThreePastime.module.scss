@@ -87,7 +87,7 @@
     height: 100%;
     top: 20px;
     bottom: 0;
-    right: 0;
+    right: 213px;
     background-color: #1D2E5B;
   }
 
@@ -95,7 +95,7 @@
     padding: 0 0 35px;
 
     &::after {
-      right: 5px;
+      right: -35px;
     }
   }
 
@@ -138,15 +138,15 @@
 
 .countryName {
   width: 100%;
-  min-width: 730px;
+  max-width: 730px;
 
   @include mixins.tablet {
-    min-width: auto;
+    max-width: auto;
   }
 
   @include mixins.tablet-small {
     position: relative;
-    min-width: auto;
+    max-width: auto;
     margin: 0 0 0 10px;
 
     &::after {
@@ -228,8 +228,13 @@
 }
 
 .countryInput {
+  margin: 0 271px 0 0;
+
+  @include mixins.tablet {
+    margin: 0;
+  }
+
   textarea {
-    max-width: 730px;
     min-height: 142px;
     width: 100%;
     height: 100%;
@@ -252,7 +257,6 @@
     }
 
     @include mixins.tablet-small {
-      max-width: 220px;
       min-height: 220px;
     }
   }
