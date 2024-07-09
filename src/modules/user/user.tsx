@@ -53,18 +53,23 @@ const User: FC<UserProps> = ({
       const value = e.target.value
       const words = value.split(' ')
       const formattedWords = words.map((word) => {
-        if (word.startsWith('#')) {
-          return word.slice(0, 20)
+        // Удаляем все символы, кроме букв, цифр и '#'
+        const cleanWord = word.replace(/[^а-яА-Яa-zA-Z0-9#]/g, '')
+        if (cleanWord.startsWith('#')) {
+          return cleanWord.slice(0, 20)
         } else {
-          return '#' + word.slice(0, 19)
+          return '#' + cleanWord.slice(0, 19)
         }
       })
-      const formattedValue = formattedWords.join(' ')
-
+      
+      // Удаляем дубликаты и ограничиваем количество хэштегов до 6
+      const uniqueWords = Array.from(new Set(formattedWords)).slice(0, 6)
+      const formattedValue = uniqueWords.join(' ')
+  
       const hashTagsArray = formattedValue
         .split(' ')
         .filter((tag) => tag.trim() !== '')
-
+  
       const syntheticEvent = {
         ...e,
         target: {
@@ -72,11 +77,11 @@ const User: FC<UserProps> = ({
           value: hashTagsArray
         }
       } as unknown as ChangeEvent<HTMLInputElement>
-
+  
       onChangeHashtags(syntheticEvent)
     }
   }
-
+  
   const handleTransportChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (onChangeTransport) {
       onChangeTransport(e)

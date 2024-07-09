@@ -95,7 +95,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
   }
 
   const handleArrayChange = (
-    e: ChangeEvent<HTMLInputElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     field: 'countryList',
     index: number,
     subfield: 'name' | 'description' | null = null
@@ -208,7 +208,12 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
                   rows={1}
                   value={country.description}
                   onChange={(e) =>
-                    handleArrayChange(e, 'countryList', index, 'description')
+                    handleArrayChange(
+                      e as ChangeEvent<HTMLTextAreaElement>,
+                      'countryList',
+                      index,
+                      'description'
+                    )
                   }
                 />
               </div>
