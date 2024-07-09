@@ -115,27 +115,35 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-
+  
     const validTransports = ['plane', 'bus', 'bike', 'walk']
     const filteredTransport = formData.transport.filter((transport) =>
       validTransports.includes(transport)
     )
-    const updatedFormData = { ...formData, transport: filteredTransport }
-
+    
+    // Фильтруем хэштеги, оставляя только те, которые имеют длину 2 или более символов
+    const filteredHashTags = formData.hashTags.filter(tag => tag.length >= 2)
+    
+    const updatedFormData = { 
+      ...formData, 
+      transport: filteredTransport,
+      hashTags: filteredHashTags
+    }
+  
     const invalidCountries = updatedFormData.countryList.filter((country) => {
       return !selectedCountries.some((sc) => sc.name.rus === country.name)
     })
-
+  
     if (invalidCountries.length > 0) {
       alert(
         'Наименование страны должно быть на русском языке из списка предложенных.'
       )
       return
     }
-
+  
     const startDate = updatedFormData.startDate.split('T')[0]
     const endDate = updatedFormData.endDate.split('T')[0]
-
+  
     const response = await fetch('https://lets-go-8s43.onrender.com/cards/', {
       method: 'POST',
       headers: {
@@ -143,7 +151,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       },
       body: JSON.stringify({ ...updatedFormData, startDate, endDate })
     })
-
+  
     if (!response.ok) {
       const data = await response.json()
       console.error(data)
@@ -153,7 +161,7 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
       console.log(data)
       alert('Данные успешно отправлены!')
       updateData(data)
-
+  
       if (data.id) {
         localStorage.setItem('cardId', data.id)
         console.log('Сохраненный ID карточки:', data.id)
