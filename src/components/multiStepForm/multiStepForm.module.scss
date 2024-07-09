@@ -67,15 +67,15 @@
 
 .user {
 	margin: -188px 0 0;
-	padding: 0 0 76px;
+	padding: 0 0 74px;
 
 	@include mixins.tablet {
 		margin: 0;
-		padding: 66px 0 61px;
+		padding: 66px 0 63px;
 	}
 
 	@include mixins.tablet-small {
-		padding: 24px 0 32px;
+		padding: 24px 0 33px;
 	}
 }
 
