@@ -53,10 +53,12 @@ const User: FC<UserProps> = ({
       const value = e.target.value
       const words = value.split(' ')
       const formattedWords = words.map((word) => {
-        if (word.startsWith('#')) {
-          return word.slice(0, 20)
+        // Удаляем все символы, кроме букв, цифр и '#'
+        const cleanWord = word.replace(/[^а-яА-Яa-zA-Z0-9#]/g, '')
+        if (cleanWord.startsWith('#')) {
+          return cleanWord.slice(0, 20)
         } else {
-          return '#' + word.slice(0, 19)
+          return '#' + cleanWord.slice(0, 19)
         }
       })
       
@@ -79,6 +81,7 @@ const User: FC<UserProps> = ({
       onChangeHashtags(syntheticEvent)
     }
   }
+  
   const handleTransportChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (onChangeTransport) {
       onChangeTransport(e)
