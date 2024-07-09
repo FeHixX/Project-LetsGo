@@ -59,12 +59,15 @@ const User: FC<UserProps> = ({
           return '#' + word.slice(0, 19)
         }
       })
-      const formattedValue = formattedWords.join(' ')
-
+      
+      // Ограничиваем количество хэштегов до 6
+      const limitedWords = formattedWords.slice(0, 6)
+      const formattedValue = limitedWords.join(' ')
+  
       const hashTagsArray = formattedValue
         .split(' ')
         .filter((tag) => tag.trim() !== '')
-
+  
       const syntheticEvent = {
         ...e,
         target: {
@@ -72,11 +75,10 @@ const User: FC<UserProps> = ({
           value: hashTagsArray
         }
       } as unknown as ChangeEvent<HTMLInputElement>
-
+  
       onChangeHashtags(syntheticEvent)
     }
   }
-
   const handleTransportChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (onChangeTransport) {
       onChangeTransport(e)
