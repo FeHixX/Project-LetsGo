@@ -17,7 +17,9 @@
     background-color: var(--color-white-default);
     border-radius: 50%;
     cursor: pointer;
-    transition: background-color variables.$transition;
+    transition:
+      background-color variables.$transition,
+      box-shadow variables.$transition;
 
     span {
       position: absolute;
@@ -42,6 +44,7 @@
       transition:
         visibility variables.$transition,
         opacity variables.$transition;
+      pointer-events: none;
 
       &::before {
         content: '';
@@ -55,18 +58,21 @@
       }
     }
 
-    &:hover span {
-      visibility: visible;
-      opacity: 1;
-    }
-
+    &:hover span,
     & span:has(+ input:focus-visible) {
       visibility: visible;
       opacity: 1;
     }
 
+    &:hover,
+    &:has(input:focus-visible) {
+      box-shadow: 0 2px 6px 0 rgba(22 28 53 / 17%);
+    }
+
+    &:active,
     &:has(input:active) {
       background-color: var(--color-solitude-2);
+      box-shadow: none;
     }
   }
 
@@ -83,10 +89,6 @@
     position: fixed;
     transform: scale(0);
 
-    &:checked + svg {
-      color: var(--color-catalina-blue);
-    }
-
     &:hover + svg,
     &:focus-visible + svg {
       color: var(--color-pink-swan);
@@ -95,6 +97,10 @@
     &:active + svg {
       color: var(--color-catalina-blue);
       opacity: 0.1;
+    }
+
+    &:checked + svg {
+      color: var(--color-catalina-blue);
     }
 
     &:checked:hover + svg,

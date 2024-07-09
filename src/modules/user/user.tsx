@@ -61,15 +61,15 @@ const User: FC<UserProps> = ({
           return '#' + cleanWord.slice(0, 19)
         }
       })
-      
+
       // Удаляем дубликаты и ограничиваем количество хэштегов до 6
       const uniqueWords = Array.from(new Set(formattedWords)).slice(0, 6)
       const formattedValue = uniqueWords.join(' ')
-  
+
       const hashTagsArray = formattedValue
         .split(' ')
         .filter((tag) => tag.trim() !== '')
-  
+
       const syntheticEvent = {
         ...e,
         target: {
@@ -77,11 +77,11 @@ const User: FC<UserProps> = ({
           value: hashTagsArray
         }
       } as unknown as ChangeEvent<HTMLInputElement>
-  
+
       onChangeHashtags(syntheticEvent)
     }
   }
-  
+
   const handleTransportChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (onChangeTransport) {
       onChangeTransport(e)
@@ -109,7 +109,9 @@ const User: FC<UserProps> = ({
               />
             </div>
             <fieldset className={styles.tags}>
-              <legend className={styles.label}>Тэги</legend>
+              <div className={styles.label}>
+                <p>Тэги</p>
+              </div>
               <Textarea
                 name="tags"
                 maxLength={70}
@@ -130,7 +132,9 @@ const User: FC<UserProps> = ({
               </label>
             </div>
             <fieldset className={styles.transport}>
-              <legend className={styles.label}>Транспорт</legend>
+              <div className={styles.label}>
+                <p>Транспорт</p>
+              </div>
               <IconCheckbox
                 items={checkboxList}
                 value={valueTransport.split(', ')}
