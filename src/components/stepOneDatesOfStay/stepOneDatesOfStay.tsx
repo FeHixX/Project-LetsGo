@@ -52,6 +52,7 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
   const [duration, setDuration] = useState<number>(0);
   const [children, setChildren] = useState<boolean>(data.children);
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 1024);
+  const [areDatesSelected, setAreDatesSelected] = useState<boolean>(false);
   const today = new Date();
   const maxDate = addMonths(today, 1);
 
@@ -100,9 +101,11 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
           setStartDate(start);
           setEndDate(end);
         }
+        setAreDatesSelected(true);
       } else {
         setStartDate(start);
         setEndDate(end);
+        setAreDatesSelected(false);
       }
     },
     []
@@ -167,14 +170,14 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
             <div className={styles.counterWrapper}>
               <button
                 onClick={() => handleDurationChange(Math.max(1, duration - 1))}
-                disabled={duration <= 1}
+                disabled={duration <= 1 || areDatesSelected}
               >
                 <Minus />
               </button>
               <span>{duration}</span>
               <button
                 onClick={() => handleDurationChange(Math.min(31, duration + 1))}
-                disabled={duration >= 31}
+                disabled={duration >= 31 || areDatesSelected}
               >
                 <Plus />
               </button>
@@ -242,14 +245,14 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
             <div className={styles.counterWrapper}>
               <button
                 onClick={() => handleDurationChange(Math.max(1, duration - 1))}
-                disabled={duration <= 1}
+                disabled={duration <= 1 || areDatesSelected}
               >
                 <Minus />
               </button>
               <span>{duration}</span>
               <button
                 onClick={() => handleDurationChange(Math.min(31, duration + 1))}
-                disabled={duration >= 31}
+                disabled={duration >= 31 || areDatesSelected}
               >
                 <Plus />
               </button>
