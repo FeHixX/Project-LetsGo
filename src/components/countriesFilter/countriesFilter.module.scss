@@ -4,10 +4,30 @@
 .root {
     @include mixins.tablet {
         z-index: 2;
+        
 
         position: absolute;
         left: 0;
         right: 0;
+    }
+
+    .selectedContinent{
+        color: rgba(25, 33, 68, 1);
+        font-weight: 700;
+    }
+}
+.country {
+    cursor: pointer;
+  }
+
+.selectedCountry{
+    color: rgba(25, 33, 68, 1);
+    font-weight: 700;
+}
+
+.countriesFilter{
+    .selectedContinent{
+        color: var(--color-echo-blue);
     }
 }
 
