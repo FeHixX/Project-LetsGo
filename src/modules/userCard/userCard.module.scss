@@ -12,20 +12,7 @@
   place-items: start;
 
   &_current {
-
-    .button,
-    .image .like {
-      display: none;
-    }
-  }
-
-  &_id {
     box-shadow: 0 4px 20px 0 rgba(0 0 0 / 25%);
-
-    [data-hidden] {
-      display: none;
-      user-select: none;
-    }
   }
 
   @include mixins.desktop-small {

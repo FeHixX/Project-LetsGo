@@ -6,25 +6,6 @@
     @include mixins.tablet {
         position: relative;
     }
-
-    .selectedContinent {
-        color: rgba(25, 33, 68, 1);
-        font-weight: 700;
-    }
-}
-.country {
-    cursor: pointer;
-}
-
-.selectedCountry {
-    color: rgba(25, 33, 68, 1);
-    font-weight: 700;
-}
-
-.countriesFilter {
-    .selectedContinent {
-        color: var(--color-echo-blue);
-    }
 }
 
 .filter {
@@ -151,7 +132,7 @@
     opacity: 0.3;
     transition: opacity variables.$transition;
 
-    &.active {
+    &.selectedContinent {
         opacity: 1;
     }
 
@@ -438,6 +419,11 @@
     @include mixins.tablet-small {
         margin: 0;
     }
+}
+
+.selectedCountry {
+    color: var(--color-catalina-blue);
+    font-weight: 700;
 }
 
 .countryText {
