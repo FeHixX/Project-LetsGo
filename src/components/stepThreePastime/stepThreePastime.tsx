@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, FormEvent, useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Textarea } from '@/ui'
@@ -56,8 +56,39 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
   const rootClassName = classNames(styles.root, className)
   const [formData, setFormData] = useState<FormData>(data)
   const [isFormValid, setIsFormValid] = useState(false)
+  const [errors, setErrors] = useState<string[]>([])
 
   const router = useRouter()
+
+  const validateForm = useCallback(() => {
+    const newErrors: string[] = []
+  
+    if (formData.countryList.length === 0) {
+      newErrors.push('Выберите хотя бы одну страну')
+    }
+  
+    if (formData.countryList.some((country) => country.description.trim() === '')) {
+      newErrors.push('Заполните план действий для всех выбранных стран')
+    }
+    if (formData.startDate === '') {
+      newErrors.push('Выберите дату начала поездки')
+    }
+    if (formData.endDate === '') {
+      newErrors.push('Выберите дату окончания поездки')
+    }
+    if (formData.hashTags.length === 0) {
+      newErrors.push('Добавьте хотя бы один хэштег')
+    }
+    if (formData.transport.length === 0) {
+      newErrors.push('Выберите хотя бы один вид транспорта')
+    }
+    if (formData.companionCount <= 0) {
+      newErrors.push('Укажите количество попутчиков')
+    }
+  
+    setErrors(newErrors)
+    setIsFormValid(newErrors.length === 0)
+  }, [formData])
 
   useEffect(() => {
     setFormData((prevData) => ({
@@ -70,29 +101,17 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
             }))
           : prevData.countryList,
       hashTags: data.hashTags,
-      transport: data.transport
+      transport: data.transport,
+      companionCount: data.companionCount,
+      startDate: data.startDate,
+      endDate: data.endDate,
+      children: data.children
     }))
+  }, [selectedCountries, data])
+  
+  useEffect(() => {
     validateForm()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    selectedCountries,
-    data.startDate,
-    data.endDate,
-    data.hashTags,
-    data.transport
-  ])
-
-  const validateForm = () => {
-    const isValid =
-      formData.countryList.every(
-        (country) => country.description.trim() !== ''
-      ) &&
-      formData.startDate !== '' &&
-      formData.endDate !== '' &&
-      formData.hashTags.length > 0 &&
-      formData.transport.length > 0
-    setIsFormValid(isValid)
-  }
+  }, [formData, validateForm])
 
   const handleArrayChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -116,12 +135,17 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
   
+    validateForm()
+    if (!isFormValid) {
+      alert('Пожалуйста, заполните все необходимые поля')
+      return
+    }
+
     const validTransports = ['plane', 'bus', 'bike', 'walk']
     const filteredTransport = formData.transport.filter((transport) =>
       validTransports.includes(transport)
     )
     
-    // Фильтруем хэштеги, оставляя только те, которые имеют длину 2 или более символов
     const filteredHashTags = formData.hashTags.filter(tag => tag.length >= 2)
     
     const updatedFormData = { 
@@ -228,6 +252,16 @@ const StepThreePastime: FC<StepThreePastimeProps> = ({
             </div>
           ))}
         </label>
+        {errors.length > 0 && (
+          <div className={styles.errorMessages}>
+            <p>Пожалуйста, заполните следующие данные:</p>
+            <ul>
+              {errors.map((error, index) => (
+                <li key={index}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div className={styles.formButtons}>
           <button
             type="submit"

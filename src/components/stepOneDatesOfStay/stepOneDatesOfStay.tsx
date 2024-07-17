@@ -49,9 +49,10 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [companionCount, setCompanionCount] = useState<number>(1);
-  const [duration, setDuration] = useState<number>(2);
+  const [duration, setDuration] = useState<number>(0);
   const [children, setChildren] = useState<boolean>(data.children);
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 1024);
+  const [areDatesSelected, setAreDatesSelected] = useState<boolean>(false);
   const today = new Date();
   const maxDate = addMonths(today, 1);
 
@@ -60,6 +61,14 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 чтобы учесть день заезда
+      setDuration(diffDays);
+    }
+  }, [startDate, endDate]);
 
   const handleNext = () => {
     const formatDateToISOString = (date: Date | null) => {
@@ -81,19 +90,35 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
   const handleDateChange = useCallback(
     (dates: [Date | null, Date | null]) => {
       const [start, end] = dates;
-      if (start && end && start.getTime() >= end.getTime()) {
-        // Если конечная дата меньше или равна начальной, устанавливаем её на следующий день
-        const newEnd = new Date(start);
-        newEnd.setDate(newEnd.getDate() + 1);
-        setStartDate(start);
-        setEndDate(newEnd);
+      if (start && end) {
+        if (start.getTime() >= end.getTime()) {
+          // Если конечная дата меньше или равна начальной, устанавливаем её на следующий день
+          const newEnd = new Date(start);
+          newEnd.setDate(newEnd.getDate() + 1);
+          setStartDate(start);
+          setEndDate(newEnd);
+        } else {
+          setStartDate(start);
+          setEndDate(end);
+        }
+        setAreDatesSelected(true);
       } else {
         setStartDate(start);
         setEndDate(end);
+        setAreDatesSelected(false);
       }
     },
     []
   );
+
+  const handleDurationChange = (newDuration: number) => {
+    setDuration(newDuration);
+    if (startDate) {
+      const newEndDate = new Date(startDate);
+      newEndDate.setDate(startDate.getDate() + newDuration - 1); // -1 потому что мы включаем день заезда
+      setEndDate(newEndDate);
+    }
+  };
 
   const renderDayContents = useCallback(
     (day: number, date: Date | null) => {
@@ -144,15 +169,15 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
           <div className={styles.counter}>
             <div className={styles.counterWrapper}>
               <button
-                onClick={() => setDuration(Math.max(2, duration - 1))}
-                disabled={duration <= 2}
+                onClick={() => handleDurationChange(Math.max(1, duration - 1))}
+                disabled={duration <= 1 || areDatesSelected}
               >
                 <Minus />
               </button>
               <span>{duration}</span>
               <button
-                onClick={() => setDuration(Math.min(31, duration + 1))}
-                disabled={duration >= 31}
+                onClick={() => handleDurationChange(Math.min(31, duration + 1))}
+                disabled={duration >= 31 || areDatesSelected}
               >
                 <Plus />
               </button>
@@ -219,15 +244,15 @@ const StepOneDatesOfStay: FC<StepOneDatesOfStayProps> = ({
           <div className={styles.counter}>
             <div className={styles.counterWrapper}>
               <button
-                onClick={() => setDuration(Math.max(2, duration - 1))}
-                disabled={duration <= 2}
+                onClick={() => handleDurationChange(Math.max(1, duration - 1))}
+                disabled={duration <= 1 || areDatesSelected}
               >
                 <Minus />
               </button>
               <span>{duration}</span>
               <button
-                onClick={() => setDuration(Math.min(31, duration + 1))}
-                disabled={duration >= 31}
+                onClick={() => handleDurationChange(Math.min(31, duration + 1))}
+                disabled={duration >= 31 || areDatesSelected}
               >
                 <Plus />
               </button>
