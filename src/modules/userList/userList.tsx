@@ -125,7 +125,6 @@ const UserList: FC<UserListProps> = ({ className, selectedContinent, selectedCou
     const nextPage = currentPage + 1;
     loadCardData(nextPage, true);
     setCurrentPage(nextPage);
-    setTotalPages((prevPages) => prevPages - 1);
   };
 
   const filteredUserData = userData.filter((user) => {
