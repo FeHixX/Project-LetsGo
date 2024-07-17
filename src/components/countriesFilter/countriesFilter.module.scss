@@ -6,6 +6,25 @@
     @include mixins.tablet {
         position: relative;
     }
+
+    .selectedContinent {
+        color: rgba(25, 33, 68, 1);
+        font-weight: 700;
+    }
+}
+.country {
+    cursor: pointer;
+}
+
+.selectedCountry {
+    color: rgba(25, 33, 68, 1);
+    font-weight: 700;
+}
+
+.countriesFilter {
+    .selectedContinent {
+        color: var(--color-echo-blue);
+    }
 }
 
 .filter {
