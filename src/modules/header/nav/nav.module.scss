@@ -1,5 +1,5 @@
-@use "@styles/func";
-@use "@styles/mixins";
+@use '@styles/func';
+@use '@styles/mixins';
 
 .root {
     display: flex;
@@ -15,14 +15,19 @@
 
 .activeroot {
     @include mixins.tablet {
-        z-index: 3;
-
         position: absolute;
+        z-index: 2;
         display: block;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        padding: 105px 0;
+        height: 73vh;
+        overflow-y: auto;
+        inset: 100% 0 0;
     }
+
+    @include mixins.tablet-small {
+        height: 82vh;
+    }
+}
+
+body:has(.activeroot) {
+    overflow: hidden;
 }

@@ -1,32 +1,28 @@
 @use '@styles/func';
 @use '@styles/mixins';
+@use '@styles/variables';
 
 .root {
     @include mixins.tablet {
-        z-index: 2;
-        
-
-        position: absolute;
-        left: 0;
-        right: 0;
+        position: relative;
     }
 
-    .selectedContinent{
+    .selectedContinent {
         color: rgba(25, 33, 68, 1);
         font-weight: 700;
     }
 }
 .country {
     cursor: pointer;
-  }
+}
 
-.selectedCountry{
+.selectedCountry {
     color: rgba(25, 33, 68, 1);
     font-weight: 700;
 }
 
-.countriesFilter{
-    .selectedContinent{
+.countriesFilter {
+    .selectedContinent {
         color: var(--color-echo-blue);
     }
 }
@@ -41,16 +37,17 @@
     text-transform: uppercase;
 
     @include mixins.tablet {
-        padding: 64px 40px 55px;
+        padding: 124px 40px 55px;
         background-color: var(--color-azureish-white-2);
         border-radius: 0 0 60px 60px;
+        margin: -60px 0 0;
     }
-
 
     @include mixins.tablet-small {
         align-items: flex-start;
-        padding: 22px 25px 15px;
+        padding: 42px 25px 15px;
         border-radius: 0 0 20px 20px;
+        margin: -20px 0 0;
     }
 }
 
@@ -61,15 +58,36 @@
 }
 
 .filterList {
+    position: relative;
     display: flex;
     align-items: center;
     margin-left: 64px;
 
+    > svg {
+        position: absolute;
+        top: 1px;
+        left: -44px;
+        width: 23px;
+        height: 15px;
+    }
+
     @include mixins.tablet {
+        > svg {
+            display: none;
+        }
+
         margin-left: 31px;
     }
 
     @include mixins.tablet-small {
+        > svg {
+            top: 3px;
+            left: -27px;
+            display: block;
+            width: 15px;
+            height: 10px;
+        }
+
         flex-direction: column;
         align-items: flex-start;
         gap: 14px;
@@ -81,6 +99,7 @@
     font-size: 20px;
     font-weight: bold;
     line-height: 20px;
+    color: var(--color-midnight-express);
 
     @include mixins.tablet {
         display: none;
@@ -124,6 +143,26 @@
 
 .continent {
     cursor: pointer;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    text-transform: uppercase;
+    color: var(--color-midnight-express);
+    opacity: 0.3;
+    transition: opacity variables.$transition;
+
+    &.active {
+        opacity: 1;
+    }
+
+    &:hover,
+    &:focus-visible {
+        opacity: 0.6;
+    }
+
+    &:active {
+        opacity: 1;
+    }
 
     @include mixins.tablet-small {
         font-size: 16px;
@@ -135,18 +174,28 @@
     margin: 0 55px 0 0;
     padding: 0 45px 0 0;
     text-transform: uppercase;
+    color: var(--color-midnight-express);
+    transition: opacity variables.$transition;
+
+    &:hover,
+    &:focus-visible {
+        opacity: 0.6;
+    }
+
+    &:active {
+        opacity: 0.3;
+    }
 
     @include mixins.tablet {
         margin: 0;
         padding: 0 72px 0 0;
     }
 
-
     @include mixins.tablet-small {
+        position: relative;
         padding: 0;
-        width: 12px;
-        height: 12px;
-        background-color: tomato;
+        width: 20px;
+        height: 20px;
     }
 }
 
@@ -169,6 +218,22 @@
 .filterOpenButton {
     & .filterOpenButtonText {
         display: block;
+        position: relative;
+
+        &::after {
+            position: absolute;
+            content: '';
+            width: 6.6px;
+            height: 6px;
+            right: -34px;
+            background-color: var(--color-midnight-express);
+            border-radius: 50%;
+            top: 42%;
+            transform: translateY(-42%);
+            box-shadow:
+                13px 0 0 0 var(--color-midnight-express),
+                26px 0 0 0 var(--color-midnight-express);
+        }
 
         @include mixins.tablet-small {
             display: none;
@@ -177,6 +242,25 @@
 
     & .filterCloseButtonText {
         display: none;
+    }
+
+    @include mixins.tablet-small {
+        transform: translate(2px, -2px);
+
+        &::after {
+            position: absolute;
+            content: '';
+            width: 3px;
+            height: 3px;
+            left: 0;
+            background-color: var(--color-midnight-express);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow:
+                7px 0 0 0 var(--color-midnight-express),
+                14px 0 0 0 var(--color-midnight-express);
+        }
     }
 }
 
@@ -187,9 +271,52 @@
 
     & .filterCloseButtonText {
         display: block;
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 42%;
+            right: -72px;
+            background-color: var(--color-midnight-express);
+            height: 2px;
+            width: 24px;
+        }
+
+        &::before {
+            transform: translateY(-42%) rotate(45deg);
+        }
+
+        &::after {
+            transform: translateY(-42%) rotate(-45deg);
+        }
 
         @include mixins.tablet-small {
             display: none;
+        }
+    }
+
+    @include mixins.tablet-small {
+        transform: translate(-4px, -4px);
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            background-color: var(--color-midnight-express);
+            height: 2px;
+            width: 20px;
+        }
+
+        &::before {
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        &::after {
+            transform: translateY(-50%) rotate(-45deg);
         }
     }
 }
@@ -204,7 +331,13 @@
     margin: 0 auto;
 
     @include mixins.tablet {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
         padding: 8px 40px 80px;
+        max-width: 1440px;
+        z-index: 100;
         background-color: var(--color-azureish-white-2);
         border-radius: 0 0 60px 60px;
 
@@ -252,21 +385,55 @@
     font-size: 60px;
     font-weight: bold;
     line-height: 60px;
+    color: var(--color-midnight-express);
 
     @include mixins.tablet {
         margin: 0;
     }
 
     @include mixins.tablet-small {
-        padding: 13.5px 16px;
+        position: relative;
+        padding: 13px 16px;
         font-size: 14px;
         font-weight: medium;
         line-height: 14px;
+        background-color: var(--color-white-default);
+        border: 1px solid var(--color-link-water);
+        margin: 0 -1px -1px 0;
+        transition:
+            border-color variables.$transition,
+            background-color variables.$transition,
+            color variables.$transition;
+
+        &.active {
+            background-color: var(--color-catalina-blue);
+            color: var(--color-white-default);
+        }
+
+        &:hover,
+        &:focus-visible {
+            border-color: var(--color-rock-blue);
+            z-index: 2;
+        }
     }
 }
 
 .country {
     margin: 0 0 5px;
+    color: var(--color-charcoal);
+    cursor: pointer;
+    transition:
+        color variables.$transition,
+        opacity variables.$transition;
+
+    &:hover,
+    &:focus-visible {
+        color: var(--color-catalina-blue);
+    }
+
+    &:active {
+        opacity: 0.3;
+    }
 
     @include mixins.tablet-small {
         margin: 0;
@@ -292,6 +459,20 @@
     background-color: var(--color-azureish-white);
     border-radius: 20px;
     text-transform: uppercase;
+    transition: background-color variables.$transition;
+
+    &:hover,
+    &:focus-visible {
+        background-color: #c8cee8;
+    }
+
+    &:active {
+        background-color: #c8cee8;
+
+        span {
+            opacity: 0.3;
+        }
+    }
 
     @include mixins.tablet {
         margin: 0 35px;
@@ -309,8 +490,41 @@
     font-size: 20px;
     font-weight: bold;
     line-height: 20px;
+    padding-left: 39px;
+    color: var(--color-midnight-express);
+    position: relative;
+    transition: opacity variables.$transition;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 44%;
+        left: -3px;
+        background-color: var(--color-midnight-express);
+        height: 2px;
+        width: 24px;
+    }
+
+    &::before {
+        transform: translateY(-44%) rotate(45deg);
+    }
+
+    &::after {
+        transform: translateY(-44%) rotate(-45deg);
+    }
 
     @include mixins.tablet-small {
+        padding-left: 34px;
         font-size: 16px;
+        line-height: 125%;
+        letter-spacing: 0.05em;
+
+        &::before,
+        &::after {
+            top: 48%;
+            left: 10px;
+            width: 15px;
+        }
     }
 }
