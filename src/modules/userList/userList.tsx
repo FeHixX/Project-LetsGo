@@ -15,6 +15,7 @@ import styles from './userList.module.scss';
 import { UserListProps, TransformedUserData } from './userList.types';
 
 interface CardData {
+  cardId: string;
   name: string;
   avatarUrl: string;
   hashTags: string[];
@@ -81,6 +82,7 @@ const UserList: FC<UserListProps> = ({ className, selectedContinent, selectedCou
     const cardData = await fetchCardData(page);
     if (cardData && cardData.cardList) {
       const transformedData = cardData.cardList.map((card: CardData) => ({
+        cardId: card.cardId, // Изменено с card.id на card.cardId
         name: card.name,
         photo: card.avatarUrl,
         online: false,
@@ -123,7 +125,6 @@ const UserList: FC<UserListProps> = ({ className, selectedContinent, selectedCou
     const nextPage = currentPage + 1;
     loadCardData(nextPage, true);
     setCurrentPage(nextPage);
-    setTotalPages((prevPages) => prevPages - 1);
   };
 
   const filteredUserData = userData.filter((user) => {
@@ -156,24 +157,30 @@ const UserList: FC<UserListProps> = ({ className, selectedContinent, selectedCou
       <Wrapper className={styles.wrapper}>
         <Filters className={styles.filters} />
         <ul className={styles.list}>
+        {filteredUserData.length === 0 && (
+          <p className={styles.noResults}>Нет совпадений</p>
+        )}
           {filteredUserData.map((item, index) => (
             <li key={index}>
               <UserCard item={item} />
             </li>
           ))}
         </ul>
-        {userData.length < totalCards && (
+
+        {filteredUserData.length < totalCards && filteredUserData.length > 0 && (
           <button className={styles.button} onClick={handleShowMore}>
             <IconPlus />
             Показать еще
           </button>
         )}
-        <Pagination
-          className={styles.pagination}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+        {filteredUserData.length > 0 && (
+          <Pagination
+            className={styles.pagination}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
       </Wrapper>
     </section>
   );

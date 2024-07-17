@@ -10,12 +10,15 @@ import { UserCardProps } from './userCard.types'
 
 const UserCard: FC<UserCardProps> = ({
   className,
-  item: { isNew, name, photo, online, tags, likes, countries, transport, level }
+  item: { cardId, isNew, name, photo, online, tags, likes, countries, transport, level }
 }) => {
+  const localCardId = localStorage.getItem('cardId');
+  const isCurrentUser = cardId === localCardId;
   const rootClassName = classNames(
     styles.root,
     className,
-    isNew ? styles.root_new : ''
+    isNew ? styles.root_new : '',
+    isCurrentUser ? styles.root_current : ''
   )
 
   return (
@@ -23,16 +26,17 @@ const UserCard: FC<UserCardProps> = ({
       <h3 className={styles.title} data-online={online}>
         {name}
       </h3>
+      
       <GroupImage
         className={styles.image}
         userPhoto={photo}
-        likeCounter={likes}
+        likeCounter={isCurrentUser ? undefined : likes}
       />
       <div className={styles.tags}>
         <p>{tags}</p>
       </div>
       <Countries className={styles.countries} item={countries} />
-      <GroupButton className={styles.button} likeCounter={likes} />
+      {!isCurrentUser && <GroupButton className={styles.button} likeCounter={likes} />}
       <GroupTransport
         className={styles.transport}
         items={transport}

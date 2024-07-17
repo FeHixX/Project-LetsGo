@@ -51,6 +51,25 @@ const User: FC<UserProps> = ({
   const handleHashtagChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (onChangeHashtags) {
       const value = e.target.value
+      const cursorPosition = e.target.selectionStart
+  
+      if (value[cursorPosition - 1] === '#') {
+        const newValue = value.slice(0, cursorPosition - 1) + value.slice(cursorPosition)
+        const syntheticEvent = {
+          ...e,
+          target: {
+            ...e.target,
+            value: newValue
+          }
+        } as unknown as ChangeEvent<HTMLTextAreaElement>
+  
+        onChangeHashtags(syntheticEvent as unknown as ChangeEvent<HTMLInputElement>)
+        setTimeout(() => {
+          e.target.setSelectionRange(cursorPosition - 1, cursorPosition - 1)
+        }, 0)
+        return
+      }
+  
       const words = value.split(' ')
       const formattedWords = words.map((word) => {
         // Удаляем все символы, кроме букв, цифр и '#'
@@ -61,15 +80,15 @@ const User: FC<UserProps> = ({
           return '#' + cleanWord.slice(0, 19)
         }
       })
-
+  
       // Удаляем дубликаты и ограничиваем количество хэштегов до 6
       const uniqueWords = Array.from(new Set(formattedWords)).slice(0, 6)
       const formattedValue = uniqueWords.join(' ')
-
+  
       const hashTagsArray = formattedValue
         .split(' ')
         .filter((tag) => tag.trim() !== '')
-
+  
       const syntheticEvent = {
         ...e,
         target: {
@@ -77,7 +96,7 @@ const User: FC<UserProps> = ({
           value: hashTagsArray
         }
       } as unknown as ChangeEvent<HTMLInputElement>
-
+  
       onChangeHashtags(syntheticEvent)
     }
   }
