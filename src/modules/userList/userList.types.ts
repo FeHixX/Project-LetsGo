@@ -22,6 +22,7 @@ export interface UserListProps {
 }
 
 export interface TransformedUserData {
+  cardId: string;
   name: string
   photo: string
   online: boolean

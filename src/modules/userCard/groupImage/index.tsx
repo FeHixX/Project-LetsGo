@@ -16,13 +16,15 @@ const GroupImage: FC<GroupImageProps> = ({
   return (
     <div className={rootClassName}>
       <Image
-        src={userPhoto} // Используем полный URL аватара
+        src={userPhoto}
         width={285}
         height={285}
         quality={85}
         alt="Аватарка"
       />
-      <Like className={styles.like} initialCounter={likeCounter} />
+      {likeCounter !== undefined && (
+        <Like className={styles.like} initialCounter={likeCounter} />
+      )}
     </div>
   )
 }
