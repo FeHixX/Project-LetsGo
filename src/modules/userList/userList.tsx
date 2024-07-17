@@ -82,7 +82,7 @@ const UserList: FC<UserListProps> = ({ className, selectedContinent, selectedCou
     const cardData = await fetchCardData(page);
     if (cardData && cardData.cardList) {
       const transformedData = cardData.cardList.map((card: CardData) => ({
-        cardId: card.cardId, // Изменено с card.id на card.cardId
+        cardId: card.cardId,
         name: card.name,
         photo: card.avatarUrl,
         online: false,

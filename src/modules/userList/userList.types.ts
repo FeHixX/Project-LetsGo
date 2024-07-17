@@ -29,6 +29,6 @@ export interface TransformedUserData {
   tags: string
   likes: number
   countries: { name: string; img: string }[]
-  transport: { icon: ReactNode; checked: boolean }[]
+  transport: { icon: ReactNode; label: string; checked: boolean }[]
   level: number
 }
