@@ -158,24 +158,30 @@ const UserList: FC<UserListProps> = ({ className, selectedContinent, selectedCou
       <Wrapper className={styles.wrapper}>
         <Filters className={styles.filters} />
         <ul className={styles.list}>
+        {filteredUserData.length === 0 && (
+          <p className={styles.noResults}>Нет совпадений</p>
+        )}
           {filteredUserData.map((item, index) => (
             <li key={index}>
               <UserCard item={item} />
             </li>
           ))}
         </ul>
-        {userData.length < totalCards && (
+
+        {filteredUserData.length < totalCards && filteredUserData.length > 0 && (
           <button className={styles.button} onClick={handleShowMore}>
             <IconPlus />
             Показать еще
           </button>
         )}
-        <Pagination
-          className={styles.pagination}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+        {filteredUserData.length > 0 && (
+          <Pagination
+            className={styles.pagination}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
       </Wrapper>
     </section>
   );
