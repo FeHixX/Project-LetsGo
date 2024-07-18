@@ -1,5 +1,3 @@
-'use client'
-
 import { FC, ChangeEvent, useEffect, useRef, useState } from 'react'
 import useResponsive from '@/shared/hooks/useResponsive'
 import { Button, IconCheckbox, SliderRange } from '@/ui'
@@ -29,14 +27,18 @@ const foodsList = [
   { name: 'food', value: 'vegan', label: 'Веган-сыроед' }
 ]
 
-const Filters: FC<FiltersProps> = ({ className }) => {
+const Filters: FC<FiltersProps> = ({ className, onChangeTransport, valueTransport }) => {
   const rootClassName = classNames(styles.root, className)
-  const [selectedTransport, setSelectedTransport] = useState<string[]>([]);
+  const [selectedTransport, setSelectedTransport] = useState<string[]>(valueTransport ? valueTransport.split(', ') : []);
 
   const handleTransportChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSelectedTransport(prev => prev.includes(value) ? prev.filter(item => item !== value) : [...prev, value]);
-  };
+    const newSelectedTransport = e.target.value.split(', ');
+    setSelectedTransport(newSelectedTransport);
+    if (onChangeTransport) {
+      onChangeTransport(e);
+    }
+  }
+
   const [accordionStates, setAccordionStates] = useState<AccordionProps>({
     hobbies: false,
     music: false,
@@ -124,10 +126,10 @@ const Filters: FC<FiltersProps> = ({ className }) => {
           <div
             className={styles.wrapper}
             data-accordion={accordionStates.transport}
-            >
-            <IconCheckbox 
-              className={styles.transport} 
-              items={checkboxList} 
+          >
+            <IconCheckbox
+              className={styles.transport}
+              items={checkboxList}
               value={selectedTransport}
               onChange={handleTransportChange}
             />
