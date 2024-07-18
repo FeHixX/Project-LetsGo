@@ -2,6 +2,7 @@
 
 import React, { FC, useEffect, useState } from 'react'
 import useResponsive from '@/shared/hooks/useResponsive'
+import IconFilter from '@icons/icon-filter.svg'
 import axios from 'axios'
 
 import styles from './countriesFilter.module.scss'
@@ -68,12 +69,14 @@ const CountriesFilter: FC<{ onFilterChange: (continent: string | null, country: 
     <div className={styles.root}>
       <div className={active ? `${styles.filter} ${styles.activefilter}` : styles.filter}>
         <div className={styles.filterList}>
+          <IconFilter />
           <span className={active ? `${styles.filterListTitle} ${styles.activeFilterListTitle}` : styles.filterListTitle}>
             Фильтрация по странам:
           </span>
           <ul className={active ? `${styles.continents} ${styles.activecontinents}` : styles.continents}>
             {continents.map((continent) => (
               <li
+                tabIndex={0}
                 key={continent}
                 className={`${styles.continent} ${selectedContinent === continent ? styles.selectedContinent : ''}`}
                 onClick={() => handleContinentClick(continent)}
@@ -104,6 +107,7 @@ const CountriesFilter: FC<{ onFilterChange: (continent: string | null, country: 
                 <ul className={styles.list}>
                   {countriesList.map((country) => (
                     <li
+                      tabIndex={0}
                       className={`${styles.country} ${selectedCountry === country.name.rus ? styles.selectedCountry : ''}`}
                       key={country.name.common}
                       onClick={() => handleCountryClick(country.name.rus)}

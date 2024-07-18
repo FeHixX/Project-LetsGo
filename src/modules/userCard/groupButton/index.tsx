@@ -10,7 +10,7 @@ const GroupButton: FC<GroupButtonProps> = ({ className, likeCounter }) => {
   const rootClassName = classNames(styles.root, className)
 
   return (
-    <div className={rootClassName} data-hidden>
+    <div className={rootClassName}>
       <Button className={styles.button} size="sm">
         Позвать!
       </Button>

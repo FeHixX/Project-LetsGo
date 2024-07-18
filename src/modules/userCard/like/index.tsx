@@ -24,7 +24,7 @@ const Like: FC<LikeProps> = ({ className, initialCounter }) => {
   }
 
   return (
-    <div className={rootClassName} data-hidden>
+    <div className={rootClassName}>
       <button
         type="button"
         data-counter={isCounterTrue}

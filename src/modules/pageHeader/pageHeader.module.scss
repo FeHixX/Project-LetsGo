@@ -3,6 +3,8 @@
 @use '@styles/variables';
 
 .root {
+  position: relative;
+  z-index: 1;
   padding: 63px 0 68px;
   background-color: var(--color-midnight-express);
   border-radius: 0 0 56px 56px;
