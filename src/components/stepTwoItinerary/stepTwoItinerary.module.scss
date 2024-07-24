@@ -1,6 +1,6 @@
-@use "@styles/func";
-@use "@styles/mixins";
-@use "@styles/variables";
+@use '@styles/func';
+@use '@styles/mixins';
+@use '@styles/variables';
 
 .root {
   display: flex;
@@ -60,14 +60,14 @@
   padding: 62px 0 0;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 1px;
     height: 100%;
     right: 225px;
     top: 0;
     bottom: 0;
-    background-color: #E1E3E9;
+    background-color: #e1e3e9;
   }
 
   @include mixins.tablet {
@@ -93,7 +93,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 85px;
-  margin: 0 0 13px;
+  margin: 0 0 15px;
 
   @include mixins.tablet {
     gap: 52px;
@@ -110,18 +110,18 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 26px 23px 22px 25px;
-  border: 1px solid #CBCED9;
+  padding: 26px 23px 18px 25px;
+  border: 1px solid #cbced9;
 
   &::after {
     position: absolute;
-    content: "";
+    content: '';
     top: 25px;
     right: -53px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background-color: #1D2E5B;
+    background-color: #1d2e5b;
     z-index: 3;
   }
 
@@ -134,7 +134,7 @@
   }
 
   @include mixins.tablet-small {
-    padding: 13px 10px;
+    padding: 13px 10px 10px;
     min-width: 168px;
     border-radius: 4px;
 
@@ -174,15 +174,25 @@
 
 .countryArrowButtom {
   position: absolute;
-  top: 0;
+  top: -4px;
+  right: 4px;
   display: inline-flex;
-  width: 11px;
-  height: 11px;
+  width: 15px;
+  height: 15px;
   cursor: pointer;
   border-top: 1px solid #000000;
   border-right: 1px solid #000000;
   z-index: 3;
   transform: rotate(135deg);
+  opacity: 0.3;
+
+  @include mixins.tablet-small {
+    top: 0;
+    right: 4px;
+    display: inline-flex;
+    width: 9px;
+    height: 9px;
+  }
 }
 
 .countryIndicator {
@@ -198,7 +208,7 @@
   @include mixins.tablet-small {
     position: relative;
     padding: 9px;
-    border: 1px solid #CBCED9;
+    border: 1px solid #cbced9;
     border-radius: 4px;
   }
 }
@@ -227,7 +237,7 @@
 
   &::before,
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     left: -6px;
     transform: translateX(50%);
@@ -249,7 +259,7 @@
     right: -8px;
     top: -8px;
     padding: 7px;
-    background-color: #EDEFF6;
+    background-color: #edeff6;
     border-radius: 50%;
 
     &::before,
@@ -288,20 +298,20 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 21px 12px;
-  border: 1px solid #CBCED9;
+  padding: 24px 12px;
+  border: 1px solid #cbced9;
   font-size: 20px;
   line-height: 20px;
 
   &::after {
     position: absolute;
-    content: "";
+    content: '';
     top: 25px;
     right: -53px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    border: 1px solid #CBCED9;
+    border: 1px solid #cbced9;
     background-color: #ffffff;
   }
 
@@ -340,6 +350,29 @@
 }
 
 .formSelectArrowCross {
+  position: absolute;
+  top: 20px;
+  right: 26px;
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border-top: 1px solid #000000;
+  border-right: 1px solid #000000;
+  z-index: 3;
+  transform: rotate(135deg);
+  opacity: 0.3;
+
+  @include mixins.tablet-small {
+    top: 16px;
+    right: 16px;
+    display: inline-flex;
+    width: 9px;
+    height: 9px;
+  }
+}
+
+.formSelectArrowCrossActive {
   position: relative;
   display: block;
   width: 18px;
@@ -347,7 +380,7 @@
 
   &::before,
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 7px;
     left: -9px;
@@ -430,7 +463,7 @@
   padding: 27px 24px;
   max-width: 60px;
   max-height: 70px;
-  border: 1px solid #CBCED9;
+  border: 1px solid #cbced9;
   font-size: 20px;
   font-weight: medium;
   line-height: 20px;
@@ -473,7 +506,7 @@
 
   &::before,
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     left: -6px;
     transform: translateX(50%);
