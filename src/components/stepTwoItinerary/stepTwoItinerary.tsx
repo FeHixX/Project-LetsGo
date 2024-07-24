@@ -157,7 +157,13 @@ const StepTwoItinerary: FC<StepTwoItineraryProps> = ({
                 <span className={styles.formSelectButtonText}>
                   Выберите страну
                 </span>
-                <span className={styles.formSelectArrowCross}></span>
+                <span
+                  className={
+                    activeSelect
+                      ? styles.formSelectArrowCrossActive
+                      : styles.formSelectArrowCross
+                  }
+                ></span>
               </button>
               <div
                 className={
