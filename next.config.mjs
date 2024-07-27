@@ -3,9 +3,9 @@
 const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-	distDir: 'dist',
-  basePath: isProd ? '/intern-pognali-1-6' : '',
-  assetPrefix: isProd ? '/intern-pognali-1-6/' : '',
+  distDir: 'dist',
+  basePath: isProd ? '/Project-LetsGo' : '',
+  assetPrefix: isProd ? '/Project-LetsGo/' : '',
   reactStrictMode: true,
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -21,8 +21,8 @@ const nextConfig = {
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
-        use: [{ loader: '@svgr/webpack', options: { icon: true } }]
+        resourceQuery: {not: [...fileLoaderRule.resourceQuery.not, /url/]},
+        use: [{loader: '@svgr/webpack', options: {icon: true}}]
       },
     )
     fileLoaderRule.exclude = /\.svg$/i
@@ -32,9 +32,9 @@ const nextConfig = {
   images: {
     unoptimized: false,
     remotePatterns: [
-      { protocol: 'https', hostname: 'flagcdn.com' },
-      { protocol: 'https', hostname: 'upload.wikimedia.org' },
-      { protocol: 'https', hostname: 'xsgames.co' },
+      {protocol: 'https', hostname: 'flagcdn.com'},
+      {protocol: 'https', hostname: 'upload.wikimedia.org'},
+      {protocol: 'https', hostname: 'xsgames.co'},
     ],
   }
 };
