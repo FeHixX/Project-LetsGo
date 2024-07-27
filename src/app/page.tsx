@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { DirectionsView } from '@/views/directions'
 
 export const metadata: Metadata = {
-  title: 'Попутчики форма',
-  description: 'Найди попутчика заполнив форму'
+  title: 'Направления',
+  description: 'Заполните форму'
 }
 
 export default function Directions() {

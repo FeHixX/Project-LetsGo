@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { Metadata } from 'next'
 import { Footer } from '@modules/footer'
 import { Header } from '@modules/header'
 
@@ -26,6 +27,10 @@ const font = localFont({
     }
   ]
 })
+
+export const metadata: Metadata = {
+  icons: `${process.env.NODE_ENV === 'production' ? '/Project-LetsGo' : ''}/favicon.ico`
+}
 
 export default function RootLayout({
   children
